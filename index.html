@@ -1,488 +1,446 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Vantage AI — Full System Flowchart</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-<style>
-  :root {
-    --bg: #060608;
-    --panel: #0d0d12;
-    --border: #1a1a2e;
-    --blue: #3b82f6;
-    --indigo: #6366f1;
-    --violet: #8b5cf6;
-    --emerald: #10b981;
-    --amber: #f59e0b;
-    --rose: #f43f5e;
-    --cyan: #06b6d4;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --dim: #334155;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinSight Ai — Full System Flowchart v2</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #060608;
+      --panel: #0d0d12;
+      --border: #1a1a2e;
+      --blue: #3b82f6;
+      --indigo: #6366f1;
+      --violet: #8b5cf6;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --cyan: #06b6d4;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --dim: #334155;
+      --pink: #ec4899;
+      --lime: #84cc16;
+      --orange: #f97316;
+    }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  /* Animated background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 40% at 20% 10%, rgba(59,130,246,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 50% at 80% 90%, rgba(99,102,241,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 50% 50%, rgba(16,185,129,0.03) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 10%, rgba(59, 130, 246, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 90%, rgba(99, 102, 241, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 50% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  .page {
-    position: relative;
-    z-index: 1;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 48px 32px 80px;
-  }
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
 
-  /* ── Header ── */
-  .header {
-    text-align: center;
-    margin-bottom: 64px;
-  }
-  .header-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(59,130,246,0.1);
-    border: 1px solid rgba(59,130,246,0.2);
-    border-radius: 100px;
-    padding: 6px 16px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--blue);
-    letter-spacing: 0.1em;
-    margin-bottom: 20px;
-  }
-  .header-badge::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-  .header h1 {
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: -1px;
-    background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 50%, #6366f1 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 12px;
-  }
-  .header p {
-    color: var(--muted);
-    font-size: 15px;
-    font-family: 'JetBrains Mono', monospace;
-  }
+    /* ── Header ── */
+    .header { text-align: center; margin-bottom: 64px; }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 100px; padding: 6px 16px;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--blue); letter-spacing: 0.1em; margin-bottom: 20px;
+    }
+    .header-badge::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
+    .header h1 {
+      font-size: 42px; font-weight: 800; letter-spacing: -1px;
+      background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 50%, #6366f1 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 12px;
+    }
+    .header p { color: var(--muted); font-size: 15px; font-family: 'JetBrains Mono', monospace; }
 
-  /* ── Sections ── */
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .section-label .num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    font-weight: 600;
-  }
-  .section-label h2 {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .section-label .line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+    /* ── Section Labels ── */
+    .section-label { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .section-label .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); font-weight: 600; }
+    .section-label h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+    .section-label .line { flex: 1; height: 1px; background: var(--border); }
 
-  /* ── Flow Columns ── */
-  .flow-row {
-    display: grid;
-    gap: 16px;
-    margin-bottom: 0;
-  }
-  .flow-row-3 { grid-template-columns: repeat(3, 1fr); }
-  .flow-row-4 { grid-template-columns: repeat(4, 1fr); }
-  .flow-row-5 { grid-template-columns: repeat(5, 1fr); }
-  .flow-row-2 { grid-template-columns: repeat(2, 1fr); }
-  .flow-row-1 { grid-template-columns: 1fr; }
+    /* ── Flow Columns ── */
+    .flow-row { display: grid; gap: 16px; margin-bottom: 0; }
+    .flow-row-3 { grid-template-columns: repeat(3, 1fr); }
+    .flow-row-4 { grid-template-columns: repeat(4, 1fr); }
+    .flow-row-5 { grid-template-columns: repeat(5, 1fr); }
+    .flow-row-2 { grid-template-columns: repeat(2, 1fr); }
+    .flow-row-1 { grid-template-columns: 1fr; }
+    .flow-row-6 { grid-template-columns: repeat(6, 1fr); }
 
-  /* ── Arrow ── */
-  .arrow-down {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    margin: 8px 0;
-  }
-  .arrow-down .stem {
-    width: 2px;
-    height: 28px;
-    background: linear-gradient(to bottom, var(--border), var(--dim));
-  }
-  .arrow-down .head {
-    width: 0; height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 8px solid var(--dim);
-  }
-  .arrow-down.big .stem { height: 40px; background: linear-gradient(to bottom, var(--dim), var(--blue)); }
-  .arrow-down.big .head { border-top-color: var(--blue); }
+    /* ── Arrows ── */
+    .arrow-down { display: flex; flex-direction: column; align-items: center; gap: 0; margin: 8px 0; }
+    .arrow-down .stem { width: 2px; height: 28px; background: linear-gradient(to bottom, var(--border), var(--dim)); }
+    .arrow-down .head { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--dim); }
+    .arrow-down.big .stem { height: 40px; background: linear-gradient(to bottom, var(--dim), var(--blue)); }
+    .arrow-down.big .head { border-top-color: var(--blue); }
 
-  .arrow-down-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 6px 0;
-  }
-  .arrow-down-label .stem { width: 2px; height: 20px; background: var(--dim); }
-  .arrow-down-label .lbl {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: var(--muted);
-    background: var(--bg);
-    padding: 2px 8px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    letter-spacing: 0.08em;
-    margin: 0;
-  }
-  .arrow-down-label .stem2 { width: 2px; height: 20px; background: var(--dim); }
-  .arrow-down-label .head {
-    width: 0; height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 7px solid var(--dim);
-  }
+    .arrow-down-label { display: flex; flex-direction: column; align-items: center; margin: 6px 0; }
+    .arrow-down-label .stem { width: 2px; height: 20px; background: var(--dim); }
+    .arrow-down-label .lbl {
+      font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted);
+      background: var(--bg); padding: 2px 8px; border: 1px solid var(--border);
+      border-radius: 4px; letter-spacing: 0.08em; margin: 0;
+    }
+    .arrow-down-label .stem2 { width: 2px; height: 20px; background: var(--dim); }
+    .arrow-down-label .head { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid var(--dim); }
 
-  /* ── Parallel bracket ── */
-  .parallel-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .parallel-indicator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin: 8px 0 16px;
-  }
-  .parallel-indicator .bar { height: 2px; flex: 1; background: linear-gradient(to right, transparent, var(--indigo)); }
-  .parallel-indicator .bar.r { background: linear-gradient(to left, transparent, var(--indigo)); }
-  .parallel-indicator .badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(99,102,241,0.12);
-    border: 1px solid rgba(99,102,241,0.3);
-    border-radius: 100px;
-    padding: 4px 14px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: #a5b4fc;
-    letter-spacing: 0.06em;
-    font-weight: 600;
-  }
-  .parallel-indicator .badge::before { content: '⚡'; font-size: 11px; }
+    /* ── Parallel bracket ── */
+    .parallel-indicator { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 8px 0 16px; }
+    .parallel-indicator .bar { height: 2px; flex: 1; background: linear-gradient(to right, transparent, var(--indigo)); }
+    .parallel-indicator .bar.r { background: linear-gradient(to left, transparent, var(--indigo)); }
+    .parallel-indicator .badge {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 100px; padding: 4px 14px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px;
+      color: #a5b4fc; letter-spacing: 0.06em; font-weight: 600;
+    }
+    .parallel-indicator .badge::before { content: '⚡'; font-size: 11px; }
 
-  /* ── NODE CARDS ── */
-  .node {
-    border-radius: 16px;
-    padding: 18px 20px;
-    position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: default;
-  }
-  .node:hover {
-    transform: translateY(-2px);
-  }
+    /* ── NODE CARDS ── */
+    .node { border-radius: 16px; padding: 18px 20px; position: relative; transition: transform 0.2s, box-shadow 0.2s; cursor: default; }
+    .node:hover { transform: translateY(-2px); }
+    .node-title { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px; }
+    .node-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); line-height: 1.6; }
+    .node-tag {
+      display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+      letter-spacing: 0.08em; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; text-transform: uppercase;
+    }
+    .node-io { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); line-height: 1.7; }
+    .node-io .in { color: #a5b4fc; }
+    .node-io .out { color: #6ee7b7; }
+    .node-io .warn { color: #fbbf24; }
 
-  .node-title {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-  }
-  .node-sub {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .node-tag {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-  }
-  .node-io {
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-  .node-io .in { color: #a5b4fc; }
-  .node-io .out { color: #6ee7b7; }
-  .node-io .warn { color: #fbbf24; }
+    .detail-list { display: flex; flex-direction: column; gap: 3px; margin-top: 4px; }
+    .detail-list span { display: flex; align-items: flex-start; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); line-height: 1.5; }
+    .detail-list span::before { content: '→'; color: var(--dim); flex-shrink: 0; }
 
-  .detail-list {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    margin-top: 4px;
-  }
-  .detail-list span {
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-  .detail-list span::before { content: '→'; color: var(--dim); flex-shrink: 0; }
+    /* Node color themes */
+    .n-blue { background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.2); }
+    .n-blue:hover { box-shadow: 0 8px 32px rgba(59,130,246,0.12); border-color: rgba(59,130,246,0.4); }
+    .n-blue .node-tag { background: rgba(59,130,246,0.15); color: #93c5fd; }
+    .n-blue .node-title { color: #93c5fd; }
 
-  /* Node color themes */
-  .n-blue {
-    background: rgba(59,130,246,0.07);
-    border: 1px solid rgba(59,130,246,0.2);
-  }
-  .n-blue:hover { box-shadow: 0 8px 32px rgba(59,130,246,0.12); border-color: rgba(59,130,246,0.4); }
-  .n-blue .node-tag { background: rgba(59,130,246,0.15); color: #93c5fd; }
-  .n-blue .node-title { color: #93c5fd; }
+    .n-indigo { background: rgba(99,102,241,0.07); border: 1px solid rgba(99,102,241,0.2); }
+    .n-indigo:hover { box-shadow: 0 8px 32px rgba(99,102,241,0.12); border-color: rgba(99,102,241,0.4); }
+    .n-indigo .node-tag { background: rgba(99,102,241,0.15); color: #a5b4fc; }
+    .n-indigo .node-title { color: #a5b4fc; }
 
-  .n-indigo {
-    background: rgba(99,102,241,0.07);
-    border: 1px solid rgba(99,102,241,0.2);
-  }
-  .n-indigo:hover { box-shadow: 0 8px 32px rgba(99,102,241,0.12); border-color: rgba(99,102,241,0.4); }
-  .n-indigo .node-tag { background: rgba(99,102,241,0.15); color: #a5b4fc; }
-  .n-indigo .node-title { color: #a5b4fc; }
+    .n-violet { background: rgba(139,92,246,0.07); border: 1px solid rgba(139,92,246,0.2); }
+    .n-violet:hover { box-shadow: 0 8px 32px rgba(139,92,246,0.12); border-color: rgba(139,92,246,0.4); }
+    .n-violet .node-tag { background: rgba(139,92,246,0.15); color: #c4b5fd; }
+    .n-violet .node-title { color: #c4b5fd; }
 
-  .n-violet {
-    background: rgba(139,92,246,0.07);
-    border: 1px solid rgba(139,92,246,0.2);
-  }
-  .n-violet:hover { box-shadow: 0 8px 32px rgba(139,92,246,0.12); border-color: rgba(139,92,246,0.4); }
-  .n-violet .node-tag { background: rgba(139,92,246,0.15); color: #c4b5fd; }
-  .n-violet .node-title { color: #c4b5fd; }
+    .n-emerald { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2); }
+    .n-emerald:hover { box-shadow: 0 8px 32px rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.4); }
+    .n-emerald .node-tag { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+    .n-emerald .node-title { color: #6ee7b7; }
 
-  .n-emerald {
-    background: rgba(16,185,129,0.07);
-    border: 1px solid rgba(16,185,129,0.2);
-  }
-  .n-emerald:hover { box-shadow: 0 8px 32px rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.4); }
-  .n-emerald .node-tag { background: rgba(16,185,129,0.15); color: #6ee7b7; }
-  .n-emerald .node-title { color: #6ee7b7; }
+    .n-amber { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2); }
+    .n-amber:hover { box-shadow: 0 8px 32px rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.4); }
+    .n-amber .node-tag { background: rgba(245,158,11,0.15); color: #fcd34d; }
+    .n-amber .node-title { color: #fcd34d; }
 
-  .n-amber {
-    background: rgba(245,158,11,0.07);
-    border: 1px solid rgba(245,158,11,0.2);
-  }
-  .n-amber:hover { box-shadow: 0 8px 32px rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.4); }
-  .n-amber .node-tag { background: rgba(245,158,11,0.15); color: #fcd34d; }
-  .n-amber .node-title { color: #fcd34d; }
+    .n-cyan { background: rgba(6,182,212,0.07); border: 1px solid rgba(6,182,212,0.2); }
+    .n-cyan:hover { box-shadow: 0 8px 32px rgba(6,182,212,0.12); border-color: rgba(6,182,212,0.4); }
+    .n-cyan .node-tag { background: rgba(6,182,212,0.15); color: #67e8f9; }
+    .n-cyan .node-title { color: #67e8f9; }
 
-  .n-cyan {
-    background: rgba(6,182,212,0.07);
-    border: 1px solid rgba(6,182,212,0.2);
-  }
-  .n-cyan:hover { box-shadow: 0 8px 32px rgba(6,182,212,0.12); border-color: rgba(6,182,212,0.4); }
-  .n-cyan .node-tag { background: rgba(6,182,212,0.15); color: #67e8f9; }
-  .n-cyan .node-title { color: #67e8f9; }
+    .n-rose { background: rgba(244,63,94,0.07); border: 1px solid rgba(244,63,94,0.2); }
+    .n-rose:hover { box-shadow: 0 8px 32px rgba(244,63,94,0.12); border-color: rgba(244,63,94,0.4); }
+    .n-rose .node-tag { background: rgba(244,63,94,0.15); color: #fda4af; }
+    .n-rose .node-title { color: #fda4af; }
 
-  .n-rose {
-    background: rgba(244,63,94,0.07);
-    border: 1px solid rgba(244,63,94,0.2);
-  }
-  .n-rose:hover { box-shadow: 0 8px 32px rgba(244,63,94,0.12); border-color: rgba(244,63,94,0.4); }
-  .n-rose .node-tag { background: rgba(244,63,94,0.15); color: #fda4af; }
-  .n-rose .node-title { color: #fda4af; }
+    .n-slate { background: rgba(51,65,85,0.35); border: 1px solid rgba(100,116,139,0.2); }
+    .n-slate:hover { box-shadow: 0 8px 32px rgba(100,116,139,0.1); border-color: rgba(100,116,139,0.4); }
+    .n-slate .node-tag { background: rgba(100,116,139,0.2); color: #94a3b8; }
+    .n-slate .node-title { color: #cbd5e1; }
 
-  .n-slate {
-    background: rgba(51,65,85,0.35);
-    border: 1px solid rgba(100,116,139,0.2);
-  }
-  .n-slate:hover { box-shadow: 0 8px 32px rgba(100,116,139,0.1); border-color: rgba(100,116,139,0.4); }
-  .n-slate .node-tag { background: rgba(100,116,139,0.2); color: #94a3b8; }
-  .n-slate .node-title { color: #cbd5e1; }
+    .n-pink { background: rgba(236,72,153,0.07); border: 1px solid rgba(236,72,153,0.2); }
+    .n-pink:hover { box-shadow: 0 8px 32px rgba(236,72,153,0.12); border-color: rgba(236,72,153,0.4); }
+    .n-pink .node-tag { background: rgba(236,72,153,0.15); color: #f9a8d4; }
+    .n-pink .node-title { color: #f9a8d4; }
 
-  /* Big accent node */
-  .node-big {
-    padding: 24px 28px;
-    border-radius: 20px;
-  }
-  .node-big .node-title { font-size: 16px; margin-bottom: 8px; }
+    .n-lime { background: rgba(132,204,22,0.07); border: 1px solid rgba(132,204,22,0.2); }
+    .n-lime:hover { box-shadow: 0 8px 32px rgba(132,204,22,0.12); border-color: rgba(132,204,22,0.4); }
+    .n-lime .node-tag { background: rgba(132,204,22,0.15); color: #bef264; }
+    .n-lime .node-title { color: #bef264; }
 
-  /* LLM chip */
-  .llm-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: rgba(139,92,246,0.12);
-    border: 1px solid rgba(139,92,246,0.25);
-    border-radius: 6px;
-    padding: 3px 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: #c4b5fd;
-    margin-top: 6px;
-    margin-right: 4px;
-    display: inline-block;
-  }
+    .n-orange { background: rgba(249,115,22,0.07); border: 1px solid rgba(249,115,22,0.2); }
+    .n-orange:hover { box-shadow: 0 8px 32px rgba(249,115,22,0.12); border-color: rgba(249,115,22,0.4); }
+    .n-orange .node-tag { background: rgba(249,115,22,0.15); color: #fdba74; }
+    .n-orange .node-title { color: #fdba74; }
 
-  /* ── Connector lines between sections ── */
-  .big-arrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 16px 0;
-    gap: 0;
-  }
-  .big-arrow .line {
-    width: 2px;
-    height: 32px;
-    background: linear-gradient(to bottom, var(--dim), var(--blue));
-  }
-  .big-arrow .arrowhead {
-    width: 0; height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 10px solid var(--blue);
-  }
-  .big-arrow .label {
-    background: rgba(59,130,246,0.1);
-    border: 1px solid rgba(59,130,246,0.2);
-    border-radius: 6px;
-    padding: 3px 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: var(--blue);
-    letter-spacing: 0.08em;
-    margin-bottom: 4px;
-    font-weight: 600;
-  }
+    .node-big { padding: 24px 28px; border-radius: 20px; }
+    .node-big .node-title { font-size: 16px; margin-bottom: 8px; }
 
-  /* ── Merge node ── */
-  .merge-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    margin: 8px 0 16px;
-  }
-  .merge-indicator .bar {
-    flex: 1;
-    height: 2px;
-    background: linear-gradient(to right, transparent, var(--emerald));
-  }
-  .merge-indicator .bar.r {
-    background: linear-gradient(to left, transparent, var(--emerald));
-  }
-  .merge-indicator .badge {
-    background: rgba(16,185,129,0.1);
-    border: 1px solid rgba(16,185,129,0.25);
-    padding: 4px 14px;
-    border-radius: 100px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: #6ee7b7;
-    letter-spacing: 0.06em;
-    font-weight: 600;
-  }
+    .llm-chip {
+      display: inline-block;
+      background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.25);
+      border-radius: 6px; padding: 3px 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #c4b5fd;
+      margin-top: 6px; margin-right: 4px;
+    }
 
-  /* ── Legend ── */
-  .legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 48px;
-    padding: 24px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-  }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-  }
-  .legend-dot {
-    width: 10px; height: 10px;
-    border-radius: 3px;
-  }
+    .big-arrow { display: flex; flex-direction: column; align-items: center; margin: 16px 0; gap: 0; }
+    .big-arrow .line { width: 2px; height: 32px; background: linear-gradient(to bottom, var(--dim), var(--blue)); }
+    .big-arrow .arrowhead { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid var(--blue); }
+    .big-arrow .label {
+      background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 6px; padding: 3px 12px;
+      font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--blue);
+      letter-spacing: 0.08em; margin-bottom: 4px; font-weight: 600;
+    }
 
-  /* ── Degraded path note ── */
-  .degraded-note {
-    background: rgba(245,158,11,0.06);
-    border: 1px dashed rgba(245,158,11,0.25);
-    border-radius: 12px;
-    padding: 14px 18px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: #fcd34d;
-    line-height: 1.6;
-    margin: 12px 0;
-  }
-  .degraded-note strong { color: #fbbf24; }
+    .merge-indicator { display: flex; align-items: center; gap: 0; margin: 8px 0 16px; }
+    .merge-indicator .bar { flex: 1; height: 2px; background: linear-gradient(to right, transparent, var(--emerald)); }
+    .merge-indicator .bar.r { background: linear-gradient(to left, transparent, var(--emerald)); }
+    .merge-indicator .badge {
+      background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25);
+      padding: 4px 14px; border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6ee7b7;
+      letter-spacing: 0.06em; font-weight: 600;
+    }
 
-  .gap { margin-bottom: 16px; }
-  .gap-sm { margin-bottom: 10px; }
-  .gap-lg { margin-bottom: 28px; }
+    /* NEW: Phase divider — big visual separator between old and new content */
+    .phase-divider {
+      margin: 48px 0 40px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .phase-divider .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(236,72,153,0.4), transparent);
+    }
+    .phase-divider .divider-badge {
+      background: rgba(236,72,153,0.08);
+      border: 1px solid rgba(236,72,153,0.3);
+      border-radius: 100px;
+      padding: 8px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #f9a8d4;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
 
-  /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .flow-row-4, .flow-row-5 { grid-template-columns: repeat(2,1fr); }
-    .flow-row-3 { grid-template-columns: 1fr; }
-  }
-</style>
+    /* NEW: User journey flow */
+    .journey-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+      transition: border-color 0.2s;
+    }
+    .journey-step:hover { border-color: rgba(99,102,241,0.3); }
+    .journey-step .step-num {
+      width: 28px; height: 28px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+      flex-shrink: 0;
+      background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.25);
+    }
+    .journey-step .step-content { flex: 1; }
+    .journey-step .step-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .journey-step .step-desc { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); line-height: 1.6; }
+    .journey-step .step-route {
+      font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+      background: rgba(59,130,246,0.12); color: #93c5fd;
+      border: 1px solid rgba(59,130,246,0.2); border-radius: 4px; padding: 2px 8px;
+      display: inline-block; margin-top: 4px;
+    }
+
+    /* NEW: Landing section cards */
+    .landing-section-card {
+      border-radius: 14px;
+      padding: 16px 18px;
+      border: 1px solid;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .landing-section-card:hover { transform: translateY(-2px); }
+    .landing-section-card .sec-num {
+      font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+      letter-spacing: 0.1em; margin-bottom: 6px; display: block;
+    }
+    .landing-section-card .sec-title { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+    .landing-section-card .sec-desc { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); line-height: 1.6; }
+    .landing-section-card .sec-what {
+      margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.05);
+      font-family: 'JetBrains Mono', monospace; font-size: 9px; line-height: 1.7; color: var(--muted);
+    }
+
+    /* NEW: Auth flow grid */
+    .auth-flow { display: flex; align-items: center; gap: 0; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; }
+    .auth-flow-node {
+      flex-shrink: 0; min-width: 140px;
+      background: rgba(99,102,241,0.07); border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 12px; padding: 12px 14px;
+      text-align: center;
+    }
+    .auth-flow-node .auth-icon { font-size: 20px; margin-bottom: 6px; }
+    .auth-flow-node .auth-label { font-size: 10px; font-weight: 700; color: #a5b4fc; margin-bottom: 4px; }
+    .auth-flow-node .auth-sub { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; color: var(--muted); line-height: 1.5; }
+    .auth-arrow {
+      flex-shrink: 0; width: 40px; display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .auth-arrow::before {
+      content: '';
+      width: 30px; height: 2px;
+      background: linear-gradient(to right, rgba(99,102,241,0.3), rgba(99,102,241,0.7));
+    }
+    .auth-arrow::after {
+      content: '';
+      position: absolute; right: 2px;
+      width: 0; height: 0;
+      border-left: 6px solid rgba(99,102,241,0.7);
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+    }
+
+    /* NEW: MongoDB schema table */
+    .schema-table { width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; }
+    .schema-table th {
+      text-align: left; padding: 8px 12px;
+      background: rgba(6,182,212,0.08); color: #67e8f9;
+      border-bottom: 1px solid rgba(6,182,212,0.2); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .schema-table td { padding: 7px 12px; color: var(--muted); border-bottom: 1px solid rgba(255,255,255,0.04); line-height: 1.4; }
+    .schema-table td:first-child { color: #93c5fd; font-weight: 600; }
+    .schema-table td:nth-child(2) { color: #6ee7b7; }
+    .schema-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* NEW: feature priority badge */
+    .priority { display: inline-block; padding: 1px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700; letter-spacing: 0.06em; margin-left: 6px; vertical-align: middle; }
+    .p-must { background: rgba(244,63,94,0.15); color: #fda4af; border: 1px solid rgba(244,63,94,0.25); }
+    .p-should { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.25); }
+    .p-nice { background: rgba(100,116,139,0.2); color: #94a3b8; border: 1px solid rgba(100,116,139,0.25); }
+
+    /* NEW: timeline */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--indigo), var(--cyan), var(--emerald)); border-radius: 2px; }
+    .timeline-item { position: relative; margin-bottom: 20px; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -28px; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      border: 2px solid var(--indigo); background: var(--bg);
+    }
+    .timeline-item.done::before { background: var(--indigo); }
+    .timeline-item .tl-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 4px; text-transform: uppercase; }
+    .timeline-item .tl-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .timeline-item .tl-items { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); line-height: 1.8; }
+
+    /* NEW: endpoint table */
+    .endpoint-row {
+      display: flex; gap: 10px; align-items: center;
+      padding: 8px 12px; border-radius: 8px;
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      margin-bottom: 6px; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    }
+    .method { padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 9px; flex-shrink: 0; min-width: 48px; text-align: center; }
+    .method.get { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+    .method.post { background: rgba(59,130,246,0.15); color: #93c5fd; }
+    .method.delete { background: rgba(244,63,94,0.15); color: #fda4af; }
+    .endpoint-path { color: #e2e8f0; flex: 1; }
+    .endpoint-desc { color: var(--muted); font-size: 9px; }
+    .endpoint-auth { font-size: 8px; padding: 1px 6px; border-radius: 3px; background: rgba(245,158,11,0.1); color: #fcd34d; border: 1px solid rgba(245,158,11,0.2); flex-shrink: 0; }
+
+    /* Degraded note */
+    .degraded-note {
+      background: rgba(245,158,11,0.06); border: 1px dashed rgba(245,158,11,0.25);
+      border-radius: 12px; padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #fcd34d; line-height: 1.6; margin: 12px 0;
+    }
+    .degraded-note strong { color: #fbbf24; }
+
+    /* Info note */
+    .info-note {
+      background: rgba(99,102,241,0.06); border: 1px dashed rgba(99,102,241,0.3);
+      border-radius: 12px; padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #a5b4fc; line-height: 1.6; margin: 12px 0;
+    }
+    .info-note strong { color: #c4b5fd; }
+
+    /* NEW: section color override for pink phase */
+    .section-label.pink .num { color: #f9a8d4; }
+    .section-label.pink h2 { color: #f9a8d4; }
+    .section-label.pink .line { background: rgba(236,72,153,0.2); }
+
+    .section-label.lime .num { color: #bef264; }
+    .section-label.lime h2 { color: #bef264; }
+    .section-label.lime .line { background: rgba(132,204,22,0.2); }
+
+    .section-label.orange .num { color: #fdba74; }
+    .section-label.orange h2 { color: #fdba74; }
+    .section-label.orange .line { background: rgba(249,115,22,0.2); }
+
+    .section-label.cyan .num { color: #67e8f9; }
+    .section-label.cyan h2 { color: #67e8f9; }
+    .section-label.cyan .line { background: rgba(6,182,212,0.2); }
+
+    /* Legend */
+    .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 48px; padding: 24px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+
+    .gap { margin-bottom: 16px; }
+    .gap-sm { margin-bottom: 10px; }
+    .gap-lg { margin-bottom: 28px; }
+
+    @media(max-width:900px) {
+      .flow-row-4,.flow-row-5,.flow-row-6 { grid-template-columns: repeat(2,1fr); }
+      .flow-row-3 { grid-template-columns: 1fr; }
+      .auth-flow { flex-direction: column; }
+      .auth-arrow { transform: rotate(90deg); }
+    }
+  </style>
 </head>
+
 <body>
 <div class="page">
 
   <!-- ══ HEADER ══ -->
   <div class="header">
-    <div class="header-badge">SYSTEM ARCHITECTURE · VANTAGE AI · v1.0</div>
+    <div class="header-badge">SYSTEM ARCHITECTURE · FINSIGHT AI · v2.0 — UPDATED WITH PRODUCT ROADMAP</div>
     <h1>Full Project Flowchart</h1>
-    <p>Multimodal Multi-Agent Financial Intelligence Platform — End-to-End Data &amp; Control Flow</p>
+    <p>Multimodal Multi-Agent Financial Intelligence Platform — End-to-End Data, Control Flow &amp; Website Product Roadmap</p>
   </div>
 
 
   <!-- ════════════════════════════════════════
-       PHASE 0 — SETUP / OFFLINE PIPELINE
+     PHASE 0 — SETUP / OFFLINE PIPELINE
   ════════════════════════════════════════ -->
   <div class="section-label">
     <span class="num">PHASE 0</span>
@@ -505,7 +463,6 @@
         <span class="out">→ out/sample_transcripts.jsonl</span>
       </div>
     </div>
-
     <div class="node n-slate">
       <span class="node-tag">feature_store.py</span>
       <div class="node-title">Feature Engineering</div>
@@ -523,7 +480,6 @@
         <span class="out">→ out/feature_manifest.json</span>
       </div>
     </div>
-
     <div class="node n-slate">
       <span class="node-tag">financial_model.py train()</span>
       <div class="node-title">XGBoost Model Training</div>
@@ -545,7 +501,7 @@
   <div class="arrow-down big"><div class="stem"></div><div class="head"></div></div>
 
   <!-- ════════════════════════════════════════
-       PHASE 1 — USER REQUEST ENTRY
+     PHASE 1 — USER REQUEST ENTRY
   ════════════════════════════════════════ -->
   <div class="section-label">
     <span class="num">PHASE 1</span>
@@ -555,7 +511,7 @@
   <div class="flow-row flow-row-2 gap">
     <div class="node n-blue">
       <span class="node-tag">React Frontend</span>
-      <div class="node-title">Vantage AI Intelligence Dashboard</div>
+      <div class="node-title">FinSight Ai Intelligence Dashboard</div>
       <div class="detail-list">
         <span>Company ID input (e.g., AAPL, COMP_007)</span>
         <span>Date input → POST /predict</span>
@@ -587,14 +543,13 @@
   <div class="arrow-down big"><div class="stem"></div><div class="head"></div></div>
 
   <!-- ════════════════════════════════════════
-       PHASE 2 — ORCHESTRATOR DATA ROUTING
+     PHASE 2 — ORCHESTRATOR DATA ROUTING
   ════════════════════════════════════════ -->
   <div class="section-label">
     <span class="num">PHASE 2</span>
     <h2>Orchestrator — Data Routing &amp; Source Selection</h2>
     <div class="line"></div>
   </div>
-
   <div class="node n-indigo node-big gap">
     <span class="node-tag">orchestrate.py</span>
     <div class="node-title">Orchestrator — Master Controller</div>
@@ -631,7 +586,6 @@
       </div>
     </div>
   </div>
-
   <div class="degraded-note">
     <strong>⚠ Degraded Mode:</strong> If any agent times out or throws, it returns a fallback output (confidence=0.5) and is added to <code>degraded_agents[]</code>. The orchestrator continues with remaining agents. If &lt;2 agents succeed, the entire request fails with <code>InsufficientDataError</code>.
   </div>
@@ -639,31 +593,25 @@
   <div class="arrow-down big"><div class="stem"></div><div class="head"></div></div>
 
   <!-- ════════════════════════════════════════
-       PHASE 3 — PARALLEL AGENT EXECUTION
+     PHASE 3 — PARALLEL AGENT EXECUTION
   ════════════════════════════════════════ -->
   <div class="section-label">
     <span class="num">PHASE 3</span>
     <h2>Parallel Agent Execution</h2>
     <div class="line"></div>
   </div>
-
   <div class="parallel-indicator">
     <div class="bar"></div>
     <div class="badge">asyncio.gather() — All 4 agents run simultaneously in parallel</div>
     <div class="bar r"></div>
   </div>
-
   <div class="flow-row flow-row-4 gap">
-
-    <!-- Agent 1 -->
     <div class="node n-violet">
       <span class="node-tag">Agent 1</span>
       <div class="node-title">Transcript NLP Agent</div>
       <span class="llm-chip">🦙 Groq llama-3.3-70b</span>
       <span class="llm-chip">✦ Gemini 2.0 fallback</span>
-      <div class="node-io" style="margin-top:10px;">
-        <span class="in">IN: transcript_text, company_id, quarter</span>
-      </div>
+      <div class="node-io" style="margin-top:10px;"><span class="in">IN: transcript_text, company_id, quarter</span></div>
       <div class="detail-list" style="margin-top:8px;">
         <span>Extract 5 key driver sentences</span>
         <span>Sentiment score [-1, 1]</span>
@@ -679,15 +627,11 @@
         <br/><span class="warn">DEGRADED: confidence=0.5, empty lists</span>
       </div>
     </div>
-
-    <!-- Agent 2 -->
     <div class="node n-cyan">
       <span class="node-tag">Agent 2</span>
       <div class="node-title">Financial Model Agent</div>
       <span class="llm-chip">🌲 XGBoost (no LLM)</span>
-      <div class="node-io" style="margin-top:10px;">
-        <span class="in">IN: company_id, as_of_date, features dict</span>
-      </div>
+      <div class="node-io" style="margin-top:10px;"><span class="in">IN: company_id, as_of_date, features dict</span></div>
       <div class="detail-list" style="margin-top:8px;">
         <span>Loads financial_model.pkl (6 models)</span>
         <span>Predicts revenue p05/p50/p95</span>
@@ -702,16 +646,12 @@
         <br/><span class="warn">DEGRADED: RuntimeError → caught by orchestrator</span>
       </div>
     </div>
-
-    <!-- Agent 3 -->
     <div class="node n-amber">
       <span class="node-tag">Agent 3</span>
       <div class="node-title">News &amp; Macro Agent</div>
       <span class="llm-chip">🦙 Groq llama-3.3-70b</span>
       <span class="llm-chip">✦ Gemini 2.0 fallback</span>
-      <div class="node-io" style="margin-top:10px;">
-        <span class="in">IN: headlines[], macro_indicators {gdp_growth, interest_rate}</span>
-      </div>
+      <div class="node-io" style="margin-top:10px;"><span class="in">IN: headlines[], macro_indicators {gdp_growth, interest_rate}</span></div>
       <div class="detail-list" style="margin-top:8px;">
         <span>Analyze news headlines + macro data</span>
         <span>Returns macro_sentiment [-1,1]</span>
@@ -725,16 +665,12 @@
         <br/><span class="warn">DEGRADED: sentiment=0, empty risk_factors</span>
       </div>
     </div>
-
-    <!-- Agent 4 -->
     <div class="node n-rose">
       <span class="node-tag">Agent 4</span>
       <div class="node-title">Competitor Agent</div>
       <span class="llm-chip">🦙 Groq llama-3.3-70b</span>
       <span class="llm-chip">✦ Gemini 2.0 fallback</span>
-      <div class="node-io" style="margin-top:10px;">
-        <span class="in">IN: peer_financials[], market_share_signals</span>
-      </div>
+      <div class="node-io" style="margin-top:10px;"><span class="in">IN: peer_financials[], market_share_signals</span></div>
       <div class="detail-list" style="margin-top:8px;">
         <span>Benchmarks vs. peer companies</span>
         <span>Computes revenue_delta &amp; margin_delta per peer</span>
@@ -750,7 +686,6 @@
     </div>
   </div>
 
-  <!-- LLM Client Breakdown -->
   <div class="arrow-down-label">
     <div class="stem"></div>
     <div class="lbl">All LLM agents call via LLMClient singleton</div>
@@ -798,7 +733,7 @@
   </div>
 
   <!-- ════════════════════════════════════════
-       PHASE 4 — ENSEMBLER
+     PHASE 4 — ENSEMBLER
   ════════════════════════════════════════ -->
   <div class="section-label">
     <span class="num">PHASE 4</span>
@@ -844,7 +779,7 @@
   <div class="arrow-down big"><div class="stem"></div><div class="head"></div></div>
 
   <!-- ════════════════════════════════════════
-       PHASE 5 — RESPONSE + AUDIT
+     PHASE 5 — RESPONSE + AUDIT
   ════════════════════════════════════════ -->
   <div class="section-label">
     <span class="num">PHASE 5</span>
@@ -875,7 +810,7 @@
         <span>Stores: trace_id, timestamp, status</span>
         <span>Stores: agents_called, degraded_agents JSON</span>
         <span>Stores: final_output_json, latency_ms</span>
-        <span>⚠ Not yet wired to API or UI</span>
+        <span>⚠ Upgrade to MongoDB for multi-user support</span>
       </div>
     </div>
     <div class="node n-blue">
@@ -893,12 +828,10 @@
     </div>
   </div>
 
-  <div class="arrow-down big"><div class="stem"></div><div class="head"></div></div>
-
   <!-- ════════════════════════════════════════
-       DATA STORES SUMMARY
+     STORES
   ════════════════════════════════════════ -->
-  <div class="section-label">
+  <div class="section-label" style="margin-top:28px;">
     <span class="num">STORES</span>
     <h2>Data Stores &amp; External Connections</h2>
     <div class="line"></div>
@@ -958,8 +891,535 @@
   </div>
 
 
+  <!-- ══════════════════════════════════════════════════════════════════
+     ██████████████████████  NEW CONTENT BELOW  ████████████████████████
+  ══════════════════════════════════════════════════════════════════════ -->
+  <div class="phase-divider">
+    <div class="divider-line"></div>
+    <div class="divider-badge">🚀 PRODUCT ROADMAP — NEW PHASES BELOW</div>
+    <div class="divider-line"></div>
+  </div>
+
+
   <!-- ════════════════════════════════════════
-       LEGEND
+     PHASE 6 — AUTH + USER ACCOUNT SYSTEM
+  ════════════════════════════════════════ -->
+  <div class="section-label pink">
+    <span class="num">PHASE 6</span>
+    <h2>User Auth &amp; Account System — Firebase + MongoDB</h2>
+    <div class="line"></div>
+  </div>
+
+  <!-- Auth Flow diagram -->
+  <div style="margin-bottom: 16px; padding: 20px; background: rgba(236,72,153,0.04); border: 1px solid rgba(236,72,153,0.15); border-radius: 16px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #f9a8d4; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">
+      🔐 Firebase Authentication Flow
+    </div>
+    <div class="auth-flow">
+      <div class="auth-flow-node">
+        <div class="auth-icon">🌐</div>
+        <div class="auth-label">Landing Page</div>
+        <div class="auth-sub">User clicks<br/>"Get Started"<br/>or "Login"</div>
+      </div>
+      <div class="auth-arrow"></div>
+      <div class="auth-flow-node">
+        <div class="auth-icon">🔑</div>
+        <div class="auth-label">Auth Page /login</div>
+        <div class="auth-sub">Email+Pass<br/>Google OAuth<br/>signInWithPopup()</div>
+      </div>
+      <div class="auth-arrow"></div>
+      <div class="auth-flow-node">
+        <div class="auth-icon">🔥</div>
+        <div class="auth-label">Firebase Auth</div>
+        <div class="auth-sub">Verifies credentials<br/>Returns user.uid<br/>Returns ID token</div>
+      </div>
+      <div class="auth-arrow"></div>
+      <div class="auth-flow-node">
+        <div class="auth-icon">🛡️</div>
+        <div class="auth-label">FastAPI Verify</div>
+        <div class="auth-sub">firebase-admin SDK<br/>verify_id_token()<br/>Extracts uid</div>
+      </div>
+      <div class="auth-arrow"></div>
+      <div class="auth-flow-node">
+        <div class="auth-icon">📊</div>
+        <div class="auth-label">Protected App</div>
+        <div class="auth-sub">Dashboard<br/>My Reports<br/>Audit Trail</div>
+      </div>
+      <div class="auth-arrow"></div>
+      <div class="auth-flow-node">
+        <div class="auth-icon">🗄️</div>
+        <div class="auth-label">MongoDB Atlas</div>
+        <div class="auth-sub">Reports tagged<br/>by user.uid<br/>Isolated per user</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-row flow-row-3 gap">
+    <div class="node n-pink">
+      <span class="node-tag">Firebase Auth Setup</span>
+      <div class="node-title">firebase.js — Client Config</div>
+      <div class="detail-list">
+        <span>initializeApp(firebaseConfig)</span>
+        <span>getAuth() + GoogleAuthProvider()</span>
+        <span>signInWithPopup(auth, googleProvider)</span>
+        <span>createUserWithEmailAndPassword()</span>
+        <span>signInWithEmailAndPassword()</span>
+        <span>onAuthStateChanged() — global state</span>
+        <span>getIdToken() — send with every API call</span>
+        <span>signOut() — logout button</span>
+      </div>
+      <div class="node-io">
+        <span class="out">→ user.uid (persisted in React context)</span>
+        <span class="out">→ Authorization: Bearer &lt;token&gt; header</span>
+      </div>
+    </div>
+    <div class="node n-pink">
+      <span class="node-tag">FastAPI — firebase-admin</span>
+      <div class="node-title">Token Verification Middleware</div>
+      <div class="detail-list">
+        <span>pip install firebase-admin</span>
+        <span>firebase_admin.initialize_app()</span>
+        <span>auth.verify_id_token(token) → decoded_uid</span>
+        <span>Dependency: get_current_user(token=Header)</span>
+        <span>Inject uid into every protected endpoint</span>
+        <span>Returns 401 if token invalid/expired</span>
+        <span>Returns 403 if uid mismatch</span>
+      </div>
+      <div class="node-io">
+        <span class="in">← Authorization: Bearer &lt;token&gt;</span>
+        <span class="out">→ uid string for MongoDB queries</span>
+      </div>
+    </div>
+    <div class="node n-pink">
+      <span class="node-tag">React ProtectedRoute</span>
+      <div class="node-title">Route Guard Component</div>
+      <div class="detail-list">
+        <span>Wraps /dashboard, /signals, /audit, /peers, /reports</span>
+        <span>onAuthStateChanged() listener at App root</span>
+        <span>AuthContext: { user, loading, uid }</span>
+        <span>If loading → show skeleton spinner</span>
+        <span>If no user → redirect to /login</span>
+        <span>If user → render children</span>
+        <span>Landing page (/) is public — no auth needed</span>
+      </div>
+      <div class="node-io">
+        <span class="out">→ Redirect /login or render protected page</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+     MONGODB SCHEMA
+  ════════════════════════════════════════ -->
+  <div class="section-label cyan" style="margin-top: 24px;">
+    <span class="num">6B</span>
+    <h2>MongoDB Atlas — Reports Collection Schema</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="flow-row flow-row-2 gap">
+    <div class="node n-cyan">
+      <span class="node-tag">Collection: reports</span>
+      <div class="node-title">Per-User Report Document Schema</div>
+      <div style="margin-top: 12px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(6,182,212,0.15);">
+        <table class="schema-table">
+          <thead>
+            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>_id</td><td>ObjectId</td><td>Auto MongoDB ID</td></tr>
+            <tr><td>userId</td><td>string</td><td>Firebase user.uid — partition key</td></tr>
+            <tr><td>companyId</td><td>string</td><td>"AAPL", "COMP_007" etc.</td></tr>
+            <tr><td>asOfDate</td><td>string</td><td>"2026-01-31" — analysis date</td></tr>
+            <tr><td>createdAt</td><td>datetime</td><td>UTC timestamp of analysis</td></tr>
+            <tr><td>reportName</td><td>string</td><td>User-given name (optional)</td></tr>
+            <tr><td>signal</td><td>string</td><td>"buy" | "sell" | "hold" | "monitor"</td></tr>
+            <tr><td>confidence</td><td>float</td><td>0.0–1.0 combined confidence</td></tr>
+            <tr><td>status</td><td>string</td><td>"success" | "partial"</td></tr>
+            <tr><td>content</td><td>object</td><td>Full EnsemblerOutput JSON</td></tr>
+            <tr><td>dataSource</td><td>string</td><td>"live_vantage" | "synthetic_store"</td></tr>
+            <tr><td>degradedAgents</td><td>array</td><td>Agents that failed/timed out</td></tr>
+            <tr><td>latencyMs</td><td>int</td><td>Total prediction time</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="node n-cyan gap-sm">
+        <span class="node-tag">Motor — Async MongoDB Driver</span>
+        <div class="node-title">Backend DB Operations</div>
+        <div class="detail-list">
+          <span>pip install motor</span>
+          <span>AsyncIOMotorClient(MONGO_URI)</span>
+          <span>db = client.finsight_db</span>
+          <span>collection = db.reports</span>
+          <span>INSERT: insert_one(doc) after every /predict</span>
+          <span>READ: find({"userId": uid}) → paginated</span>
+          <span>DELETE: delete_one({"_id": id, "userId": uid})</span>
+          <span>INDEX on userId + createdAt for fast queries</span>
+        </div>
+      </div>
+      <div class="node n-cyan">
+        <span class="node-tag">New FastAPI Endpoints</span>
+        <div class="node-title">Reports API</div>
+        <div style="margin-top:10px;">
+          <div class="endpoint-row">
+            <span class="method get">GET</span>
+            <span class="endpoint-path">/api/my-reports</span>
+            <span class="endpoint-auth">🔐 Auth</span>
+            <span class="endpoint-desc">All reports for uid</span>
+          </div>
+          <div class="endpoint-row">
+            <span class="method get">GET</span>
+            <span class="endpoint-path">/api/my-reports/{id}</span>
+            <span class="endpoint-auth">🔐 Auth</span>
+            <span class="endpoint-desc">Single report by ID</span>
+          </div>
+          <div class="endpoint-row">
+            <span class="method delete">DEL</span>
+            <span class="endpoint-path">/api/my-reports/{id}</span>
+            <span class="endpoint-auth">🔐 Auth</span>
+            <span class="endpoint-desc">Delete one report</span>
+          </div>
+          <div class="endpoint-row">
+            <span class="method get">GET</span>
+            <span class="endpoint-path">/api/export/{id}/json</span>
+            <span class="endpoint-auth">🔐 Auth</span>
+            <span class="endpoint-desc">Download as JSON file</span>
+          </div>
+          <div class="endpoint-row">
+            <span class="method get">GET</span>
+            <span class="endpoint-path">/api/export/{id}/csv</span>
+            <span class="endpoint-auth">🔐 Auth</span>
+            <span class="endpoint-desc">Download as CSV file</span>
+          </div>
+          <div class="endpoint-row">
+            <span class="method get">GET</span>
+            <span class="endpoint-path">/api/export/{id}/txt</span>
+            <span class="endpoint-auth">🔐 Auth</span>
+            <span class="endpoint-desc">Download as TXT summary</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+     PHASE 7 — USER DASHBOARD (MY REPORTS)
+  ════════════════════════════════════════ -->
+  <div class="section-label lime" style="margin-top: 24px;">
+    <span class="num">PHASE 7</span>
+    <h2>User Dashboard — My Reports &amp; File Export</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="flow-row flow-row-3 gap">
+    <div class="node n-lime">
+      <span class="node-tag">/reports — My Reports Page</span>
+      <div class="node-title">User's Saved Analysis Library</div>
+      <div class="detail-list">
+        <span>Fetches GET /api/my-reports on mount</span>
+        <span>Shows report cards sorted by createdAt desc</span>
+        <span>Each card: company, date, signal badge, confidence</span>
+        <span>Status badge: SUCCESS / PARTIAL (amber)</span>
+        <span>Click card → view full analysis in modal</span>
+        <span>3 export buttons per card: [JSON] [CSV] [TXT]</span>
+        <span>Delete button with confirm dialog</span>
+        <span>Search/filter by company name or signal type</span>
+        <span>Empty state: "Run your first analysis"</span>
+      </div>
+    </div>
+    <div class="node n-lime">
+      <span class="node-tag">File Export System</span>
+      <div class="node-title">JSON / CSV / TXT Generation</div>
+      <div class="detail-list">
+        <span>JSON: full EnsemblerOutput → pretty printed</span>
+        <span>CSV: flatten metrics → row per agent output</span>
+        <span>TXT: human-readable summary report</span>
+        <span>TXT includes: signal, rationale, risk factors</span>
+        <span>TXT includes: revenue forecast with CI range</span>
+        <span>FastAPI: StreamingResponse with Content-Disposition</span>
+        <span>Frontend: window.open(exportUrl) → auto-download</span>
+        <span>Filename: {companyId}_{date}.{ext}</span>
+      </div>
+    </div>
+    <div class="node n-lime">
+      <span class="node-tag">Predict → Auto-Save Flow</span>
+      <div class="node-title">Seamless Report Persistence</div>
+      <div class="detail-list">
+        <span>User runs analysis on /dashboard</span>
+        <span>Backend: POST /predict → runs agents</span>
+        <span>After ensembler → insert_one to MongoDB</span>
+        <span>Tagged with user.uid from auth token</span>
+        <span>Response includes MongoDB _id in payload</span>
+        <span>Frontend shows "✓ Saved to My Reports" toast</span>
+        <span>User can immediately export or visit /reports</span>
+        <span>Re-runs same company → creates new report doc</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-note">
+    <strong>💡 My Reports Dashboard Layout:</strong> Sidebar nav item "My Reports 📂" → Grid of cards (2-col on desktop, 1-col mobile). Each card shows company logo placeholder, ticker, date, signal colored badge (green=BUY, red=SELL, blue=HOLD), confidence percentage, and 3 download icons. Clicking the card body expands to show full analysis in a slide-over panel without leaving the page.
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+     PHASE 8 — LANDING PAGE BLUEPRINT
+  ════════════════════════════════════════ -->
+  <div class="section-label orange" style="margin-top: 24px;">
+    <span class="num">PHASE 8</span>
+    <h2>Landing Page — Section-by-Section Blueprint</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="info-note">
+    <strong>Design Mandate:</strong> NOT generic AI slop. Dark theme (#060608 base). Syne + JetBrains Mono fonts (already in your project). Subtle grid overlay, glowing accent lines, animated number counters. Real screenshots of your dashboard, not mockup illustrations. No stock photos.
+  </div>
+
+  <div class="flow-row flow-row-3 gap-sm">
+
+    <div class="landing-section-card" style="background: rgba(59,130,246,0.06); border-color: rgba(59,130,246,0.2);">
+      <span class="sec-num" style="color:#93c5fd;">§ 01 · HERO</span>
+      <div class="sec-title" style="color:#93c5fd;">Above the Fold — The Hook</div>
+      <div class="sec-desc">Animated badge: "AI-Powered Financial Intelligence for Startups". Headline: "Your Startup's Financials, Decoded in 10 Seconds." Subline: "4 AI agents analyze your reports simultaneously — revenue forecast, buy/sell signal, peer benchmarking, risk flags." Two CTAs: [Get Started Free] [See How It Works ↓]</div>
+      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Animated mockup of dashboard (screenshot with glow). Subtle floating numbers (revenue values) in background. Pulse animation on "LIVE" badge.</div>
+    </div>
+
+    <div class="landing-section-card" style="background: rgba(244,63,94,0.06); border-color: rgba(244,63,94,0.2);">
+      <span class="sec-num" style="color:#fda4af;">§ 02 · PROBLEM</span>
+      <div class="sec-title" style="color:#fda4af;">Why Startups Fail at Financials</div>
+      <div class="sec-desc">4 pain points shown as cards with before/after contrast. "Manual Excel takes weeks." "CFO costs ₹40L/year." "Missing investor-grade benchmarks." "No early warning on revenue risk." Stat: "73% of startups cite financial mismanagement as a key failure cause."</div>
+      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> 4 cards with ❌ icons for "without FinSight". Subtle red tint background on this section only for emotional contrast.</div>
+    </div>
+
+    <div class="landing-section-card" style="background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.2);">
+      <span class="sec-num" style="color:#6ee7b7;">§ 03 · HOW IT WORKS</span>
+      <div class="sec-title" style="color:#6ee7b7;">3-Step Process (No Jargon)</div>
+      <div class="sec-desc">Step 1: Upload or enter your company data / ticker. Step 2: 4 AI agents analyze simultaneously (show agent names with icons). Step 3: Get your full report — signal, forecast, peers, risks. Timeline or stepper UI. Below: "It runs in under 10 seconds."</div>
+      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Horizontal 3-step flow with connecting animated dotted line. Agent icons with slight bounce on scroll-in.</div>
+    </div>
+
+    <div class="landing-section-card" style="background: rgba(139,92,246,0.06); border-color: rgba(139,92,246,0.2);">
+      <span class="sec-num" style="color:#c4b5fd;">§ 04 · THE 4 AGENTS</span>
+      <div class="sec-title" style="color:#c4b5fd;">Meet Your Analysis Team</div>
+      <div class="sec-desc">4 cards, one per agent. Each has: icon, name, what it does in plain English, example output snippet. Transcript NLP: "Reads your earnings calls and finds what management is really saying." Financial Model: "XGBoost ML predicts revenue range with 3 confidence levels." News Agent: "Scans macro headlines to flag external risks." Competitor Agent: "Benchmarks you vs peers."</div>
+      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> 2×2 grid of agent cards. Each card has a small animated output preview (e.g. confidence bar filling up).</div>
+    </div>
+
+    <div class="landing-section-card" style="background: rgba(6,182,212,0.06); border-color: rgba(6,182,212,0.2);">
+      <span class="sec-num" style="color:#67e8f9;">§ 05 · WHAT YOU GET</span>
+      <div class="sec-title" style="color:#67e8f9;">Your Full Financial Intelligence Report</div>
+      <div class="sec-desc">Show the exact outputs: BUY/HOLD/SELL/MONITOR signal with color. Revenue forecast bar with p05/p50/p95. EBITDA forecast. Confidence score with ring. Peer comparison table. Transcript driver quotes. Risk factors. Export to JSON/CSV/TXT.</div>
+      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Real screenshot of your dashboard with annotations/callouts pointing to each output. "Real data, real predictions."</div>
+    </div>
+
+    <div class="landing-section-card" style="background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.2);">
+      <span class="sec-num" style="color:#fcd34d;">§ 06 · WHY IT MATTERS</span>
+      <div class="sec-title" style="color:#fcd34d;">Built for Startup Reality</div>
+      <div class="sec-desc">"Before your Series A pitch, know your numbers cold." "Identify revenue risk 1 quarter before it hits." "Present investor-grade peer benchmarks without a Bloomberg terminal." "Save ₹30L/year vs traditional financial analysts." 3 stat counters animated on scroll: 4 Agents, &lt;10s Analysis, 800+ Data Points.</div>
+      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Bold stat numbers with counter animation. Short founder testimonial card (even if fictional for now). Glassmorphism card design.</div>
+    </div>
+
+    <div class="landing-section-card" style="background: rgba(132,204,22,0.06); border-color: rgba(132,204,22,0.2);">
+      <span class="sec-num" style="color:#bef264;">§ 07 · TECH TRANSPARENCY</span>
+      <div class="sec-title" style="color:#bef264;">What Powers FinSight Ai</div>
+      <div class="sec-desc">Show the real stack honestly. Groq (primary LLM), Gemini 2.0 (fallback), XGBoost (ML forecasting), FastAPI (backend), React + Vite (frontend), MongoDB Atlas (storage), Firebase Auth (security). "No hallucination — every agent output is audited and logged."</div>
+      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Stack badges with logos. Small architecture diagram (simplified, not the full flowchart). "Powered by real ML, not just chat."</div>
+    </div>
+
+    <div class="landing-section-card" style="background: rgba(99,102,241,0.06); border-color: rgba(99,102,241,0.2);">
+      <span class="sec-num" style="color:#a5b4fc;">§ 08 · PRICING</span>
+      <div class="sec-title" style="color:#a5b4fc;">Beta Access — Currently Free</div>
+      <div class="sec-desc">Free Tier: 5 analyses/month, all 4 agents, JSON/CSV export. Pro (Coming Soon): Unlimited analyses, priority queue, PDF reports. Enterprise (Coming Soon): API access, team accounts, custom data. Be honest: "Beta phase — all features free for early adopters."</div>
+      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> 3-column pricing cards. Free tier highlighted with "Current" badge. Pro/Enterprise with "Waitlist" CTA instead of price.</div>
+    </div>
+
+    <div class="landing-section-card" style="background: rgba(236,72,153,0.06); border-color: rgba(236,72,153,0.2);">
+      <span class="sec-num" style="color:#f9a8d4;">§ 09 · FAQ + FOOTER</span>
+      <div class="sec-title" style="color:#f9a8d4;">FAQ + Final CTA + Footer</div>
+      <div class="sec-desc">FAQ: Is my data secure? (Firebase + MongoDB, no sharing). What companies? (Any public ticker + synthetic test data). How accurate? (Probabilistic ranges, not guarantees). Need tech skills? (No — just enter a name). Final CTA: "Ready to understand your financials?" [Create Free Account]. Footer: GitHub, docs link, contact email, college project notice.</div>
+      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Accordion FAQ. Large bold CTA section with glow effect. Minimal footer — no link spam.</div>
+    </div>
+
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+     PHASE 9 — COMPLETE USER JOURNEY
+  ════════════════════════════════════════ -->
+  <div class="section-label" style="margin-top: 28px;">
+    <span class="num">PHASE 9</span>
+    <h2>Complete End-to-End User Journey</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="flow-row flow-row-2 gap">
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;">👤 NEW USER FLOW (First Visit)</div>
+
+      <div class="journey-step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-title">Lands on / (Landing Page)</div>
+          <div class="step-desc">Reads hero, scrolls through How It Works, sees agent breakdown and sample outputs. Clicks "Get Started Free".</div>
+          <span class="step-route">/ → public, no auth</span>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-title">Creates Account → /signup</div>
+          <div class="step-desc">Enters email+password or Google OAuth. Firebase creates account. uid assigned. Redirected to dashboard.</div>
+          <span class="step-route">/signup → /dashboard</span>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-title">Runs First Analysis</div>
+          <div class="step-desc">Enters "AAPL" or company ticker. Selects date. Clicks Signal. 4 agents run in parallel (&lt;10s). Results appear. Report auto-saved to MongoDB with their uid.</div>
+          <span class="step-route">/dashboard → POST /api/predict → MongoDB save</span>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <div class="step-title">Views Report Detail + Exports</div>
+          <div class="step-desc">Sees BUY signal, revenue forecast chart, peer table, transcript drivers. Clicks [Download JSON] to export full data. Clicks [Download TXT] for readable summary.</div>
+          <span class="step-route">/dashboard → GET /api/export/{id}/json</span>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <div class="step-title">Visits My Reports</div>
+          <div class="step-desc">Sees all past analyses. Can search by company, filter by signal type. Views any old report in full-screen panel. Deletes reports they don't need.</div>
+          <span class="step-route">/reports → GET /api/my-reports</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;">🔄 RETURNING USER FLOW</div>
+
+      <div class="journey-step">
+        <div class="step-num">R1</div>
+        <div class="step-content">
+          <div class="step-title">Visits /login</div>
+          <div class="step-desc">onAuthStateChanged fires. If already logged in (token valid), skips login page, goes directly to /dashboard. If not, shows login form.</div>
+          <span class="step-route">/login → check auth state → /dashboard</span>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">R2</div>
+        <div class="step-content">
+          <div class="step-title">Explores Peer Benchmarking</div>
+          <div class="step-desc">After running analysis, clicks "Peer Benchmarking" in sidebar. Sees AAPL vs MSFT/GOOGL/META comparison table with revenue delta and margin delta columns.</div>
+          <span class="step-route">/peers → uses data prop from App.jsx</span>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">R3</div>
+        <div class="step-content">
+          <div class="step-title">Checks Audit Trail</div>
+          <div class="step-desc">Visits Audit Trail to see all past prediction logs, including which agents ran, which degraded, exact latency. Searchable log table. All rows from their account only.</div>
+          <span class="step-route">/audit → GET /api/audit (uid-filtered)</span>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">R4</div>
+        <div class="step-content">
+          <div class="step-title">Sector Analysis View</div>
+          <div class="step-desc">Views macro sector context from most recent prediction. Sees sector_outlook string, risk_factors list, macro_sentiment score from News Agent output.</div>
+          <span class="step-route">/sector → reads data prop</span>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">R5</div>
+        <div class="step-content">
+          <div class="step-title">Uses Active Signals Page</div>
+          <div class="step-desc">Views chronological list of all BUY/HOLD/SELL signals they've generated, with timestamps and confidence scores. Quick overview of their analysis history without opening each report.</div>
+          <span class="step-route">/signals → GET /api/my-reports (summary only)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+     PHASE 10 — BUILD PRIORITY + TIMELINE
+  ════════════════════════════════════════ -->
+  <div class="section-label" style="margin-top: 28px;">
+    <span class="num">PHASE 10</span>
+    <h2>Build Priority &amp; College Timeline (1.5 Years)</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="flow-row flow-row-2 gap">
+    <div style="padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Feature Priority</div>
+      <div class="detail-list" style="gap: 8px;">
+        <span>Landing Page (§01–09) <span class="priority p-must">MUST</span> — judges see this first</span>
+        <span>Firebase Auth (/login, /signup, ProtectedRoute) <span class="priority p-must">MUST</span></span>
+        <span>MongoDB Reports storage (auto-save on predict) <span class="priority p-must">MUST</span></span>
+        <span>My Reports page (/reports) <span class="priority p-must">MUST</span></span>
+        <span>JSON / TXT Export endpoints <span class="priority p-must">MUST</span></span>
+        <span>Audit trail filtered by uid <span class="priority p-should">SHOULD</span></span>
+        <span>CSV Export (flatten metrics) <span class="priority p-should">SHOULD</span></span>
+        <span>Search/filter in My Reports <span class="priority p-should">SHOULD</span></span>
+        <span>Report naming (user can rename) <span class="priority p-nice">NICE</span></span>
+        <span>Dark/light mode toggle <span class="priority p-nice">NICE</span></span>
+        <span>Email notifications on analysis complete <span class="priority p-nice">NICE</span></span>
+        <span>Shareable report link (public URL) <span class="priority p-nice">NICE</span></span>
+      </div>
+    </div>
+    <div style="padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Build Timeline</div>
+      <div class="timeline">
+        <div class="timeline-item done">
+          <div class="tl-label">✅ DONE — Semester 1</div>
+          <div class="tl-title">Core AI Pipeline</div>
+          <div class="tl-items">4 agents · XGBoost training · Groq/Gemini · FastAPI · React dashboard · SQLite audit</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-label">📍 NOW — Month 1-2</div>
+          <div class="tl-title">Auth + Storage Layer</div>
+          <div class="tl-items">Firebase Auth setup · Firebase Admin on FastAPI · MongoDB Atlas + Motor · Auto-save reports · Protected routes</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-label">Month 3-4</div>
+          <div class="tl-title">My Reports + Export</div>
+          <div class="tl-items">Reports page UI · JSON/CSV/TXT export endpoints · Audit trail uid-filtering · Delete report flow</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-label">Month 5-6</div>
+          <div class="tl-title">Landing Page</div>
+          <div class="tl-items">All 9 sections · Real dashboard screenshots · Stat counters · Pricing · FAQ · SEO meta tags</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-label">Month 7-8</div>
+          <div class="tl-title">Polish + Deploy</div>
+          <div class="tl-items">Vercel (frontend) · Render (backend) · MongoDB Atlas · Firebase production mode · Domain name · Performance audit</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-label">Month 9-18 (Post-Submission)</div>
+          <div class="tl-title">Upgrade Path</div>
+          <div class="tl-items">Real transcript ingestion · PDF report generation · OpenAI GPT-4 upgrade · Stripe payments · Real company onboarding</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="degraded-note" style="margin-top: 20px;">
+    <strong>💰 Cost = ₹0 during college:</strong> Groq API (14,400 req/day free) · Gemini API (15 RPM free) · Firebase Auth (10,000 users/month free) · MongoDB Atlas (512MB free) · Vercel frontend (free) · Render backend (750hrs/month free). Total monthly cost: ₹0. Deploy everything on free tiers until you have paying users.
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+     UPDATED LEGEND
   ════════════════════════════════════════ -->
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:rgba(59,130,246,0.5)"></div>Frontend / API Layer</div>
@@ -971,6 +1431,10 @@
     <div class="legend-item"><div class="legend-dot" style="background:rgba(16,185,129,0.5)"></div>Ensembler</div>
     <div class="legend-item"><div class="legend-dot" style="background:rgba(100,116,139,0.3); border:1px solid #475569"></div>Offline / Data Store</div>
     <div class="legend-item"><div class="legend-dot" style="background:rgba(245,158,11,0.2); border:1px dashed rgba(245,158,11,0.4)"></div>Degraded / Gap</div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(236,72,153,0.5)"></div>🆕 Auth System (Firebase)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(6,182,212,0.5)"></div>🆕 MongoDB (Reports DB)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(132,204,22,0.5)"></div>🆕 User Dashboard / Export</div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(249,115,22,0.5)"></div>🆕 Landing Page</div>
   </div>
 
 </div>
