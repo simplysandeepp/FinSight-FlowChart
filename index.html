@@ -1,1442 +1,2071 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FinSight Ai — Full System Flowchart v2</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap"
-    rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #060608;
-      --panel: #0d0d12;
-      --border: #1a1a2e;
-      --blue: #3b82f6;
-      --indigo: #6366f1;
-      --violet: #8b5cf6;
-      --emerald: #10b981;
-      --amber: #f59e0b;
-      --rose: #f43f5e;
-      --cyan: #06b6d4;
-      --text: #e2e8f0;
-      --muted: #64748b;
-      --dim: #334155;
-      --pink: #ec4899;
-      --lime: #84cc16;
-      --orange: #f97316;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FinSight AI — Complete Project Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #05080f;
+  --bg2: #080d18;
+  --bg3: #0c1220;
+  --card: #0f172a;
+  --card2: #111827;
+  --border: #1e293b;
+  --border2: #263147;
+  --teal: #0ea5e9;
+  --teal2: #38bdf8;
+  --green: #10b981;
+  --gold: #f59e0b;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --red: #ef4444;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --white: #ffffff;
+}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Syne', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+html { scroll-behavior: smooth; }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 40% at 20% 10%, rgba(59, 130, 246, 0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 50% at 80% 90%, rgba(99, 102, 241, 0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 50% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
 
-    .page {
-      position: relative;
-      z-index: 1;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 48px 32px 80px;
-    }
+/* ── BG GRID ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(14,165,233,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,165,233,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-    /* ── Header ── */
-    .header { text-align: center; margin-bottom: 64px; }
-    .header-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2);
-      border-radius: 100px; padding: 6px 16px;
-      font-family: 'JetBrains Mono', monospace; font-size: 11px;
-      color: var(--blue); letter-spacing: 0.1em; margin-bottom: 20px;
-    }
-    .header-badge::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
-    .header h1 {
-      font-size: 42px; font-weight: 800; letter-spacing: -1px;
-      background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 50%, #6366f1 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; margin-bottom: 12px;
-    }
-    .header p { color: var(--muted); font-size: 15px; font-family: 'JetBrains Mono', monospace; }
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 0%, rgba(14,165,233,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 100%, rgba(139,92,246,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 50% 50%, rgba(16,185,129,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
 
-    /* ── Section Labels ── */
-    .section-label { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-    .section-label .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); font-weight: 600; }
-    .section-label h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
-    .section-label .line { flex: 1; height: 1px; background: var(--border); }
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 32px 100px;
+}
 
-    /* ── Flow Columns ── */
-    .flow-row { display: grid; gap: 16px; margin-bottom: 0; }
-    .flow-row-3 { grid-template-columns: repeat(3, 1fr); }
-    .flow-row-4 { grid-template-columns: repeat(4, 1fr); }
-    .flow-row-5 { grid-template-columns: repeat(5, 1fr); }
-    .flow-row-2 { grid-template-columns: repeat(2, 1fr); }
-    .flow-row-1 { grid-template-columns: 1fr; }
-    .flow-row-6 { grid-template-columns: repeat(6, 1fr); }
+/* ── NAVIGATION ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(5,8,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+}
+.nav-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 56px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-logo {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--teal);
+  white-space: nowrap;
+  margin-right: 12px;
+}
+.nav-logo span { color: var(--white); }
+.nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text3);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.nav-link:hover { color: var(--text); background: var(--card); }
 
-    /* ── Arrows ── */
-    .arrow-down { display: flex; flex-direction: column; align-items: center; gap: 0; margin: 8px 0; }
-    .arrow-down .stem { width: 2px; height: 28px; background: linear-gradient(to bottom, var(--border), var(--dim)); }
-    .arrow-down .head { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--dim); }
-    .arrow-down.big .stem { height: 40px; background: linear-gradient(to bottom, var(--dim), var(--blue)); }
-    .arrow-down.big .head { border-top-color: var(--blue); }
+/* ── HERO ── */
+.hero {
+  padding: 80px 0 64px;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14,165,233,0.1);
+  border: 1px solid rgba(14,165,233,0.25);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--teal2);
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+}
+.hero-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
 
-    .arrow-down-label { display: flex; flex-direction: column; align-items: center; margin: 6px 0; }
-    .arrow-down-label .stem { width: 2px; height: 20px; background: var(--dim); }
-    .arrow-down-label .lbl {
-      font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted);
-      background: var(--bg); padding: 2px 8px; border: 1px solid var(--border);
-      border-radius: 4px; letter-spacing: 0.08em; margin: 0;
-    }
-    .arrow-down-label .stem2 { width: 2px; height: 20px; background: var(--dim); }
-    .arrow-down-label .head { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid var(--dim); }
+.hero h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 40%, #0ea5e9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero h1 em { font-style: normal; color: var(--teal); -webkit-text-fill-color: var(--teal); }
+.hero p {
+  font-size: 20px;
+  color: var(--text2);
+  max-width: 700px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+.pill {
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid;
+}
+.pill-teal { background: rgba(14,165,233,0.1); border-color: rgba(14,165,233,0.3); color: var(--teal2); }
+.pill-green { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); color: #34d399; }
+.pill-gold { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); color: #fcd34d; }
+.pill-purple { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.3); color: #c4b5fd; }
+.pill-pink { background: rgba(236,72,153,0.1); border-color: rgba(236,72,153,0.3); color: #f9a8d4; }
 
-    /* ── Parallel bracket ── */
-    .parallel-indicator { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 8px 0 16px; }
-    .parallel-indicator .bar { height: 2px; flex: 1; background: linear-gradient(to right, transparent, var(--indigo)); }
-    .parallel-indicator .bar.r { background: linear-gradient(to left, transparent, var(--indigo)); }
-    .parallel-indicator .badge {
-      display: flex; align-items: center; gap: 6px;
-      background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.3);
-      border-radius: 100px; padding: 4px 14px;
-      font-family: 'JetBrains Mono', monospace; font-size: 10px;
-      color: #a5b4fc; letter-spacing: 0.06em; font-weight: 600;
-    }
-    .parallel-indicator .badge::before { content: '⚡'; font-size: 11px; }
+/* ── SECTION ── */
+.section {
+  margin-bottom: 80px;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.tag-teal { background: rgba(14,165,233,0.12); color: var(--teal2); border: 1px solid rgba(14,165,233,0.25); }
+.tag-green { background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.25); }
+.tag-gold { background: rgba(245,158,11,0.12); color: #fcd34d; border: 1px solid rgba(245,158,11,0.25); }
+.tag-purple { background: rgba(139,92,246,0.12); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.25); }
+.tag-pink { background: rgba(236,72,153,0.12); color: #f9a8d4; border: 1px solid rgba(236,72,153,0.25); }
+.tag-red { background: rgba(239,68,68,0.12); color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
+.tag-cyan { background: rgba(6,182,212,0.12); color: #67e8f9; border: 1px solid rgba(6,182,212,0.25); }
 
-    /* ── NODE CARDS ── */
-    .node { border-radius: 16px; padding: 18px 20px; position: relative; transition: transform 0.2s, box-shadow 0.2s; cursor: default; }
-    .node:hover { transform: translateY(-2px); }
-    .node-title { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px; }
-    .node-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); line-height: 1.6; }
-    .node-tag {
-      display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
-      letter-spacing: 0.08em; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; text-transform: uppercase;
-    }
-    .node-io { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); line-height: 1.7; }
-    .node-io .in { color: #a5b4fc; }
-    .node-io .out { color: #6ee7b7; }
-    .node-io .warn { color: #fbbf24; }
+.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.section-line { flex: 1; height: 1px; background: var(--border); }
 
-    .detail-list { display: flex; flex-direction: column; gap: 3px; margin-top: 4px; }
-    .detail-list span { display: flex; align-items: flex-start; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); line-height: 1.5; }
-    .detail-list span::before { content: '→'; color: var(--dim); flex-shrink: 0; }
+/* ── CARDS ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: var(--border2); transform: translateY(-2px); }
 
-    /* Node color themes */
-    .n-blue { background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.2); }
-    .n-blue:hover { box-shadow: 0 8px 32px rgba(59,130,246,0.12); border-color: rgba(59,130,246,0.4); }
-    .n-blue .node-tag { background: rgba(59,130,246,0.15); color: #93c5fd; }
-    .n-blue .node-title { color: #93c5fd; }
+.card-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.card-sub {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.65;
+}
 
-    .n-indigo { background: rgba(99,102,241,0.07); border: 1px solid rgba(99,102,241,0.2); }
-    .n-indigo:hover { box-shadow: 0 8px 32px rgba(99,102,241,0.12); border-color: rgba(99,102,241,0.4); }
-    .n-indigo .node-tag { background: rgba(99,102,241,0.15); color: #a5b4fc; }
-    .n-indigo .node-title { color: #a5b4fc; }
+/* ── GRID SYSTEMS ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
 
-    .n-violet { background: rgba(139,92,246,0.07); border: 1px solid rgba(139,92,246,0.2); }
-    .n-violet:hover { box-shadow: 0 8px 32px rgba(139,92,246,0.12); border-color: rgba(139,92,246,0.4); }
-    .n-violet .node-tag { background: rgba(139,92,246,0.15); color: #c4b5fd; }
-    .n-violet .node-title { color: #c4b5fd; }
+/* ── COMPARISON TABLE ── */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.compare-table th {
+  padding: 16px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.compare-table th:first-child { color: var(--text2); text-align: left; }
+.compare-table th:nth-child(2) { background: rgba(239,68,68,0.08); color: #fca5a5; text-align: center; }
+.compare-table th:nth-child(3) { background: rgba(16,185,129,0.08); color: #34d399; text-align: center; }
 
-    .n-emerald { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2); }
-    .n-emerald:hover { box-shadow: 0 8px 32px rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.4); }
-    .n-emerald .node-tag { background: rgba(16,185,129,0.15); color: #6ee7b7; }
-    .n-emerald .node-title { color: #6ee7b7; }
+.compare-table td {
+  padding: 14px 20px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(30,41,59,0.6);
+  vertical-align: middle;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td:first-child { color: var(--text); font-weight: 500; }
+.compare-table td:nth-child(2) { color: #fca5a5; font-size: 13px; text-align: center; background: rgba(239,68,68,0.03); }
+.compare-table td:nth-child(3) { color: #34d399; font-size: 13px; text-align: center; background: rgba(16,185,129,0.03); }
+.compare-table tr:hover td { background: rgba(255,255,255,0.015); }
 
-    .n-amber { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2); }
-    .n-amber:hover { box-shadow: 0 8px 32px rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.4); }
-    .n-amber .node-tag { background: rgba(245,158,11,0.15); color: #fcd34d; }
-    .n-amber .node-title { color: #fcd34d; }
+/* ── FLOW DIAGRAM ── */
+.flow-diagram {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+}
+.flow-diagram-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 28px;
+  text-align: center;
+}
 
-    .n-cyan { background: rgba(6,182,212,0.07); border: 1px solid rgba(6,182,212,0.2); }
-    .n-cyan:hover { box-shadow: 0 8px 32px rgba(6,182,212,0.12); border-color: rgba(6,182,212,0.4); }
-    .n-cyan .node-tag { background: rgba(6,182,212,0.15); color: #67e8f9; }
-    .n-cyan .node-title { color: #67e8f9; }
+.flow-nodes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.flow-node {
+  text-align: center;
+  padding: 16px 20px;
+  border-radius: 14px;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+.flow-arrow {
+  font-size: 22px;
+  color: var(--text3);
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+.flow-node-icon { font-size: 26px; margin-bottom: 8px; }
+.flow-node-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.flow-node-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  line-height: 1.5;
+}
 
-    .n-rose { background: rgba(244,63,94,0.07); border: 1px solid rgba(244,63,94,0.2); }
-    .n-rose:hover { box-shadow: 0 8px 32px rgba(244,63,94,0.12); border-color: rgba(244,63,94,0.4); }
-    .n-rose .node-tag { background: rgba(244,63,94,0.15); color: #fda4af; }
-    .n-rose .node-title { color: #fda4af; }
+/* ── AGENT CARDS ── */
+.agent-card {
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.agent-card:hover { transform: translateY(-3px); }
+.agent-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.agent-violet { background: rgba(139,92,246,0.07); border-color: rgba(139,92,246,0.25); }
+.agent-violet::before { background: linear-gradient(90deg, #8b5cf6, transparent); }
+.agent-cyan { background: rgba(6,182,212,0.07); border-color: rgba(6,182,212,0.25); }
+.agent-cyan::before { background: linear-gradient(90deg, #06b6d4, transparent); }
+.agent-amber { background: rgba(245,158,11,0.07); border-color: rgba(245,158,11,0.25); }
+.agent-amber::before { background: linear-gradient(90deg, #f59e0b, transparent); }
+.agent-rose { background: rgba(244,63,94,0.07); border-color: rgba(244,63,94,0.25); }
+.agent-rose::before { background: linear-gradient(90deg, #f43f5e, transparent); }
+.agent-emerald { background: rgba(16,185,129,0.07); border-color: rgba(16,185,129,0.25); }
+.agent-emerald::before { background: linear-gradient(90deg, #10b981, transparent); }
 
-    .n-slate { background: rgba(51,65,85,0.35); border: 1px solid rgba(100,116,139,0.2); }
-    .n-slate:hover { box-shadow: 0 8px 32px rgba(100,116,139,0.1); border-color: rgba(100,116,139,0.4); }
-    .n-slate .node-tag { background: rgba(100,116,139,0.2); color: #94a3b8; }
-    .n-slate .node-title { color: #cbd5e1; }
+.agent-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.agent-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(139,92,246,0.12);
+  border: 1px solid rgba(139,92,246,0.25);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #c4b5fd;
+  margin: 4px 4px 4px 0;
+}
+.chip.green { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.25); color: #6ee7b7; }
+.chip.cyan { background: rgba(6,182,212,0.12); border-color: rgba(6,182,212,0.25); color: #67e8f9; }
 
-    .n-pink { background: rgba(236,72,153,0.07); border: 1px solid rgba(236,72,153,0.2); }
-    .n-pink:hover { box-shadow: 0 8px 32px rgba(236,72,153,0.12); border-color: rgba(236,72,153,0.4); }
-    .n-pink .node-tag { background: rgba(236,72,153,0.15); color: #f9a8d4; }
-    .n-pink .node-title { color: #f9a8d4; }
+.item-list {
+  list-style: none;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.item-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.55;
+}
+.item-list li::before {
+  content: '→';
+  color: var(--text3);
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
 
-    .n-lime { background: rgba(132,204,22,0.07); border: 1px solid rgba(132,204,22,0.2); }
-    .n-lime:hover { box-shadow: 0 8px 32px rgba(132,204,22,0.12); border-color: rgba(132,204,22,0.4); }
-    .n-lime .node-tag { background: rgba(132,204,22,0.15); color: #bef264; }
-    .n-lime .node-title { color: #bef264; }
+.io-box {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.05);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.io-in { color: #a5b4fc; }
+.io-out { color: #6ee7b7; }
+.io-warn { color: #fbbf24; }
 
-    .n-orange { background: rgba(249,115,22,0.07); border: 1px solid rgba(249,115,22,0.2); }
-    .n-orange:hover { box-shadow: 0 8px 32px rgba(249,115,22,0.12); border-color: rgba(249,115,22,0.4); }
-    .n-orange .node-tag { background: rgba(249,115,22,0.15); color: #fdba74; }
-    .n-orange .node-title { color: #fdba74; }
+/* ── FILE TREE ── */
+.file-tree {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  line-height: 2;
+}
+.tree-dir { color: var(--teal2); font-weight: 600; }
+.tree-file { color: var(--text2); }
+.tree-new { color: #34d399; }
+.tree-modify { color: #fcd34d; }
+.tree-comment { color: var(--text3); font-style: italic; }
+.tree-indent1 { padding-left: 20px; }
+.tree-indent2 { padding-left: 40px; }
+.tree-indent3 { padding-left: 60px; }
 
-    .node-big { padding: 24px 28px; border-radius: 20px; }
-    .node-big .node-title { font-size: 16px; margin-bottom: 8px; }
+/* ── CODE BLOCK ── */
+.code-block {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #e2e8f0;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+.code-block .kw { color: #c4b5fd; }
+.code-block .str { color: #6ee7b7; }
+.code-block .cmt { color: #475569; font-style: italic; }
+.code-block .fn { color: #93c5fd; }
+.code-block .num { color: #fcd34d; }
 
-    .llm-chip {
-      display: inline-block;
-      background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.25);
-      border-radius: 6px; padding: 3px 8px;
-      font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #c4b5fd;
-      margin-top: 6px; margin-right: 4px;
-    }
+/* ── PHASE DIVIDER ── */
+.phase-divider {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 80px 0 60px;
+}
+.phase-divider .line { flex: 1; height: 1px; background: var(--border); }
+.phase-divider .badge {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
 
-    .big-arrow { display: flex; flex-direction: column; align-items: center; margin: 16px 0; gap: 0; }
-    .big-arrow .line { width: 2px; height: 32px; background: linear-gradient(to bottom, var(--dim), var(--blue)); }
-    .big-arrow .arrowhead { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid var(--blue); }
-    .big-arrow .label {
-      background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);
-      border-radius: 6px; padding: 3px 12px;
-      font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--blue);
-      letter-spacing: 0.08em; margin-bottom: 4px; font-weight: 600;
-    }
+/* ── PRIORITY BADGES ── */
+.priority {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.p-must { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
+.p-should { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.25); }
+.p-nice { background: rgba(100,116,139,0.2); color: #94a3b8; border: 1px solid rgba(100,116,139,0.25); }
 
-    .merge-indicator { display: flex; align-items: center; gap: 0; margin: 8px 0 16px; }
-    .merge-indicator .bar { flex: 1; height: 2px; background: linear-gradient(to right, transparent, var(--emerald)); }
-    .merge-indicator .bar.r { background: linear-gradient(to left, transparent, var(--emerald)); }
-    .merge-indicator .badge {
-      background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25);
-      padding: 4px 14px; border-radius: 100px;
-      font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6ee7b7;
-      letter-spacing: 0.06em; font-weight: 600;
-    }
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: 36px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 11px; top: 8px; bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--teal), var(--purple), var(--green));
+  border-radius: 2px;
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 28px;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -29px; top: 8px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--teal);
+  background: var(--bg);
+  transition: background 0.2s;
+}
+.tl-item.done::before { background: var(--teal); border-color: var(--teal); }
+.tl-item.active::before { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 12px rgba(245,158,11,0.5); }
 
-    /* NEW: Phase divider — big visual separator between old and new content */
-    .phase-divider {
-      margin: 48px 0 40px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .phase-divider .divider-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(236,72,153,0.4), transparent);
-    }
-    .phase-divider .divider-badge {
-      background: rgba(236,72,153,0.08);
-      border: 1px solid rgba(236,72,153,0.3);
-      border-radius: 100px;
-      padding: 8px 24px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: #f9a8d4;
-      letter-spacing: 0.12em;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
+.tl-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.tl-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.tl-items {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.65;
+}
 
-    /* NEW: User journey flow */
-    .journey-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 16px 20px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border);
-      margin-bottom: 8px;
-      transition: border-color 0.2s;
-    }
-    .journey-step:hover { border-color: rgba(99,102,241,0.3); }
-    .journey-step .step-num {
-      width: 28px; height: 28px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
-      flex-shrink: 0;
-      background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.25);
-    }
-    .journey-step .step-content { flex: 1; }
-    .journey-step .step-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .journey-step .step-desc { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); line-height: 1.6; }
-    .journey-step .step-route {
-      font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
-      background: rgba(59,130,246,0.12); color: #93c5fd;
-      border: 1px solid rgba(59,130,246,0.2); border-radius: 4px; padding: 2px 8px;
-      display: inline-block; margin-top: 4px;
-    }
+/* ── BIG STAT ── */
+.big-stat {
+  text-align: center;
+  padding: 28px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.big-stat .num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.big-stat .label { font-size: 14px; color: var(--text2); font-weight: 500; }
 
-    /* NEW: Landing section cards */
-    .landing-section-card {
-      border-radius: 14px;
-      padding: 16px 18px;
-      border: 1px solid;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .landing-section-card:hover { transform: translateY(-2px); }
-    .landing-section-card .sec-num {
-      font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
-      letter-spacing: 0.1em; margin-bottom: 6px; display: block;
-    }
-    .landing-section-card .sec-title { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
-    .landing-section-card .sec-desc { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); line-height: 1.6; }
-    .landing-section-card .sec-what {
-      margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.05);
-      font-family: 'JetBrains Mono', monospace; font-size: 9px; line-height: 1.7; color: var(--muted);
-    }
+/* ── INFO / WARNING BOXES ── */
+.info-box {
+  padding: 20px 24px;
+  border-radius: 14px;
+  margin-bottom: 24px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.info-box strong { font-weight: 700; }
+.info-teal { background: rgba(14,165,233,0.07); border: 1px solid rgba(14,165,233,0.2); color: #bae6fd; }
+.info-teal strong { color: var(--teal2); }
+.info-gold { background: rgba(245,158,11,0.07); border: 1px dashed rgba(245,158,11,0.3); color: #fde68a; }
+.info-gold strong { color: #fcd34d; }
+.info-green { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2); color: #a7f3d0; }
+.info-green strong { color: #34d399; }
+.info-red { background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.2); color: #fecaca; }
+.info-red strong { color: #fca5a5; }
 
-    /* NEW: Auth flow grid */
-    .auth-flow { display: flex; align-items: center; gap: 0; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; }
-    .auth-flow-node {
-      flex-shrink: 0; min-width: 140px;
-      background: rgba(99,102,241,0.07); border: 1px solid rgba(99,102,241,0.2);
-      border-radius: 12px; padding: 12px 14px;
-      text-align: center;
-    }
-    .auth-flow-node .auth-icon { font-size: 20px; margin-bottom: 6px; }
-    .auth-flow-node .auth-label { font-size: 10px; font-weight: 700; color: #a5b4fc; margin-bottom: 4px; }
-    .auth-flow-node .auth-sub { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; color: var(--muted); line-height: 1.5; }
-    .auth-arrow {
-      flex-shrink: 0; width: 40px; display: flex; align-items: center; justify-content: center;
-      position: relative;
-    }
-    .auth-arrow::before {
-      content: '';
-      width: 30px; height: 2px;
-      background: linear-gradient(to right, rgba(99,102,241,0.3), rgba(99,102,241,0.7));
-    }
-    .auth-arrow::after {
-      content: '';
-      position: absolute; right: 2px;
-      width: 0; height: 0;
-      border-left: 6px solid rgba(99,102,241,0.7);
-      border-top: 4px solid transparent;
-      border-bottom: 4px solid transparent;
-    }
+/* ── ENDPOINT ROW ── */
+.endpoint-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  transition: border-color 0.2s;
+}
+.endpoint-row:hover { border-color: var(--border2); }
+.method {
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  min-width: 52px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.method.get { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+.method.post { background: rgba(14,165,233,0.15); color: var(--teal2); }
+.method.del { background: rgba(239,68,68,0.15); color: #fca5a5; }
+.ep-path { color: var(--text); flex: 1; }
+.ep-desc { color: var(--text3); font-size: 12px; }
+.ep-auth { padding: 2px 8px; border-radius: 4px; background: rgba(245,158,11,0.1); color: #fcd34d; font-size: 10px; flex-shrink: 0; }
 
-    /* NEW: MongoDB schema table */
-    .schema-table { width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; }
-    .schema-table th {
-      text-align: left; padding: 8px 12px;
-      background: rgba(6,182,212,0.08); color: #67e8f9;
-      border-bottom: 1px solid rgba(6,182,212,0.2); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .schema-table td { padding: 7px 12px; color: var(--muted); border-bottom: 1px solid rgba(255,255,255,0.04); line-height: 1.4; }
-    .schema-table td:first-child { color: #93c5fd; font-weight: 600; }
-    .schema-table td:nth-child(2) { color: #6ee7b7; }
-    .schema-table tr:hover td { background: rgba(255,255,255,0.02); }
+/* ── SECTION WITH SIDE ACCENT ── */
+.accent-card {
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid;
+  position: relative;
+  overflow: hidden;
+}
+.accent-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+}
+.accent-teal { background: rgba(14,165,233,0.05); border-color: rgba(14,165,233,0.2); }
+.accent-teal::before { background: var(--teal); }
+.accent-green { background: rgba(16,185,129,0.05); border-color: rgba(16,185,129,0.2); }
+.accent-green::before { background: var(--green); }
+.accent-gold { background: rgba(245,158,11,0.05); border-color: rgba(245,158,11,0.2); }
+.accent-gold::before { background: var(--gold); }
+.accent-purple { background: rgba(139,92,246,0.05); border-color: rgba(139,92,246,0.2); }
+.accent-purple::before { background: var(--purple); }
+.accent-pink { background: rgba(236,72,153,0.05); border-color: rgba(236,72,153,0.2); }
+.accent-pink::before { background: var(--pink); }
 
-    /* NEW: feature priority badge */
-    .priority { display: inline-block; padding: 1px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700; letter-spacing: 0.06em; margin-left: 6px; vertical-align: middle; }
-    .p-must { background: rgba(244,63,94,0.15); color: #fda4af; border: 1px solid rgba(244,63,94,0.25); }
-    .p-should { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.25); }
-    .p-nice { background: rgba(100,116,139,0.2); color: #94a3b8; border: 1px solid rgba(100,116,139,0.25); }
+.accent-card .ac-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.accent-card .ac-body { font-size: 14px; color: var(--text2); line-height: 1.7; }
 
-    /* NEW: timeline */
-    .timeline { position: relative; padding-left: 32px; }
-    .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--indigo), var(--cyan), var(--emerald)); border-radius: 2px; }
-    .timeline-item { position: relative; margin-bottom: 20px; }
-    .timeline-item::before {
-      content: ''; position: absolute; left: -28px; top: 6px;
-      width: 12px; height: 12px; border-radius: 50%;
-      border: 2px solid var(--indigo); background: var(--bg);
-    }
-    .timeline-item.done::before { background: var(--indigo); }
-    .timeline-item .tl-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 4px; text-transform: uppercase; }
-    .timeline-item .tl-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .timeline-item .tl-items { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); line-height: 1.8; }
+/* ── DIVIDER ── */
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 
-    /* NEW: endpoint table */
-    .endpoint-row {
-      display: flex; gap: 10px; align-items: center;
-      padding: 8px 12px; border-radius: 8px;
-      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
-      margin-bottom: 6px; font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    }
-    .method { padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 9px; flex-shrink: 0; min-width: 48px; text-align: center; }
-    .method.get { background: rgba(16,185,129,0.15); color: #6ee7b7; }
-    .method.post { background: rgba(59,130,246,0.15); color: #93c5fd; }
-    .method.delete { background: rgba(244,63,94,0.15); color: #fda4af; }
-    .endpoint-path { color: #e2e8f0; flex: 1; }
-    .endpoint-desc { color: var(--muted); font-size: 9px; }
-    .endpoint-auth { font-size: 8px; padding: 1px 6px; border-radius: 3px; background: rgba(245,158,11,0.1); color: #fcd34d; border: 1px solid rgba(245,158,11,0.2); flex-shrink: 0; }
+/* ── STEP NUMBER ── */
+.step-circle {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  flex-shrink: 0;
+  background: rgba(14,165,233,0.15);
+  color: var(--teal2);
+  border: 1px solid rgba(14,165,233,0.3);
+}
 
-    /* Degraded note */
-    .degraded-note {
-      background: rgba(245,158,11,0.06); border: 1px dashed rgba(245,158,11,0.25);
-      border-radius: 12px; padding: 14px 18px;
-      font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #fcd34d; line-height: 1.6; margin: 12px 0;
-    }
-    .degraded-note strong { color: #fbbf24; }
+.step-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 10px;
+  transition: border-color 0.2s;
+}
+.step-row:hover { border-color: var(--border2); }
+.step-content .step-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.step-content .step-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+.step-content .step-route {
+  display: inline-block;
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--teal2);
+  background: rgba(14,165,233,0.1);
+  border: 1px solid rgba(14,165,233,0.2);
+  border-radius: 5px;
+  padding: 2px 10px;
+}
 
-    /* Info note */
-    .info-note {
-      background: rgba(99,102,241,0.06); border: 1px dashed rgba(99,102,241,0.3);
-      border-radius: 12px; padding: 14px 18px;
-      font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #a5b4fc; line-height: 1.6; margin: 12px 0;
-    }
-    .info-note strong { color: #c4b5fd; }
+/* ── MONGO SCHEMA TABLE ── */
+.schema-table { width: 100%; border-collapse: collapse; }
+.schema-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background: rgba(6,182,212,0.08);
+  color: #67e8f9;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(6,182,212,0.15);
+}
+.schema-table td {
+  padding: 11px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(30,41,59,0.5);
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text2);
+}
+.schema-table td:first-child { color: #93c5fd; font-weight: 600; }
+.schema-table td:nth-child(2) { color: #6ee7b7; }
+.schema-table tr:last-child td { border-bottom: none; }
+.schema-table tr:hover td { background: rgba(255,255,255,0.02); }
 
-    /* NEW: section color override for pink phase */
-    .section-label.pink .num { color: #f9a8d4; }
-    .section-label.pink h2 { color: #f9a8d4; }
-    .section-label.pink .line { background: rgba(236,72,153,0.2); }
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 40px 32px;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+footer p {
+  color: var(--text3);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.8;
+}
 
-    .section-label.lime .num { color: #bef264; }
-    .section-label.lime h2 { color: #bef264; }
-    .section-label.lime .line { background: rgba(132,204,22,0.2); }
+/* ── UTILS ── */
+.mb-6 { margin-bottom: 6px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-32 { margin-bottom: 32px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.text-teal { color: var(--teal2); }
+.text-green { color: #34d399; }
+.text-gold { color: #fcd34d; }
+.text-purple { color: #c4b5fd; }
+.text-pink { color: #f9a8d4; }
+.text-red { color: #fca5a5; }
+.text-muted { color: var(--text2); }
+.text-dim { color: var(--text3); }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+.font-display { font-family: 'Outfit', sans-serif; }
+.font-bold { font-weight: 700; }
 
-    .section-label.orange .num { color: #fdba74; }
-    .section-label.orange h2 { color: #fdba74; }
-    .section-label.orange .line { background: rgba(249,115,22,0.2); }
+/* parallel badge */
+.parallel-badge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+.parallel-badge .pb-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(139,92,246,0.5)); }
+.parallel-badge .pb-line.r { background: linear-gradient(to left, transparent, rgba(139,92,246,0.5)); }
+.parallel-badge .pb-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #c4b5fd;
+  letter-spacing: 0.08em;
+  padding: 6px 16px;
+  background: rgba(139,92,246,0.1);
+  border: 1px solid rgba(139,92,246,0.25);
+  border-radius: 100px;
+  white-space: nowrap;
+}
 
-    .section-label.cyan .num { color: #67e8f9; }
-    .section-label.cyan h2 { color: #67e8f9; }
-    .section-label.cyan .line { background: rgba(6,182,212,0.2); }
+.merge-badge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+.merge-badge .mb-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(16,185,129,0.5)); }
+.merge-badge .mb-line.r { background: linear-gradient(to left, transparent, rgba(16,185,129,0.5)); }
+.merge-badge .mb-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6ee7b7;
+  letter-spacing: 0.08em;
+  padding: 6px 16px;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: 100px;
+  white-space: nowrap;
+}
 
-    /* Legend */
-    .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 48px; padding: 24px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px; }
-    .legend-item { display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
-    .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
-
-    .gap { margin-bottom: 16px; }
-    .gap-sm { margin-bottom: 10px; }
-    .gap-lg { margin-bottom: 28px; }
-
-    @media(max-width:900px) {
-      .flow-row-4,.flow-row-5,.flow-row-6 { grid-template-columns: repeat(2,1fr); }
-      .flow-row-3 { grid-template-columns: 1fr; }
-      .auth-flow { flex-direction: column; }
-      .auth-arrow { transform: rotate(90deg); }
-    }
-  </style>
+/* responsive */
+@media(max-width:900px){
+  .grid-3,.grid-4,.grid-5{grid-template-columns:1fr 1fr}
+  .grid-2{grid-template-columns:1fr}
+  .hero h1{font-size:42px}
+  .section-title{font-size:26px}
+  .page{padding:0 16px 60px}
+}
+@media(max-width:600px){
+  .grid-3,.grid-4,.grid-5,.grid-2{grid-template-columns:1fr}
+  .hero h1{font-size:32px}
+}
+</style>
 </head>
-
 <body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">Fin<span>Sight</span> AI</span>
+    <a href="#overview" class="nav-link">Overview</a>
+    <a href="#current" class="nav-link">Current State</a>
+    <a href="#architecture" class="nav-link">Architecture</a>
+    <a href="#upgrade" class="nav-link">What to Upgrade</a>
+    <a href="#newfiles" class="nav-link">New Files</a>
+    <a href="#future" class="nav-link">Future Structure</a>
+    <a href="#roadmap" class="nav-link">Roadmap</a>
+    <a href="#deploy" class="nav-link">Deploy</a>
+    <a href="#journey" class="nav-link">User Journey</a>
+  </div>
+</nav>
+
 <div class="page">
 
-  <!-- ══ HEADER ══ -->
-  <div class="header">
-    <div class="header-badge">SYSTEM ARCHITECTURE · FINSIGHT AI · v2.0 — UPDATED WITH PRODUCT ROADMAP</div>
-    <h1>Full Project Flowchart</h1>
-    <p>Multimodal Multi-Agent Financial Intelligence Platform — End-to-End Data, Control Flow &amp; Website Product Roadmap</p>
+<!-- ── HERO ── -->
+<div class="hero" id="overview">
+  <div class="hero-badge">BTech CSE (AI) · 6th Semester Project · v2.0 Upgrade Plan</div>
+  <h1>FinSight <em>AI</em><br/>Complete Project Document</h1>
+  <p>Everything in one place — what you built, what needs upgrading, every new file to create, how it all works together, and the full roadmap to major project.</p>
+  <div class="hero-pills">
+    <span class="pill pill-teal">4 Parallel AI Agents</span>
+    <span class="pill pill-green">Real Finnhub Data</span>
+    <span class="pill pill-gold">XGBoost Forecasting</span>
+    <span class="pill pill-purple">Firebase Auth</span>
+    <span class="pill pill-pink">MongoDB Reports</span>
+    <span class="pill pill-teal">Free Deployment</span>
+    <span class="pill pill-green">Two User Modes</span>
+    <span class="pill pill-gold">CSV Upload</span>
   </div>
 
-
-  <!-- ════════════════════════════════════════
-     PHASE 0 — SETUP / OFFLINE PIPELINE
-  ════════════════════════════════════════ -->
-  <div class="section-label">
-    <span class="num">PHASE 0</span>
-    <h2>Offline Data &amp; Training Pipeline</h2>
-    <div class="line"></div>
-  </div>
-  <div class="flow-row flow-row-3 gap">
-    <div class="node n-slate">
-      <span class="node-tag">generator.py</span>
-      <div class="node-title">Synthetic Data Generator</div>
-      <div class="detail-list">
-        <span>40 companies × 20 quarters = 800 rows</span>
-        <span>GBM or AR(1) revenue simulation</span>
-        <span>Bull / Neutral / Bear scenarios (40/40/20%)</span>
-        <span>Mismatch flags, restatement rate</span>
-        <span>10 transcript templates w/ sentiment</span>
-      </div>
-      <div class="node-io">
-        <span class="out">→ out/synthetic_financials.csv</span><br/>
-        <span class="out">→ out/sample_transcripts.jsonl</span>
-      </div>
+  <!-- Quick stats -->
+  <div class="grid-5 mb-32" style="max-width:900px;margin:0 auto;">
+    <div class="big-stat">
+      <div class="num text-teal">4</div>
+      <div class="label">AI Agents</div>
     </div>
-    <div class="node n-slate">
-      <span class="node-tag">feature_store.py</span>
-      <div class="node-title">Feature Engineering</div>
-      <div class="detail-list">
-        <span>Lag features: revenue 1Q/2Q/4Q, EBITDA 1Q</span>
-        <span>Rolling 4Q mean &amp; std (revenue, EBITDA margin)</span>
-        <span>YoY &amp; QoQ growth rates</span>
-        <span>One-hot encode scenario column</span>
-        <span>Temporal split 70 / 15 / 15 by date</span>
-        <span>Drop NaN rows from lag windows</span>
-      </div>
-      <div class="node-io">
-        <span class="in">← synthetic_financials.csv</span><br/>
-        <span class="out">→ out/features_v1.pkl</span><br/>
-        <span class="out">→ out/feature_manifest.json</span>
-      </div>
+    <div class="big-stat">
+      <div class="num text-green">6</div>
+      <div class="label">XGBoost Models</div>
     </div>
-    <div class="node n-slate">
-      <span class="node-tag">financial_model.py train()</span>
-      <div class="node-title">XGBoost Model Training</div>
-      <div class="detail-list">
-        <span>2 targets: revenue, EBITDA</span>
-        <span>3 quantiles: α = 0.05, 0.50, 0.95</span>
-        <span>= 6 XGBoost models trained</span>
-        <span>Objective: reg:quantileerror</span>
-        <span>100 estimators, max_depth=5, hist method</span>
-        <span>Val set used for early eval</span>
-      </div>
-      <div class="node-io">
-        <span class="in">← features_v1.pkl (train+val splits)</span><br/>
-        <span class="out">→ out/financial_model.pkl</span>
-      </div>
+    <div class="big-stat">
+      <div class="num text-gold">&lt;10s</div>
+      <div class="label">Per Analysis</div>
+    </div>
+    <div class="big-stat">
+      <div class="num text-purple">₹0</div>
+      <div class="label">Monthly Cost</div>
+    </div>
+    <div class="big-stat">
+      <div class="num text-pink">2</div>
+      <div class="label">User Modes</div>
     </div>
   </div>
+</div>
 
-  <div class="arrow-down big"><div class="stem"></div><div class="head"></div></div>
 
-  <!-- ════════════════════════════════════════
-     PHASE 1 — USER REQUEST ENTRY
-  ════════════════════════════════════════ -->
-  <div class="section-label">
-    <span class="num">PHASE 1</span>
-    <h2>User Request Entry</h2>
-    <div class="line"></div>
+<!-- ══════════════════════════════════
+  SECTION 1 — WHAT YOU HAVE RIGHT NOW
+══════════════════════════════════ -->
+<div class="section" id="current">
+  <div class="section-header">
+    <span class="section-tag tag-green">✅ Completed</span>
+    <h2 class="section-title">What You Have Right Now</h2>
+    <div class="section-line"></div>
   </div>
-  <div class="flow-row flow-row-2 gap">
-    <div class="node n-blue">
-      <span class="node-tag">React Frontend</span>
-      <div class="node-title">FinSight Ai Intelligence Dashboard</div>
-      <div class="detail-list">
-        <span>Company ID input (e.g., AAPL, COMP_007)</span>
-        <span>Date input → POST /predict</span>
-        <span>Loading skeleton → KPI grid display</span>
-        <span>Revenue CI chart (Recharts)</span>
-        <span>Transcript drivers, signal attribution bars</span>
-      </div>
-      <div class="node-io">
-        <span class="out">→ { company_id, as_of_date, request_id }</span>
-      </div>
+
+  <div class="grid-3 mb-24">
+    <div class="card">
+      <div class="card-title text-teal">🧠 Multi-Agent AI Core</div>
+      <ul class="item-list">
+        <li>4 specialized agents running in parallel via asyncio.gather()</li>
+        <li>Transcript NLP — Groq LLaMA 3.3-70b</li>
+        <li>Financial Model — XGBoost quantile regression (6 models)</li>
+        <li>News & Macro — Groq + Gemini fallback</li>
+        <li>Competitor Agent — peer benchmarking via LLM</li>
+        <li>CIO Ensembler — final Buy/Hold/Sell signal</li>
+        <li>10s timeout per agent, graceful degradation</li>
+      </ul>
     </div>
-    <div class="node n-blue">
-      <span class="node-tag">FastAPI — /predict</span>
-      <div class="node-title">REST API Endpoint</div>
-      <div class="detail-list">
-        <span>Validates PredictRequest schema (Pydantic)</span>
-        <span>Auto-generates UUID request_id if missing</span>
-        <span>CORS: allows localhost:5173</span>
-        <span>Returns 503 on orchestrator failure</span>
-        <span>Calls orchestrate() async</span>
-      </div>
-      <div class="node-io">
-        <span class="in">← POST { company_id, as_of_date }</span><br/>
-        <span class="out">→ Full JSON response</span>
-      </div>
+    <div class="card">
+      <div class="card-title text-green">⚙️ Backend Infrastructure</div>
+      <ul class="item-list">
+        <li>FastAPI with Pydantic validation</li>
+        <li>asyncio parallel orchestration</li>
+        <li>Groq key rotation (multiple keys, round-robin on 429)</li>
+        <li>Gemini fallback when all Groq keys fail</li>
+        <li>SQLite audit trail (aiosqlite async writes)</li>
+        <li>CORS configured for localhost:5173</li>
+        <li>Docker support via Dockerfile</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title text-gold">🖥️ Frontend Dashboard</div>
+      <ul class="item-list">
+        <li>React + Vite, Tailwind CSS</li>
+        <li>Revenue confidence interval chart (Recharts)</li>
+        <li>KPI cards: signal, confidence, latency</li>
+        <li>Transcript driver highlights</li>
+        <li>Signal attribution bars per agent</li>
+        <li>Peer benchmarking table</li>
+        <li>Audit trail page, Active Signals page</li>
+      </ul>
     </div>
   </div>
 
-  <div class="arrow-down big"><div class="stem"></div><div class="head"></div></div>
-
-  <!-- ════════════════════════════════════════
-     PHASE 2 — ORCHESTRATOR DATA ROUTING
-  ════════════════════════════════════════ -->
-  <div class="section-label">
-    <span class="num">PHASE 2</span>
-    <h2>Orchestrator — Data Routing &amp; Source Selection</h2>
-    <div class="line"></div>
+  <div class="info-box info-gold">
+    <strong>⚠️ Current Gaps (Honest Assessment):</strong> All financial data is synthetic (fake 40 companies). Alpha Vantage only gives 25 API calls/day. No user accounts — everyone shares the same app. No plain English mode — jargon everywhere. Can only run on localhost, not deployed live. No way for users to save or export their reports.
   </div>
-  <div class="node n-indigo node-big gap">
-    <span class="node-tag">orchestrate.py</span>
-    <div class="node-title">Orchestrator — Master Controller</div>
-    <div class="flow-row flow-row-3" style="margin-top:14px;">
-      <div>
-        <div class="node-sub" style="color:#a5b4fc; font-weight:600; margin-bottom:6px;">① Data Source Decision</div>
-        <div class="detail-list">
-          <span>If company_id is a real ticker (no "COMP_" prefix)</span>
-          <span>Try yfinance → 8 quarters of quarterly financials</span>
-          <span>compute_features() for lag/rolling features</span>
-          <span>Fallback → Alpha Vantage news sentiment</span>
-          <span>Else → load from features_v1.pkl (synthetic)</span>
+</div>
+
+
+<!-- ══════════════════════════════════
+  SECTION 2 — CURRENT ARCHITECTURE
+══════════════════════════════════ -->
+<div class="section" id="architecture">
+  <div class="section-header">
+    <span class="section-tag tag-teal">Architecture</span>
+    <h2 class="section-title">How It Works Right Now</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- Phase 0 -->
+  <div class="mb-24">
+    <div class="font-mono text-dim mb-12" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">PHASE 0 — Offline Training Pipeline (run once before starting server)</div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="font-mono text-dim mb-6" style="font-size:11px;">generator.py</div>
+        <div class="card-title">Synthetic Data Generator</div>
+        <ul class="item-list">
+          <li>Creates 40 fake companies × 20 quarters = 800 rows</li>
+          <li>GBM or AR(1) revenue simulation</li>
+          <li>Bull/Neutral/Bear scenarios</li>
+          <li>10 transcript templates with sentiment</li>
+        </ul>
+        <div class="io-box mt-16">
+          <div class="io-out">→ out/synthetic_financials.csv</div>
+          <div class="io-out">→ out/sample_transcripts.jsonl</div>
         </div>
       </div>
-      <div>
-        <div class="node-sub" style="color:#a5b4fc; font-weight:600; margin-bottom:6px;">② Transcript &amp; Peers</div>
-        <div class="detail-list">
-          <span>Synthetic: match company_id + quarter in .jsonl</span>
-          <span>Live: static placeholder text (gap!)</span>
-          <span>Peers: PEER_MAP[ticker] → yfinance fetch</span>
-          <span>Peer tickers: AAPL→MSFT/GOOGL/META etc.</span>
-          <span>No peer data for synthetic COMP_XXX IDs</span>
+      <div class="card">
+        <div class="font-mono text-dim mb-6" style="font-size:11px;">feature_store.py</div>
+        <div class="card-title">Feature Engineering</div>
+        <ul class="item-list">
+          <li>Lag features: revenue 1Q/2Q/4Q, EBITDA 1Q</li>
+          <li>Rolling 4Q mean & std</li>
+          <li>YoY & QoQ growth rates</li>
+          <li>Temporal split: 70/15/15 by date</li>
+        </ul>
+        <div class="io-box mt-16">
+          <div class="io-in">← synthetic_financials.csv</div>
+          <div class="io-out">→ out/features_v1.pkl</div>
+          <div class="io-out">→ out/feature_manifest.json</div>
         </div>
       </div>
-      <div>
-        <div class="node-sub" style="color:#a5b4fc; font-weight:600; margin-bottom:6px;">③ Parallel Dispatch</div>
-        <div class="detail-list">
-          <span>asyncio.gather() — all 4 agents fire simultaneously</span>
-          <span>asyncio.wait_for() — 10s hard timeout per agent</span>
-          <span>Failed/timed-out agents added to degraded[]</span>
-          <span>Minimum 2 agents must succeed (else 503)</span>
-          <span>Confidence penalised: × 0.9^(num_degraded)</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="degraded-note">
-    <strong>⚠ Degraded Mode:</strong> If any agent times out or throws, it returns a fallback output (confidence=0.5) and is added to <code>degraded_agents[]</code>. The orchestrator continues with remaining agents. If &lt;2 agents succeed, the entire request fails with <code>InsufficientDataError</code>.
-  </div>
-
-  <div class="arrow-down big"><div class="stem"></div><div class="head"></div></div>
-
-  <!-- ════════════════════════════════════════
-     PHASE 3 — PARALLEL AGENT EXECUTION
-  ════════════════════════════════════════ -->
-  <div class="section-label">
-    <span class="num">PHASE 3</span>
-    <h2>Parallel Agent Execution</h2>
-    <div class="line"></div>
-  </div>
-  <div class="parallel-indicator">
-    <div class="bar"></div>
-    <div class="badge">asyncio.gather() — All 4 agents run simultaneously in parallel</div>
-    <div class="bar r"></div>
-  </div>
-  <div class="flow-row flow-row-4 gap">
-    <div class="node n-violet">
-      <span class="node-tag">Agent 1</span>
-      <div class="node-title">Transcript NLP Agent</div>
-      <span class="llm-chip">🦙 Groq llama-3.3-70b</span>
-      <span class="llm-chip">✦ Gemini 2.0 fallback</span>
-      <div class="node-io" style="margin-top:10px;"><span class="in">IN: transcript_text, company_id, quarter</span></div>
-      <div class="detail-list" style="margin-top:8px;">
-        <span>Extract 5 key driver sentences</span>
-        <span>Sentiment score [-1, 1]</span>
-        <span>Mgmt confidence [0, 1]</span>
-        <span>Top 5 topics with scores</span>
-        <span>All numeric facts (rev, EBITDA, guidance)</span>
-        <span>Flag optimistic language + bad numbers</span>
-        <span>10s asyncio timeout</span>
-        <span>JSON cleanup + regex fallback parse</span>
-      </div>
-      <div class="node-io">
-        <span class="out">OUT: drivers, sentiment, topics, numeric_facts, confidence</span>
-        <br/><span class="warn">DEGRADED: confidence=0.5, empty lists</span>
-      </div>
-    </div>
-    <div class="node n-cyan">
-      <span class="node-tag">Agent 2</span>
-      <div class="node-title">Financial Model Agent</div>
-      <span class="llm-chip">🌲 XGBoost (no LLM)</span>
-      <div class="node-io" style="margin-top:10px;"><span class="in">IN: company_id, as_of_date, features dict</span></div>
-      <div class="detail-list" style="margin-top:8px;">
-        <span>Loads financial_model.pkl (6 models)</span>
-        <span>Predicts revenue p05/p50/p95</span>
-        <span>Predicts EBITDA p05/p50/p95</span>
-        <span>Enforces monotonicity: p05 ≤ p50 ≤ p95</span>
-        <span>Confidence = 1 - (p95-p05)/(2×p50)</span>
-        <span>Feature importance from p50 rev model (gain)</span>
-        <span>Top 5 features returned</span>
-      </div>
-      <div class="node-io">
-        <span class="out">OUT: revenue_forecast {p05,p50,p95}, ebitda_forecast, feature_importances, confidence</span>
-        <br/><span class="warn">DEGRADED: RuntimeError → caught by orchestrator</span>
-      </div>
-    </div>
-    <div class="node n-amber">
-      <span class="node-tag">Agent 3</span>
-      <div class="node-title">News &amp; Macro Agent</div>
-      <span class="llm-chip">🦙 Groq llama-3.3-70b</span>
-      <span class="llm-chip">✦ Gemini 2.0 fallback</span>
-      <div class="node-io" style="margin-top:10px;"><span class="in">IN: headlines[], macro_indicators {gdp_growth, interest_rate}</span></div>
-      <div class="detail-list" style="margin-top:8px;">
-        <span>Analyze news headlines + macro data</span>
-        <span>Returns macro_sentiment [-1,1]</span>
-        <span>Returns sector_outlook string</span>
-        <span>Returns risk_factors list</span>
-        <span>10s asyncio timeout</span>
-        <span>Headlines: live via Alpha Vantage or synthetic</span>
-      </div>
-      <div class="node-io">
-        <span class="out">OUT: macro_sentiment, sector_outlook, risk_factors, confidence</span>
-        <br/><span class="warn">DEGRADED: sentiment=0, empty risk_factors</span>
-      </div>
-    </div>
-    <div class="node n-rose">
-      <span class="node-tag">Agent 4</span>
-      <div class="node-title">Competitor Agent</div>
-      <span class="llm-chip">🦙 Groq llama-3.3-70b</span>
-      <span class="llm-chip">✦ Gemini 2.0 fallback</span>
-      <div class="node-io" style="margin-top:10px;"><span class="in">IN: peer_financials[], market_share_signals</span></div>
-      <div class="detail-list" style="margin-top:8px;">
-        <span>Benchmarks vs. peer companies</span>
-        <span>Computes revenue_delta &amp; margin_delta per peer</span>
-        <span>Returns relative_position_score [-1, 1]</span>
-        <span>Handles peer alias mapping robustly</span>
-        <span>Peers empty for synthetic COMP_XXX IDs</span>
-        <span>10s asyncio timeout</span>
-      </div>
-      <div class="node-io">
-        <span class="out">OUT: relative_position_score, peer_benchmarks[], confidence</span>
-        <br/><span class="warn">DEGRADED: score=0, empty benchmarks</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="arrow-down-label">
-    <div class="stem"></div>
-    <div class="lbl">All LLM agents call via LLMClient singleton</div>
-    <div class="stem2"></div>
-    <div class="head"></div>
-  </div>
-
-  <div class="node n-slate gap">
-    <span class="node-tag">llm_client.py — Singleton</span>
-    <div class="node-title">LLM Rotation &amp; Fallback Client</div>
-    <div class="flow-row flow-row-3">
-      <div>
-        <div class="node-sub" style="color:#94a3b8; font-weight:600; margin-bottom:4px;">Primary: Groq (Key Rotation)</div>
-        <div class="detail-list">
-          <span>Loads all GROQ_API_KEY* env vars</span>
-          <span>Round-robin rotation on 429 RateLimitError</span>
-          <span>AsyncGroq client, temp=0</span>
-          <span>Model: llama-3.3-70b-versatile</span>
-        </div>
-      </div>
-      <div>
-        <div class="node-sub" style="color:#94a3b8; font-weight:600; margin-bottom:4px;">Fallback: Gemini</div>
-        <div class="detail-list">
-          <span>Triggered if ALL Groq keys fail</span>
-          <span>GEMINI_API_KEY from .env</span>
-          <span>asyncio.to_thread (sync→async wrapper)</span>
-          <span>Model: gemini-2.0-flash, temp=0</span>
-        </div>
-      </div>
-      <div>
-        <div class="node-sub" style="color:#94a3b8; font-weight:600; margin-bottom:4px;">Error Path</div>
-        <div class="detail-list">
-          <span>Both fail → LLMUnavailableError raised</span>
-          <span>Each agent catches → degraded output</span>
-          <span>Orchestrator logs degraded_agents[]</span>
+      <div class="card">
+        <div class="font-mono text-dim mb-6" style="font-size:11px;">financial_model.py train()</div>
+        <div class="card-title">XGBoost Training</div>
+        <ul class="item-list">
+          <li>2 targets: revenue + EBITDA</li>
+          <li>3 quantiles: α = 0.05, 0.50, 0.95</li>
+          <li>= 6 XGBoost models total</li>
+          <li>Objective: reg:quantileerror</li>
+        </ul>
+        <div class="io-box mt-16">
+          <div class="io-in">← features_v1.pkl (train+val)</div>
+          <div class="io-out">→ out/financial_model.pkl</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="merge-indicator">
-    <div class="bar"></div>
-    <div class="badge">All agent outputs merge → Ensembler</div>
-    <div class="bar r"></div>
+  <!-- Phase 1-2 -->
+  <div class="grid-2 mb-24">
+    <div class="card">
+      <div class="font-mono text-dim mb-6" style="font-size:11px;">PHASE 1 — User Request Entry</div>
+      <div class="card-title">React Frontend → FastAPI</div>
+      <ul class="item-list">
+        <li>User types ticker (AAPL, COMP_007) + selects date</li>
+        <li>POST /api/predict → FastAPI validates with Pydantic</li>
+        <li>Auto-generates UUID request_id</li>
+        <li>Calls orchestrate() async function</li>
+      </ul>
+      <div class="io-box mt-16">
+        <div class="io-out">→ { company_id, as_of_date, request_id }</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="font-mono text-dim mb-6" style="font-size:11px;">PHASE 2 — Orchestrator Routing</div>
+      <div class="card-title">orchestrate.py — Data Decision</div>
+      <ul class="item-list">
+        <li>If real ticker → yfinance (8 quarters quarterly financials)</li>
+        <li>If COMP_XXX → load from features_v1.pkl (synthetic)</li>
+        <li>Fetch transcript (synthetic .jsonl or placeholder text)</li>
+        <li>Fetch peer companies via PEER_MAP[ticker]</li>
+        <li>Dispatch all 4 agents via asyncio.gather()</li>
+        <li>Minimum 2 agents must succeed — else 503 error</li>
+      </ul>
+    </div>
   </div>
 
-  <!-- ════════════════════════════════════════
-     PHASE 4 — ENSEMBLER
-  ════════════════════════════════════════ -->
-  <div class="section-label">
-    <span class="num">PHASE 4</span>
-    <h2>Ensembler — Final Signal Aggregation</h2>
-    <div class="line"></div>
+  <!-- Agents -->
+  <div class="font-mono text-dim mb-12" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">PHASE 3 — Parallel Agent Execution</div>
+  <div class="parallel-badge">
+    <div class="pb-line"></div>
+    <div class="pb-text">⚡ asyncio.gather() — All 4 agents fire simultaneously</div>
+    <div class="pb-line r"></div>
   </div>
-  <div class="node n-emerald node-big gap">
-    <span class="node-tag">EnsemblerAgent</span>
-    <div class="node-title">Chief Investment Officer Agent</div>
-    <div class="flow-row flow-row-3" style="margin-top:14px;">
+
+  <div class="grid-4 mb-16">
+    <div class="agent-card agent-violet">
+      <div class="agent-num" style="color:#c4b5fd;">Agent 1</div>
+      <div class="agent-title">Transcript NLP</div>
+      <span class="chip">🦙 Groq LLaMA 3.3</span>
+      <span class="chip">✦ Gemini fallback</span>
+      <ul class="item-list mt-16">
+        <li>Extracts 5 key driver sentences</li>
+        <li>Sentiment score [-1 to +1]</li>
+        <li>Management confidence [0 to 1]</li>
+        <li>All numeric facts (revenue, EBITDA)</li>
+        <li>Flags optimistic language + bad numbers</li>
+      </ul>
+      <div class="io-box mt-16">
+        <div class="io-out">OUT: drivers, sentiment, topics, confidence</div>
+        <div class="io-warn">FAIL: confidence=0.5, empty lists</div>
+      </div>
+    </div>
+
+    <div class="agent-card agent-cyan">
+      <div class="agent-num" style="color:#67e8f9;">Agent 2</div>
+      <div class="agent-title">Financial Model</div>
+      <span class="chip cyan">🌲 XGBoost Only</span>
+      <ul class="item-list mt-16">
+        <li>Loads 6 XGBoost models from .pkl</li>
+        <li>Predicts Revenue p05 / p50 / p95</li>
+        <li>Predicts EBITDA p05 / p50 / p95</li>
+        <li>Enforces: p05 ≤ p50 ≤ p95</li>
+        <li>Confidence = 1 − (p95−p05)/(2×p50)</li>
+        <li>Returns top 5 feature importances</li>
+      </ul>
+      <div class="io-box mt-16">
+        <div class="io-out">OUT: revenue forecast, ebitda forecast, confidence</div>
+      </div>
+    </div>
+
+    <div class="agent-card agent-amber">
+      <div class="agent-num" style="color:#fcd34d;">Agent 3</div>
+      <div class="agent-title">News & Macro</div>
+      <span class="chip">🦙 Groq LLaMA 3.3</span>
+      <span class="chip">✦ Gemini fallback</span>
+      <ul class="item-list mt-16">
+        <li>Analyzes news headlines + macro data</li>
+        <li>Returns macro sentiment [-1 to +1]</li>
+        <li>Returns sector outlook string</li>
+        <li>Returns list of risk factors</li>
+        <li>Currently: Alpha Vantage (only 25/day!)</li>
+      </ul>
+      <div class="io-box mt-16">
+        <div class="io-out">OUT: macro_sentiment, sector_outlook, risk_factors</div>
+        <div class="io-warn">UPGRADE: Replace Alpha Vantage with NewsAPI + FRED</div>
+      </div>
+    </div>
+
+    <div class="agent-card agent-rose">
+      <div class="agent-num" style="color:#fda4af;">Agent 4</div>
+      <div class="agent-title">Competitor Intel</div>
+      <span class="chip">🦙 Groq LLaMA 3.3</span>
+      <span class="chip">✦ Gemini fallback</span>
+      <ul class="item-list mt-16">
+        <li>Benchmarks vs peer companies</li>
+        <li>Revenue delta & margin delta per peer</li>
+        <li>Relative position score [-1 to +1]</li>
+        <li>Currently: yfinance peer data only</li>
+        <li>No peers for synthetic COMP_XXX</li>
+      </ul>
+      <div class="io-box mt-16">
+        <div class="io-out">OUT: relative_position, peer_benchmarks[]</div>
+        <div class="io-warn">UPGRADE: Replace with Finnhub peer data</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="merge-badge">
+    <div class="mb-line"></div>
+    <div class="mb-text">All 4 agent outputs merge into CIO Ensembler</div>
+    <div class="mb-line r"></div>
+  </div>
+
+  <div class="agent-card agent-emerald mb-24">
+    <div class="agent-num" style="color:#6ee7b7;">PHASE 4 — Final Signal</div>
+    <div class="agent-title">CIO Ensembler Agent — Chief Investment Officer</div>
+    <div class="grid-3 mt-16">
       <div>
-        <div class="node-sub" style="color:#6ee7b7; font-weight:600; margin-bottom:6px;">Input: All Agent Outputs (dict)</div>
-        <div class="detail-list">
-          <span>transcript_nlp output</span>
-          <span>financial_model output</span>
-          <span>news_macro output</span>
-          <span>competitor output</span>
-          <span>Only successfully completed agents included</span>
+        <div class="font-mono text-green mb-6" style="font-size:12px;">Input</div>
+        <ul class="item-list">
+          <li>All 4 agent outputs as dict</li>
+          <li>Only successful agents included</li>
+          <li>Degraded agents logged separately</li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-mono text-green mb-6" style="font-size:12px;">LLM Synthesis</div>
+        <ul class="item-list">
+          <li>"You are a chief investment officer"</li>
+          <li>Returns: action (buy/hold/sell/monitor)</li>
+          <li>Returns: rationale, explanations list</li>
+          <li>Returns: human_review_required bool</li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-mono text-green mb-6" style="font-size:12px;">Confidence Calc</div>
+        <ul class="item-list">
+          <li>Geometric mean of all agent confidences</li>
+          <li>Penalty: × 0.9^(num_degraded)</li>
+          <li>Final confidence clamped [0, 1]</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 5 -->
+  <div class="grid-3">
+    <div class="card">
+      <div class="font-mono text-dim mb-6" style="font-size:11px;">PHASE 5 — Response</div>
+      <div class="card-title">Final JSON Payload</div>
+      <ul class="item-list">
+        <li>request_id, trace_id, model_version</li>
+        <li>status: "success" or "partial"</li>
+        <li>latency_ms, data_source</li>
+        <li>result (full EnsemblerOutput)</li>
+        <li>explainability: confidence per agent</li>
+        <li>agents_called[], degraded_agents[]</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="font-mono text-dim mb-6" style="font-size:11px;">PHASE 5 — Persistence</div>
+      <div class="card-title">audit_trail.py → SQLite</div>
+      <ul class="item-list">
+        <li>aiosqlite — async writes, non-blocking</li>
+        <li>Table: requests (request_id PK)</li>
+        <li>Stores all agent call history</li>
+        <li>Stores final output JSON</li>
+        <li class="text-gold">⚠️ Upgrade to MongoDB for multi-user</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="font-mono text-dim mb-6" style="font-size:11px;">PHASE 5 — Rendering</div>
+      <div class="card-title">React Dashboard Display</div>
+      <ul class="item-list">
+        <li>KPI cards: signal, confidence, latency</li>
+        <li>Revenue CI chart (Recharts bar chart)</li>
+        <li>EBITDA forecast card</li>
+        <li>Transcript driver highlights</li>
+        <li>Signal attribution bars per agent</li>
+        <li>Data source badge (live vs synthetic)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+  SECTION 3 — WHAT TO UPGRADE
+══════════════════════════════════ -->
+<div class="section" id="upgrade">
+  <div class="section-header">
+    <span class="section-tag tag-red">Upgrades Required</span>
+    <h2 class="section-title">What Needs to Change & Why</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="mb-24">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>What</th>
+          <th>❌ Current (Problem)</th>
+          <th>✅ Upgrade To (Solution)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Financial Data Source</td>
+          <td>Synthetic fake data — 40 fake companies. Zero credibility in demos.</td>
+          <td>Finnhub API — real companies, free tier, 60 calls/min. Works for AAPL, NVDA, TSLA, any ticker.</td>
+        </tr>
+        <tr>
+          <td>Macro Data</td>
+          <td>Hardcoded or missing. GDP = 0.02, interest_rate = 0.05 always same values.</td>
+          <td>FRED API (Federal Reserve) — official GDP, inflation, interest rate, unemployment. Unlimited, free forever.</td>
+        </tr>
+        <tr>
+          <td>News Headlines</td>
+          <td>Alpha Vantage — only 25 requests per day. Breaks after a few demos.</td>
+          <td>NewsAPI free tier — 100 req/day. Real company news. Plus Finnhub news endpoint as backup.</td>
+        </tr>
+        <tr>
+          <td>User Data Support</td>
+          <td>No way for user to upload their own company data. Only predefined tickers work.</td>
+          <td>CSV upload — user uploads their own quarterly data. Backend parses it, runs full analysis on it.</td>
+        </tr>
+        <tr>
+          <td>ML Training Data</td>
+          <td>XGBoost trained on synthetic fake data. Model has never seen real financial patterns.</td>
+          <td>Collect real Finnhub data for 25+ real companies, retrain XGBoost on real historical financials.</td>
+        </tr>
+        <tr>
+          <td>LLM Output Language</td>
+          <td>Everything in financial jargon. Faculty/students who don't know finance can't understand it.</td>
+          <td>Two-section prompt: Expert Analysis + Plain English Summary. Simple verdict like "Good time to invest."</td>
+        </tr>
+        <tr>
+          <td>Dashboard Modes</td>
+          <td>One dashboard for all users. Way too complex for normal investors. Too simple for startups.</td>
+          <td>Mode toggle: Normal Investor view (plain language) vs Startup/Business view (full financial detail).</td>
+        </tr>
+        <tr>
+          <td>User Accounts</td>
+          <td>No login. No saved history. Everyone shares same app, same audit trail.</td>
+          <td>Firebase Auth — free, Google OAuth + email. Every user gets isolated data in MongoDB.</td>
+        </tr>
+        <tr>
+          <td>Report Storage</td>
+          <td>SQLite — good for single user, not for multi-user deployment. No per-user isolation.</td>
+          <td>MongoDB Atlas — free 512MB, per-user reports tagged by Firebase uid. Motor async driver.</td>
+        </tr>
+        <tr>
+          <td>Deployment</td>
+          <td>Only runs on localhost. Can't share live link. Faculty has to run it locally themselves.</td>
+          <td>Render.com (backend) + Vercel (frontend) — both free. Share one live URL with anyone.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3 key free APIs -->
+  <div class="font-mono text-dim mb-16" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">Get These Free API Keys First — Takes 5 Minutes</div>
+  <div class="grid-3 mb-24">
+    <div class="accent-card accent-teal">
+      <div class="ac-title text-teal">Finnhub API</div>
+      <div class="ac-body">Real company financials, peer data, company profiles, news. Free tier: 60 API calls per minute. Sign up at <strong>finnhub.io</strong> — takes 2 minutes. Replaces both yfinance AND synthetic data.</div>
+      <div class="io-box mt-16">
+        <div class="font-mono text-dim" style="font-size:11px;">FINNHUB_API_KEY=pk_xxx</div>
+      </div>
+    </div>
+    <div class="accent-card accent-green">
+      <div class="ac-title text-green">FRED API (Federal Reserve)</div>
+      <div class="ac-body">Official US macroeconomic data — GDP growth, CPI inflation, Fed funds rate, unemployment, S&P 500. Completely free, no rate limits. Sign up at <strong>fred.stlouisfed.org/docs/api</strong></div>
+      <div class="io-box mt-16">
+        <div class="font-mono text-dim" style="font-size:11px;">FRED_API_KEY=xxx</div>
+      </div>
+    </div>
+    <div class="accent-card accent-gold">
+      <div class="ac-title text-gold">NewsAPI</div>
+      <div class="ac-body">Real news headlines for any company. Free tier: 100 requests per day — plenty for demos. Sign up at <strong>newsapi.org</strong>. Replaces Alpha Vantage which only allowed 25/day.</div>
+      <div class="io-box mt-16">
+        <div class="font-mono text-dim" style="font-size:11px;">NEWS_API_KEY=xxx</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+  SECTION 4 — NEW FILES TO CREATE
+══════════════════════════════════ -->
+<div class="section" id="newfiles">
+  <div class="section-header">
+    <span class="section-tag tag-gold">New Files</span>
+    <h2 class="section-title">Every File You Need to Create or Modify</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid-2 mb-24">
+    <div>
+      <div class="font-mono text-dim mb-12" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Backend — New Files to Create</div>
+
+      <div class="accent-card accent-teal mb-12">
+        <div class="ac-title text-teal">backend/data_sources/finnhub_loader.py <span style="font-size:12px;color:#34d399;font-family:'JetBrains Mono',monospace;">[NEW]</span></div>
+        <div class="ac-body">Replaces both yfinance and synthetic data. Contains 4 functions:</div>
+        <ul class="item-list mt-16">
+          <li><strong>get_company_financials(ticker)</strong> — fetches last 8 quarters of real revenue, EBITDA, net income, EPS</li>
+          <li><strong>get_company_profile(ticker)</strong> — name, sector, market cap, P/E ratio, revenue growth for Startup dashboard</li>
+          <li><strong>get_peer_companies(ticker)</strong> — returns list of 5 competitor tickers</li>
+          <li><strong>get_peers_financials(peers)</strong> — fetches financial metrics for each peer company</li>
+        </ul>
+      </div>
+
+      <div class="accent-card accent-green mb-12">
+        <div class="ac-title text-green">backend/data_sources/fred_loader.py <span style="font-size:12px;color:#34d399;font-family:'JetBrains Mono',monospace;">[NEW]</span></div>
+        <div class="ac-body">Official macro data from Federal Reserve. Contains 2 functions:</div>
+        <ul class="item-list mt-16">
+          <li><strong>get_macro_indicators()</strong> — fetches GDP growth, CPI inflation, Fed rate, unemployment, S&P 500, consumer confidence. Returns structured dict with value, previous, trend.</li>
+          <li><strong>get_macro_summary_text()</strong> — returns single sentence like "GDP growth at 2.3%, CPI at 3.1%, Fed rate at 5.25%." — passed directly to the LLM News Agent prompt.</li>
+        </ul>
+      </div>
+
+      <div class="accent-card accent-gold mb-12">
+        <div class="ac-title text-gold">backend/data_sources/news_loader.py <span style="font-size:12px;color:#34d399;font-family:'JetBrains Mono',monospace;">[NEW]</span></div>
+        <div class="ac-body">Replaces Alpha Vantage. 100 requests/day free:</div>
+        <ul class="item-list mt-16">
+          <li><strong>get_company_news(company_name, ticker)</strong> — fetches last 7 days of real news headlines for a company. Returns top 5 titles.</li>
+          <li><strong>get_market_headlines()</strong> — general US business news for macro context. Falls back to "Markets stable" if API unavailable.</li>
+        </ul>
+      </div>
+
+      <div class="accent-card accent-purple mb-12">
+        <div class="ac-title text-purple">backend/data_sources/csv_loader.py <span style="font-size:12px;color:#34d399;font-family:'JetBrains Mono',monospace;">[NEW]</span></div>
+        <div class="ac-body">Parses user-uploaded CSV files. Required columns: date, revenue. Optional: ebitda, net_income, eps. Validates data, builds feature dict for XGBoost, returns structured result or clear error message.</div>
+      </div>
+
+      <div class="accent-card accent-pink mb-12">
+        <div class="ac-title text-pink">backend/collect_training_data.py <span style="font-size:12px;color:#34d399;font-family:'JetBrains Mono',monospace;">[NEW]</span></div>
+        <div class="ac-body">Run once to collect real training data. Fetches 25+ real company tickers from Finnhub (AAPL, MSFT, GOOGL, JPM, WMT etc). Takes ~5 minutes due to rate limits. Saves to out/real_training_data.csv. Then retrain XGBoost on this real data.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="font-mono text-dim mb-12" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Frontend — New Files to Create</div>
+
+      <div class="accent-card accent-teal mb-12">
+        <div class="ac-title text-teal">frontend/src/components/ModeToggle.jsx <span style="font-size:12px;color:#34d399;font-family:'JetBrains Mono',monospace;">[NEW]</span></div>
+        <div class="ac-body">Two-button toggle: "👤 Normal Investor" (teal) and "🏢 Startup / Business" (amber). Placed at top of dashboard results. Controls which dashboard component renders below. State managed in App.jsx.</div>
+      </div>
+
+      <div class="accent-card accent-green mb-12">
+        <div class="ac-title text-green">frontend/src/components/InvestorDashboard.jsx <span style="font-size:12px;color:#34d399;font-family:'JetBrains Mono',monospace;">[NEW]</span></div>
+        <div class="ac-body">Plain English mode for everyday investors. Contains:</div>
+        <ul class="item-list mt-16">
+          <li>Big colored signal card — "🟢 Good to Invest" / "🔴 Consider Selling" etc.</li>
+          <li>Plain English verdict from ensembler's simple_verdict field</li>
+          <li>"🧠 What does this mean for me?" explanation box</li>
+          <li>Revenue forecast as Worst / Most Likely / Best Case in dollars</li>
+          <li>✅ Good Signs and ⚠️ Watch Out cards</li>
+          <li>Tooltip glossary on every financial term (hover to see explanation)</li>
+        </ul>
+      </div>
+
+      <div class="accent-card accent-gold mb-12">
+        <div class="ac-title text-gold">frontend/src/components/StartupDashboard.jsx <span style="font-size:12px;color:#34d399;font-family:'JetBrains Mono',monospace;">[NEW]</span></div>
+        <div class="ac-body">Detailed financial mode for startup founders. Contains:</div>
+        <ul class="item-list mt-16">
+          <li>Company profile card (logo, name, sector, market cap)</li>
+          <li>4-metric grid: P/E ratio, revenue growth, net margin, market cap</li>
+          <li>Revenue forecast with P05/P50/P95 (6 cells including EBITDA)</li>
+          <li>Peer benchmarking table with revenue delta, margin delta per peer</li>
+          <li>Agent Confidence Radar chart (Recharts RadarChart)</li>
+          <li>Expert rationale paragraph from ensembler</li>
+        </ul>
+      </div>
+
+      <div class="accent-card accent-purple mb-12">
+        <div class="ac-title text-purple">frontend/src/components/CSVUpload.jsx <span style="font-size:12px;color:#34d399;font-family:'JetBrains Mono',monospace;">[NEW]</span></div>
+        <div class="ac-body">Drag-and-drop CSV upload. Shows dashed border that glows teal on hover. Click or drag to upload. Validates .csv extension. Shows loading state while uploading. Error message if CSV format is wrong. Download sample CSV link for users who don't know the format.</div>
+      </div>
+
+      <div class="accent-card accent-pink mb-12">
+        <div class="ac-title text-pink">frontend/public/sample_upload.csv <span style="font-size:12px;color:#34d399;font-family:'JetBrains Mono',monospace;">[NEW]</span></div>
+        <div class="ac-body">Sample CSV for users to download. 8 rows of fictional quarterly data with columns: date, revenue, ebitda, net_income, eps. Users can download this, fill in their numbers, and upload it back.</div>
+      </div>
+
+      <div class="font-mono text-dim mb-12 mt-24" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Files to Modify (existing files)</div>
+
+      <div class="card mb-12">
+        <div class="card-title" style="font-size:15px;">Files That Need Changes</div>
+        <ul class="item-list">
+          <li><span class="font-mono text-gold" style="font-size:12px;">backend/.env</span> — Add FINNHUB_API_KEY, FRED_API_KEY, NEWS_API_KEY. Remove ALPHA_VANTAGE_API_KEY.</li>
+          <li><span class="font-mono text-gold" style="font-size:12px;">backend/requirements.txt</span> — Add: finnhub-python, fredapi, newsapi-python, motor, firebase-admin</li>
+          <li><span class="font-mono text-gold" style="font-size:12px;">backend/agents/news_macro.py</span> — Replace Alpha Vantage calls with news_loader.py + fred_loader.py</li>
+          <li><span class="font-mono text-gold" style="font-size:12px;">backend/agents/ensembler.py</span> — New two-section prompt for expert + plain English. New output fields: simple_summary, simple_verdict, key_risks, key_strengths</li>
+          <li><span class="font-mono text-gold" style="font-size:12px;">backend/orchestrator/api.py</span> — Add POST /api/upload-csv endpoint</li>
+          <li><span class="font-mono text-gold" style="font-size:12px;">backend/orchestrator/orchestrate.py</span> — Add Finnhub as primary data path, add CSV data override path</li>
+          <li><span class="font-mono text-gold" style="font-size:12px;">backend/features/feature_store.py</span> — Load real_training_data.csv if exists, else fall back to synthetic</li>
+          <li><span class="font-mono text-gold" style="font-size:12px;">frontend/src/App.jsx</span> — Add mode state, import ModeToggle, CSVUpload, InvestorDashboard, StartupDashboard</li>
+          <li><span class="font-mono text-gold" style="font-size:12px;">frontend/vite.config.js</span> — Update proxy to Render.com URL for production</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+  SECTION 5 — FUTURE FILE STRUCTURE
+══════════════════════════════════ -->
+<div class="section" id="future">
+  <div class="section-header">
+    <span class="section-tag tag-purple">File Structure</span>
+    <h2 class="section-title">Complete File Structure After All Changes</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="info-box info-teal mb-24">
+    <strong>Color Key:</strong> <span class="text-teal">Blue = existing directory</span> · <span class="text-green">Green text = new file to create</span> · <span class="text-gold">Yellow = modify existing file</span> · White = unchanged file
+  </div>
+
+  <div class="grid-2">
+    <div class="file-tree">
+      <div class="tree-dir">finsight-ai/</div>
+      <div class="tree-indent1">
+        <div class="tree-modify">├── README.md  <span class="tree-comment">← already upgraded</span></div>
+        <div class="tree-new">├── render.yaml  <span class="tree-comment">← [NEW] Render deployment config</span></div>
+        <div class="tree-dir">│</div>
+        <div class="tree-dir">├── backend/</div>
+      </div>
+      <div class="tree-indent2">
+        <div class="tree-modify">├── .env  <span class="tree-comment">← [MODIFY] add new API keys</span></div>
+        <div class="tree-modify">├── requirements.txt  <span class="tree-comment">← [MODIFY] new packages</span></div>
+        <div class="tree-file">├── Dockerfile</div>
+        <div class="tree-file">├── config.yaml</div>
+        <div class="tree-modify">├── train_pipeline.py  <span class="tree-comment">← [MODIFY] use real data</span></div>
+        <div class="tree-new">├── collect_training_data.py  <span class="tree-comment">← [NEW] collect real data</span></div>
+        <div class="tree-dir">│</div>
+        <div class="tree-new">├── data_sources/  <span class="tree-comment">← [NEW FOLDER]</span></div>
+      </div>
+      <div class="tree-indent3">
+        <div class="tree-new">├── finnhub_loader.py  <span class="tree-comment">← [NEW] replaces yfinance + synthetic</span></div>
+        <div class="tree-new">├── fred_loader.py  <span class="tree-comment">← [NEW] official macro data</span></div>
+        <div class="tree-new">├── news_loader.py  <span class="tree-comment">← [NEW] replaces Alpha Vantage</span></div>
+        <div class="tree-new">└── csv_loader.py  <span class="tree-comment">← [NEW] user CSV parsing</span></div>
+      </div>
+      <div class="tree-indent2">
+        <div class="tree-dir">│</div>
+        <div class="tree-dir">├── agents/</div>
+      </div>
+      <div class="tree-indent3">
+        <div class="tree-file">├── base.py</div>
+        <div class="tree-file">├── transcript_nlp.py</div>
+        <div class="tree-modify">├── financial_model.py  <span class="tree-comment">← minor update</span></div>
+        <div class="tree-modify">├── news_macro.py  <span class="tree-comment">← [MODIFY] use fred + newsapi</span></div>
+        <div class="tree-modify">├── competitor.py  <span class="tree-comment">← [MODIFY] use finnhub peers</span></div>
+        <div class="tree-modify">└── ensembler.py  <span class="tree-comment">← [MODIFY] plain English prompt</span></div>
+      </div>
+      <div class="tree-indent2">
+        <div class="tree-dir">│</div>
+        <div class="tree-dir">├── orchestrator/</div>
+      </div>
+      <div class="tree-indent3">
+        <div class="tree-modify">├── api.py  <span class="tree-comment">← [MODIFY] add /upload-csv endpoint</span></div>
+        <div class="tree-modify">└── orchestrate.py  <span class="tree-comment">← [MODIFY] finnhub + csv routing</span></div>
+      </div>
+      <div class="tree-indent2">
+        <div class="tree-dir">│</div>
+        <div class="tree-dir">├── features/</div>
+      </div>
+      <div class="tree-indent3">
+        <div class="tree-modify">└── feature_store.py  <span class="tree-comment">← [MODIFY] load real data</span></div>
+      </div>
+      <div class="tree-indent2">
+        <div class="tree-dir">│</div>
+        <div class="tree-dir">└── out/  <span class="tree-comment">(generated, gitignored)</span></div>
+      </div>
+      <div class="tree-indent3">
+        <div class="tree-new">├── real_training_data.csv  <span class="tree-comment">← [NEW] real Finnhub data</span></div>
+        <div class="tree-file">├── features_v1.pkl</div>
+        <div class="tree-file">└── financial_model.pkl  <span class="tree-comment">(retrained on real data)</span></div>
+      </div>
+    </div>
+
+    <div class="file-tree">
+      <div class="tree-dir">├── frontend/</div>
+      <div class="tree-indent1">
+        <div class="tree-file">├── package.json</div>
+        <div class="tree-modify">├── vite.config.js  <span class="tree-comment">← [MODIFY] prod proxy URL</span></div>
+        <div class="tree-dir">│</div>
+        <div class="tree-dir">└── src/</div>
+      </div>
+      <div class="tree-indent2">
+        <div class="tree-modify">├── App.jsx  <span class="tree-comment">← [MODIFY] add modes + CSV</span></div>
+        <div class="tree-dir">│</div>
+        <div class="tree-dir">└── components/</div>
+      </div>
+      <div class="tree-indent3">
+        <div class="tree-file">├── Dashboard.jsx  <span class="tree-comment">(existing, minor changes)</span></div>
+        <div class="tree-file">├── SignalPage.jsx</div>
+        <div class="tree-file">├── AuditTrail.jsx</div>
+        <div class="tree-file">├── PeerBenchmarking.jsx</div>
+        <div class="tree-file">├── SectorAnalysis.jsx</div>
+        <div class="tree-new">├── ModeToggle.jsx  <span class="tree-comment">← [NEW] investor/startup switch</span></div>
+        <div class="tree-new">├── InvestorDashboard.jsx  <span class="tree-comment">← [NEW] plain English mode</span></div>
+        <div class="tree-new">├── StartupDashboard.jsx  <span class="tree-comment">← [NEW] financial detail mode</span></div>
+        <div class="tree-new">└── CSVUpload.jsx  <span class="tree-comment">← [NEW] drag & drop CSV</span></div>
+      </div>
+      <div class="tree-indent2">
+        <div class="tree-dir">│</div>
+        <div class="tree-dir">└── public/</div>
+      </div>
+      <div class="tree-indent3">
+        <div class="tree-new">└── sample_upload.csv  <span class="tree-comment">← [NEW] template for users</span></div>
+      </div>
+      <div class="tree-indent1">
+        <div class="tree-dir">&nbsp;</div>
+        <div class="tree-dir">Future Phases (Major Project):</div>
+        <div class="tree-new">├── firebase.js  <span class="tree-comment">← auth client config</span></div>
+        <div class="tree-new">├── components/AuthContext.jsx  <span class="tree-comment">← global auth state</span></div>
+        <div class="tree-new">├── components/ProtectedRoute.jsx  <span class="tree-comment">← route guard</span></div>
+        <div class="tree-new">├── pages/Login.jsx  <span class="tree-comment">← /login page</span></div>
+        <div class="tree-new">├── pages/Signup.jsx  <span class="tree-comment">← /signup page</span></div>
+        <div class="tree-new">└── pages/MyReports.jsx  <span class="tree-comment">← /reports page</span></div>
+      </div>
+      <div class="tree-dir">&nbsp;</div>
+      <div class="tree-dir">Backend Future Phases:</div>
+      <div class="tree-new">├── backend/auth/firebase_verify.py  <span class="tree-comment">← token verification</span></div>
+      <div class="tree-new">├── backend/db/mongodb.py  <span class="tree-comment">← Motor async client</span></div>
+      <div class="tree-new">└── backend/db/reports.py  <span class="tree-comment">← CRUD for reports</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+  SECTION 6 — HOW IT ALL WORKS AFTER UPGRADE
+══════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-tag tag-cyan">Data Flow</span>
+    <h2 class="section-title">How Everything Works After All Upgrades</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="flow-diagram mb-24">
+    <div class="flow-diagram-title">Complete Request Flow — After Upgrade</div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <!-- Row 1: Entry -->
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="flow-node" style="background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);min-width:180px;">
+          <div class="flow-node-icon">🌐</div>
+          <div class="flow-node-label">User Input</div>
+          <div class="flow-node-sub">Ticker / Date<br/>or CSV Upload</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" style="background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);min-width:180px;">
+          <div class="flow-node-icon">⚡</div>
+          <div class="flow-node-label">FastAPI</div>
+          <div class="flow-node-sub">POST /predict<br/>or POST /upload-csv</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);min-width:180px;">
+          <div class="flow-node-icon">🧭</div>
+          <div class="flow-node-label">Orchestrator</div>
+          <div class="flow-node-sub">Routes data source<br/>dispatches agents</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" style="background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);flex:1;">
+          <div style="display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;">
+            <div style="font-size:11px;background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3);border-radius:6px;padding:4px 10px;color:var(--teal2);font-family:'JetBrains Mono',monospace;">Finnhub API</div>
+            <div style="font-size:11px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);border-radius:6px;padding:4px 10px;color:#34d399;font-family:'JetBrains Mono',monospace;">FRED API</div>
+            <div style="font-size:11px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);border-radius:6px;padding:4px 10px;color:#fcd34d;font-family:'JetBrains Mono',monospace;">NewsAPI</div>
+            <div style="font-size:11px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);border-radius:6px;padding:4px 10px;color:#c4b5fd;font-family:'JetBrains Mono',monospace;">CSV Upload</div>
+          </div>
+          <div class="flow-node-sub" style="margin-top:8px;">Real data sources replace synthetic</div>
+        </div>
+      </div>
+
+      <!-- Arrow down -->
+      <div style="text-align:center;color:var(--text3);font-size:24px;">↓</div>
+
+      <!-- Row 2: Agents -->
+      <div style="padding:20px;background:rgba(139,92,246,0.05);border:1px solid rgba(139,92,246,0.2);border-radius:14px;">
+        <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#c4b5fd;letter-spacing:0.08em;margin-bottom:16px;">⚡ asyncio.gather() — 4 Agents in Parallel (10s timeout each)</div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <div class="flow-node agent-card agent-violet" style="min-width:140px;padding:14px;">
+            <div style="font-size:20px;margin-bottom:6px;">🧠</div>
+            <div style="font-size:13px;font-weight:700;color:#c4b5fd;margin-bottom:4px;">NLP Agent</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);">Transcript analysis<br/>Groq LLaMA 3.3</div>
+          </div>
+          <div class="flow-node agent-card agent-cyan" style="min-width:140px;padding:14px;">
+            <div style="font-size:20px;margin-bottom:6px;">📊</div>
+            <div style="font-size:13px;font-weight:700;color:#67e8f9;margin-bottom:4px;">ML Model</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);">XGBoost forecasting<br/>Trained on real data</div>
+          </div>
+          <div class="flow-node agent-card agent-amber" style="min-width:140px;padding:14px;">
+            <div style="font-size:20px;margin-bottom:6px;">📰</div>
+            <div style="font-size:13px;font-weight:700;color:#fcd34d;margin-bottom:4px;">News & Macro</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);">NewsAPI + FRED<br/>Real macro data</div>
+          </div>
+          <div class="flow-node agent-card agent-rose" style="min-width:140px;padding:14px;">
+            <div style="font-size:20px;margin-bottom:6px;">🏢</div>
+            <div style="font-size:13px;font-weight:700;color:#fda4af;margin-bottom:4px;">Competitor</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);">Finnhub peer data<br/>Real benchmarks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow down -->
+      <div style="text-align:center;color:var(--text3);font-size:24px;">↓</div>
+
+      <!-- Row 3: Ensembler -->
+      <div class="agent-card agent-emerald" style="text-align:center;padding:20px;">
+        <div style="font-size:24px;margin-bottom:8px;">👔</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:white;margin-bottom:6px;">CIO Ensembler — Final Signal</div>
+        <div style="font-size:14px;color:var(--text2);">New prompt generates TWO outputs: Expert Analysis (for professionals) + Plain English Summary (for everyone else)</div>
+      </div>
+
+      <!-- Arrow down -->
+      <div style="text-align:center;color:var(--text3);font-size:24px;">↓</div>
+
+      <!-- Row 4: Dashboard split -->
+      <div class="grid-2">
+        <div style="padding:20px;background:rgba(14,165,233,0.07);border:1px solid rgba(14,165,233,0.25);border-radius:14px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:8px;">👤</div>
+          <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:white;margin-bottom:6px;">Normal Investor Mode</div>
+          <div style="font-size:13px;color:var(--text2);">Plain English verdict · Simple Buy/Sell card · "What does this mean for me?" · Glossary tooltips</div>
+        </div>
+        <div style="padding:20px;background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.25);border-radius:14px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:8px;">🏢</div>
+          <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:white;margin-bottom:6px;">Startup / Business Mode</div>
+          <div style="font-size:13px;color:var(--text2);">P/E ratio · Market cap · EV/EBITDA · Peer benchmarks · Revenue forecast with CI · Radar chart</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Ensembler Prompt -->
+  <div class="card mb-24">
+    <div class="card-title text-green mb-16">🔑 New Ensembler System Prompt — This is the key change</div>
+    <div class="code-block">
+<span class="cmt"># In backend/agents/ensembler.py — Replace the existing system prompt with this:</span>
+
+<span class="kw">ENSEMBLER_SYSTEM_PROMPT</span> = <span class="str">"""
+You are a Chief Investment Officer. Analyze the 4 agent outputs provided.
+
+Your response MUST have TWO sections:
+
+--- SECTION 1: EXPERT ANALYSIS ---
+Detailed Buy/Hold/Sell recommendation for financial professionals.
+Include: revenue forecast range, key metrics, macro risks, competitor positioning.
+Final signal: BUY / HOLD / SELL / MONITOR
+
+--- SECTION 2: SIMPLE SUMMARY ---
+Explain the SAME recommendation for someone with zero financial knowledge.
+Use plain language. Use analogies.
+Instead of "P/E ratio is elevated" say "The stock price is high compared to earnings."
+End with: "In simple terms: [one sentence verdict]"
+
+Return ONLY valid JSON with these fields:
+{
+  "action": "buy|hold|sell|monitor",
+  "confidence": 0.0-1.0,
+  "rationale": "Expert analysis paragraph",
+  "simple_summary": "Plain English explanation",
+  "simple_verdict": "In simple terms: [verdict]",
+  "key_risks": ["risk 1", "risk 2"],
+  "key_strengths": ["strength 1", "strength 2"]
+}
+"""</span>
+    </div>
+  </div>
+
+  <!-- CSV Format -->
+  <div class="card mb-24">
+    <div class="card-title text-gold mb-16">📄 CSV Upload Format — Tell users this</div>
+    <div class="grid-2">
+      <div>
+        <div class="font-mono text-dim mb-8" style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;">Required columns</div>
+        <div class="code-block">
+date,revenue,ebitda,net_income,eps
+2022-01-01,42000,11000,7500,2.1
+2022-04-01,45000,12000,8000,2.3
+2022-07-01,47500,12500,8500,2.5
+2022-10-01,50000,13000,9000,2.6
+2023-01-01,52000,13500,9200,2.7
+2023-04-01,55000,14000,9800,2.9
         </div>
       </div>
       <div>
-        <div class="node-sub" style="color:#6ee7b7; font-weight:600; margin-bottom:6px;">LLM: CIO Synthesis Prompt</div>
-        <div class="detail-list">
-          <span>System: "You are a chief investment officer"</span>
-          <span>Returns final_forecast {rev_p50, ebitda_p50, revenue_ci}</span>
-          <span>Returns recommendation {action, rationale}</span>
-          <span>Actions: monitor / hold / buy / sell</span>
-          <span>Explanations list + human_review_required bool</span>
-        </div>
+        <div class="font-mono text-dim mb-8" style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;">Rules</div>
+        <ul class="item-list">
+          <li>date and revenue are required. Others optional.</li>
+          <li>Revenue, EBITDA, net_income in millions</li>
+          <li>Date format: YYYY-MM-DD (quarterly dates)</li>
+          <li>Minimum 2 rows needed for lag features</li>
+          <li>More rows = better forecast accuracy</li>
+          <li>Save file as .csv format (not .xlsx)</li>
+        </ul>
       </div>
-      <div>
-        <div class="node-sub" style="color:#6ee7b7; font-weight:600; margin-bottom:6px;">Confidence Aggregation</div>
-        <div class="detail-list">
-          <span>Geometric mean of all agent confidences</span>
-          <span>Penalty: × 0.9^(num_degraded_agents)</span>
-          <span>Final combined_confidence clamped [0,1]</span>
-          <span>Baseline from financial_model as fallback</span>
-        </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+  SECTION 7 — FUTURE: AUTH + MONGODB
+══════════════════════════════════ -->
+<div class="phase-divider">
+  <div class="line"></div>
+  <div class="badge" style="background:rgba(236,72,153,0.08);border:1px solid rgba(236,72,153,0.3);color:#f9a8d4;">🚀 Future Phases — Major Project Upgrade</div>
+  <div class="line"></div>
+</div>
+
+<div class="section" id="roadmap">
+  <div class="section-header">
+    <span class="section-tag tag-pink">Major Project</span>
+    <h2 class="section-title">Firebase Auth + MongoDB + My Reports</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- Auth flow -->
+  <div class="card mb-24">
+    <div class="card-title mb-16">🔐 Firebase Authentication Flow</div>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;">
+      <div style="text-align:center;padding:16px;min-width:110px;background:rgba(236,72,153,0.07);border:1px solid rgba(236,72,153,0.2);border-radius:12px;">
+        <div style="font-size:24px;margin-bottom:6px;">🌐</div>
+        <div style="font-size:13px;font-weight:700;color:#f9a8d4;">Landing Page</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:4px;">clicks<br/>"Get Started"</div>
+      </div>
+      <div style="font-size:20px;color:var(--text3);">→</div>
+      <div style="text-align:center;padding:16px;min-width:110px;background:rgba(236,72,153,0.07);border:1px solid rgba(236,72,153,0.2);border-radius:12px;">
+        <div style="font-size:24px;margin-bottom:6px;">🔑</div>
+        <div style="font-size:13px;font-weight:700;color:#f9a8d4;">/login</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:4px;">Email+Pass<br/>Google OAuth</div>
+      </div>
+      <div style="font-size:20px;color:var(--text3);">→</div>
+      <div style="text-align:center;padding:16px;min-width:110px;background:rgba(236,72,153,0.07);border:1px solid rgba(236,72,153,0.2);border-radius:12px;">
+        <div style="font-size:24px;margin-bottom:6px;">🔥</div>
+        <div style="font-size:13px;font-weight:700;color:#f9a8d4;">Firebase</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:4px;">verifies credentials<br/>returns user.uid</div>
+      </div>
+      <div style="font-size:20px;color:var(--text3);">→</div>
+      <div style="text-align:center;padding:16px;min-width:110px;background:rgba(236,72,153,0.07);border:1px solid rgba(236,72,153,0.2);border-radius:12px;">
+        <div style="font-size:24px;margin-bottom:6px;">🛡️</div>
+        <div style="font-size:13px;font-weight:700;color:#f9a8d4;">FastAPI Verify</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:4px;">firebase-admin SDK<br/>verify_id_token()</div>
+      </div>
+      <div style="font-size:20px;color:var(--text3);">→</div>
+      <div style="text-align:center;padding:16px;min-width:110px;background:rgba(236,72,153,0.07);border:1px solid rgba(236,72,153,0.2);border-radius:12px;">
+        <div style="font-size:24px;margin-bottom:6px;">📊</div>
+        <div style="font-size:13px;font-weight:700;color:#f9a8d4;">Dashboard</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:4px;">protected routes<br/>user's own data</div>
+      </div>
+      <div style="font-size:20px;color:var(--text3);">→</div>
+      <div style="text-align:center;padding:16px;min-width:110px;background:rgba(236,72,153,0.07);border:1px solid rgba(236,72,153,0.2);border-radius:12px;">
+        <div style="font-size:24px;margin-bottom:6px;">🗄️</div>
+        <div style="font-size:13px;font-weight:700;color:#f9a8d4;">MongoDB</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:4px;">reports tagged<br/>by user.uid</div>
       </div>
     </div>
   </div>
 
-  <div class="arrow-down big"><div class="stem"></div><div class="head"></div></div>
-
-  <!-- ════════════════════════════════════════
-     PHASE 5 — RESPONSE + AUDIT
-  ════════════════════════════════════════ -->
-  <div class="section-label">
-    <span class="num">PHASE 5</span>
-    <h2>Response Assembly &amp; Persistence</h2>
-    <div class="line"></div>
-  </div>
-  <div class="flow-row flow-row-3 gap">
-    <div class="node n-blue">
-      <span class="node-tag">Orchestrator — Final Response</span>
-      <div class="node-title">Response Payload Assembly</div>
-      <div class="detail-list">
-        <span>request_id, trace_id, model_version</span>
-        <span>status: "success" or "partial"</span>
-        <span>latency_ms (wall clock)</span>
-        <span>result (EnsemblerOutput dict)</span>
-        <span>data_source: live_vantage / synthetic_store</span>
-        <span>explainability.confidence_breakdown per agent</span>
-        <span>agents_called[], degraded_agents[]</span>
-        <span>audit_link URL</span>
-      </div>
-    </div>
-    <div class="node n-slate">
-      <span class="node-tag">audit_trail.py</span>
-      <div class="node-title">SQLite Audit Persistence</div>
-      <div class="detail-list">
-        <span>aiosqlite — async writes</span>
-        <span>Table: requests (request_id PK)</span>
-        <span>Stores: trace_id, timestamp, status</span>
-        <span>Stores: agents_called, degraded_agents JSON</span>
-        <span>Stores: final_output_json, latency_ms</span>
-        <span>⚠ Upgrade to MongoDB for multi-user support</span>
-      </div>
-    </div>
-    <div class="node n-blue">
-      <span class="node-tag">React Frontend</span>
-      <div class="node-title">Dashboard Rendering</div>
-      <div class="detail-list">
-        <span>KPI cards: recommendation, confidence, latency</span>
-        <span>Revenue confidence interval chart</span>
-        <span>EBITDA forecast card</span>
-        <span>Signal Attribution bars (per agent %)</span>
-        <span>Transcript driver highlights (top 5)</span>
-        <span>Data source badge (live vs synthetic)</span>
-        <span>Status: success / partial / error</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════════════
-     STORES
-  ════════════════════════════════════════ -->
-  <div class="section-label" style="margin-top:28px;">
-    <span class="num">STORES</span>
-    <h2>Data Stores &amp; External Connections</h2>
-    <div class="line"></div>
-  </div>
-  <div class="flow-row flow-row-5 gap">
-    <div class="node n-slate">
-      <span class="node-tag">File Store</span>
-      <div class="node-title">out/</div>
-      <div class="detail-list">
-        <span>features_v1.pkl</span>
-        <span>financial_model.pkl</span>
-        <span>synthetic_financials.csv</span>
-        <span>sample_transcripts.jsonl</span>
-        <span>feature_manifest.json</span>
-      </div>
-    </div>
-    <div class="node n-slate">
-      <span class="node-tag">SQLite DB</span>
-      <div class="node-title">audit_trail.sqlite</div>
-      <div class="detail-list">
-        <span>Async aiosqlite writes</span>
-        <span>All prediction requests</span>
-        <span>Agent call history</span>
-        <span>⚠ No UI yet</span>
-      </div>
-    </div>
-    <div class="node n-slate">
-      <span class="node-tag">yfinance</span>
-      <div class="node-title">Real Market Data</div>
-      <div class="detail-list">
-        <span>Quarterly financials (8Q)</span>
-        <span>Revenue, EBITDA, Net Income, EPS</span>
-        <span>5 tickers w/ peer maps</span>
-        <span>Fallback if no live data</span>
-      </div>
-    </div>
-    <div class="node n-slate">
-      <span class="node-tag">Alpha Vantage</span>
-      <div class="node-title">News Sentiment API</div>
-      <div class="detail-list">
-        <span>Top 5 news headlines</span>
-        <span>Used for NewsMacroAgent</span>
-        <span>Requires ALPHA_VANTAGE_KEY</span>
-        <span>Falls back to synthetic headlines</span>
-      </div>
-    </div>
-    <div class="node n-slate">
-      <span class="node-tag">Groq / Gemini</span>
-      <div class="node-title">LLM APIs</div>
-      <div class="detail-list">
-        <span>Groq: GROQ_API_KEY_1..N</span>
-        <span>Gemini: GEMINI_API_KEY</span>
-        <span>Used by 3 of 4 agents</span>
-        <span>Key rotation on 429</span>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ══════════════════════════════════════════════════════════════════
-     ██████████████████████  NEW CONTENT BELOW  ████████████████████████
-  ══════════════════════════════════════════════════════════════════════ -->
-  <div class="phase-divider">
-    <div class="divider-line"></div>
-    <div class="divider-badge">🚀 PRODUCT ROADMAP — NEW PHASES BELOW</div>
-    <div class="divider-line"></div>
-  </div>
-
-
-  <!-- ════════════════════════════════════════
-     PHASE 6 — AUTH + USER ACCOUNT SYSTEM
-  ════════════════════════════════════════ -->
-  <div class="section-label pink">
-    <span class="num">PHASE 6</span>
-    <h2>User Auth &amp; Account System — Firebase + MongoDB</h2>
-    <div class="line"></div>
-  </div>
-
-  <!-- Auth Flow diagram -->
-  <div style="margin-bottom: 16px; padding: 20px; background: rgba(236,72,153,0.04); border: 1px solid rgba(236,72,153,0.15); border-radius: 16px;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #f9a8d4; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">
-      🔐 Firebase Authentication Flow
-    </div>
-    <div class="auth-flow">
-      <div class="auth-flow-node">
-        <div class="auth-icon">🌐</div>
-        <div class="auth-label">Landing Page</div>
-        <div class="auth-sub">User clicks<br/>"Get Started"<br/>or "Login"</div>
-      </div>
-      <div class="auth-arrow"></div>
-      <div class="auth-flow-node">
-        <div class="auth-icon">🔑</div>
-        <div class="auth-label">Auth Page /login</div>
-        <div class="auth-sub">Email+Pass<br/>Google OAuth<br/>signInWithPopup()</div>
-      </div>
-      <div class="auth-arrow"></div>
-      <div class="auth-flow-node">
-        <div class="auth-icon">🔥</div>
-        <div class="auth-label">Firebase Auth</div>
-        <div class="auth-sub">Verifies credentials<br/>Returns user.uid<br/>Returns ID token</div>
-      </div>
-      <div class="auth-arrow"></div>
-      <div class="auth-flow-node">
-        <div class="auth-icon">🛡️</div>
-        <div class="auth-label">FastAPI Verify</div>
-        <div class="auth-sub">firebase-admin SDK<br/>verify_id_token()<br/>Extracts uid</div>
-      </div>
-      <div class="auth-arrow"></div>
-      <div class="auth-flow-node">
-        <div class="auth-icon">📊</div>
-        <div class="auth-label">Protected App</div>
-        <div class="auth-sub">Dashboard<br/>My Reports<br/>Audit Trail</div>
-      </div>
-      <div class="auth-arrow"></div>
-      <div class="auth-flow-node">
-        <div class="auth-icon">🗄️</div>
-        <div class="auth-label">MongoDB Atlas</div>
-        <div class="auth-sub">Reports tagged<br/>by user.uid<br/>Isolated per user</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="flow-row flow-row-3 gap">
-    <div class="node n-pink">
-      <span class="node-tag">Firebase Auth Setup</span>
-      <div class="node-title">firebase.js — Client Config</div>
-      <div class="detail-list">
-        <span>initializeApp(firebaseConfig)</span>
-        <span>getAuth() + GoogleAuthProvider()</span>
-        <span>signInWithPopup(auth, googleProvider)</span>
-        <span>createUserWithEmailAndPassword()</span>
-        <span>signInWithEmailAndPassword()</span>
-        <span>onAuthStateChanged() — global state</span>
-        <span>getIdToken() — send with every API call</span>
-        <span>signOut() — logout button</span>
-      </div>
-      <div class="node-io">
-        <span class="out">→ user.uid (persisted in React context)</span>
-        <span class="out">→ Authorization: Bearer &lt;token&gt; header</span>
-      </div>
-    </div>
-    <div class="node n-pink">
-      <span class="node-tag">FastAPI — firebase-admin</span>
-      <div class="node-title">Token Verification Middleware</div>
-      <div class="detail-list">
-        <span>pip install firebase-admin</span>
-        <span>firebase_admin.initialize_app()</span>
-        <span>auth.verify_id_token(token) → decoded_uid</span>
-        <span>Dependency: get_current_user(token=Header)</span>
-        <span>Inject uid into every protected endpoint</span>
-        <span>Returns 401 if token invalid/expired</span>
-        <span>Returns 403 if uid mismatch</span>
-      </div>
-      <div class="node-io">
-        <span class="in">← Authorization: Bearer &lt;token&gt;</span>
-        <span class="out">→ uid string for MongoDB queries</span>
-      </div>
-    </div>
-    <div class="node n-pink">
-      <span class="node-tag">React ProtectedRoute</span>
-      <div class="node-title">Route Guard Component</div>
-      <div class="detail-list">
-        <span>Wraps /dashboard, /signals, /audit, /peers, /reports</span>
-        <span>onAuthStateChanged() listener at App root</span>
-        <span>AuthContext: { user, loading, uid }</span>
-        <span>If loading → show skeleton spinner</span>
-        <span>If no user → redirect to /login</span>
-        <span>If user → render children</span>
-        <span>Landing page (/) is public — no auth needed</span>
-      </div>
-      <div class="node-io">
-        <span class="out">→ Redirect /login or render protected page</span>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ════════════════════════════════════════
-     MONGODB SCHEMA
-  ════════════════════════════════════════ -->
-  <div class="section-label cyan" style="margin-top: 24px;">
-    <span class="num">6B</span>
-    <h2>MongoDB Atlas — Reports Collection Schema</h2>
-    <div class="line"></div>
-  </div>
-
-  <div class="flow-row flow-row-2 gap">
-    <div class="node n-cyan">
-      <span class="node-tag">Collection: reports</span>
-      <div class="node-title">Per-User Report Document Schema</div>
-      <div style="margin-top: 12px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(6,182,212,0.15);">
+  <!-- MongoDB schema + API endpoints -->
+  <div class="grid-2 mb-24">
+    <div class="card">
+      <div class="card-title text-teal mb-16">🗄️ MongoDB reports Collection Schema</div>
+      <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(6,182,212,0.15);">
         <table class="schema-table">
-          <thead>
-            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
-          </thead>
+          <thead><tr><th>Field</th><th>Type</th><th>What it stores</th></tr></thead>
           <tbody>
             <tr><td>_id</td><td>ObjectId</td><td>Auto MongoDB ID</td></tr>
-            <tr><td>userId</td><td>string</td><td>Firebase user.uid — partition key</td></tr>
-            <tr><td>companyId</td><td>string</td><td>"AAPL", "COMP_007" etc.</td></tr>
-            <tr><td>asOfDate</td><td>string</td><td>"2026-01-31" — analysis date</td></tr>
-            <tr><td>createdAt</td><td>datetime</td><td>UTC timestamp of analysis</td></tr>
-            <tr><td>reportName</td><td>string</td><td>User-given name (optional)</td></tr>
+            <tr><td>userId</td><td>string</td><td>Firebase user.uid — isolates per user</td></tr>
+            <tr><td>companyId</td><td>string</td><td>"AAPL", "NVDA" etc.</td></tr>
+            <tr><td>asOfDate</td><td>string</td><td>Analysis date</td></tr>
             <tr><td>signal</td><td>string</td><td>"buy" | "sell" | "hold" | "monitor"</td></tr>
             <tr><td>confidence</td><td>float</td><td>0.0–1.0 combined confidence</td></tr>
-            <tr><td>status</td><td>string</td><td>"success" | "partial"</td></tr>
             <tr><td>content</td><td>object</td><td>Full EnsemblerOutput JSON</td></tr>
-            <tr><td>dataSource</td><td>string</td><td>"live_vantage" | "synthetic_store"</td></tr>
-            <tr><td>degradedAgents</td><td>array</td><td>Agents that failed/timed out</td></tr>
-            <tr><td>latencyMs</td><td>int</td><td>Total prediction time</td></tr>
+            <tr><td>createdAt</td><td>datetime</td><td>UTC timestamp</td></tr>
+            <tr><td>latencyMs</td><td>int</td><td>How long analysis took</td></tr>
+            <tr><td>degradedAgents</td><td>array</td><td>Which agents failed</td></tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div>
-      <div class="node n-cyan gap-sm">
-        <span class="node-tag">Motor — Async MongoDB Driver</span>
-        <div class="node-title">Backend DB Operations</div>
-        <div class="detail-list">
-          <span>pip install motor</span>
-          <span>AsyncIOMotorClient(MONGO_URI)</span>
-          <span>db = client.finsight_db</span>
-          <span>collection = db.reports</span>
-          <span>INSERT: insert_one(doc) after every /predict</span>
-          <span>READ: find({"userId": uid}) → paginated</span>
-          <span>DELETE: delete_one({"_id": id, "userId": uid})</span>
-          <span>INDEX on userId + createdAt for fast queries</span>
-        </div>
+    <div class="card">
+      <div class="card-title text-green mb-16">🔗 New API Endpoints (Authenticated)</div>
+      <div class="endpoint-row">
+        <span class="method get">GET</span>
+        <span class="ep-path">/api/my-reports</span>
+        <span class="ep-auth">🔐 Auth</span>
+        <span class="ep-desc">All reports for this user</span>
       </div>
-      <div class="node n-cyan">
-        <span class="node-tag">New FastAPI Endpoints</span>
-        <div class="node-title">Reports API</div>
-        <div style="margin-top:10px;">
-          <div class="endpoint-row">
-            <span class="method get">GET</span>
-            <span class="endpoint-path">/api/my-reports</span>
-            <span class="endpoint-auth">🔐 Auth</span>
-            <span class="endpoint-desc">All reports for uid</span>
-          </div>
-          <div class="endpoint-row">
-            <span class="method get">GET</span>
-            <span class="endpoint-path">/api/my-reports/{id}</span>
-            <span class="endpoint-auth">🔐 Auth</span>
-            <span class="endpoint-desc">Single report by ID</span>
-          </div>
-          <div class="endpoint-row">
-            <span class="method delete">DEL</span>
-            <span class="endpoint-path">/api/my-reports/{id}</span>
-            <span class="endpoint-auth">🔐 Auth</span>
-            <span class="endpoint-desc">Delete one report</span>
-          </div>
-          <div class="endpoint-row">
-            <span class="method get">GET</span>
-            <span class="endpoint-path">/api/export/{id}/json</span>
-            <span class="endpoint-auth">🔐 Auth</span>
-            <span class="endpoint-desc">Download as JSON file</span>
-          </div>
-          <div class="endpoint-row">
-            <span class="method get">GET</span>
-            <span class="endpoint-path">/api/export/{id}/csv</span>
-            <span class="endpoint-auth">🔐 Auth</span>
-            <span class="endpoint-desc">Download as CSV file</span>
-          </div>
-          <div class="endpoint-row">
-            <span class="method get">GET</span>
-            <span class="endpoint-path">/api/export/{id}/txt</span>
-            <span class="endpoint-auth">🔐 Auth</span>
-            <span class="endpoint-desc">Download as TXT summary</span>
-          </div>
-        </div>
+      <div class="endpoint-row">
+        <span class="method get">GET</span>
+        <span class="ep-path">/api/my-reports/{id}</span>
+        <span class="ep-auth">🔐 Auth</span>
+        <span class="ep-desc">Single report by ID</span>
+      </div>
+      <div class="endpoint-row">
+        <span class="method del">DEL</span>
+        <span class="ep-path">/api/my-reports/{id}</span>
+        <span class="ep-auth">🔐 Auth</span>
+        <span class="ep-desc">Delete one report</span>
+      </div>
+      <div class="endpoint-row">
+        <span class="method get">GET</span>
+        <span class="ep-path">/api/export/{id}/json</span>
+        <span class="ep-auth">🔐 Auth</span>
+        <span class="ep-desc">Download full JSON export</span>
+      </div>
+      <div class="endpoint-row">
+        <span class="method get">GET</span>
+        <span class="ep-path">/api/export/{id}/csv</span>
+        <span class="ep-auth">🔐 Auth</span>
+        <span class="ep-desc">Download CSV of metrics</span>
+      </div>
+      <div class="endpoint-row">
+        <span class="method get">GET</span>
+        <span class="ep-path">/api/export/{id}/txt</span>
+        <span class="ep-auth">🔐 Auth</span>
+        <span class="ep-desc">Download text summary report</span>
+      </div>
+      <div class="endpoint-row">
+        <span class="method post">POST</span>
+        <span class="ep-path">/api/upload-csv</span>
+        <span class="ep-desc">User CSV upload (current phase)</span>
       </div>
     </div>
   </div>
-
-
-  <!-- ════════════════════════════════════════
-     PHASE 7 — USER DASHBOARD (MY REPORTS)
-  ════════════════════════════════════════ -->
-  <div class="section-label lime" style="margin-top: 24px;">
-    <span class="num">PHASE 7</span>
-    <h2>User Dashboard — My Reports &amp; File Export</h2>
-    <div class="line"></div>
-  </div>
-
-  <div class="flow-row flow-row-3 gap">
-    <div class="node n-lime">
-      <span class="node-tag">/reports — My Reports Page</span>
-      <div class="node-title">User's Saved Analysis Library</div>
-      <div class="detail-list">
-        <span>Fetches GET /api/my-reports on mount</span>
-        <span>Shows report cards sorted by createdAt desc</span>
-        <span>Each card: company, date, signal badge, confidence</span>
-        <span>Status badge: SUCCESS / PARTIAL (amber)</span>
-        <span>Click card → view full analysis in modal</span>
-        <span>3 export buttons per card: [JSON] [CSV] [TXT]</span>
-        <span>Delete button with confirm dialog</span>
-        <span>Search/filter by company name or signal type</span>
-        <span>Empty state: "Run your first analysis"</span>
-      </div>
-    </div>
-    <div class="node n-lime">
-      <span class="node-tag">File Export System</span>
-      <div class="node-title">JSON / CSV / TXT Generation</div>
-      <div class="detail-list">
-        <span>JSON: full EnsemblerOutput → pretty printed</span>
-        <span>CSV: flatten metrics → row per agent output</span>
-        <span>TXT: human-readable summary report</span>
-        <span>TXT includes: signal, rationale, risk factors</span>
-        <span>TXT includes: revenue forecast with CI range</span>
-        <span>FastAPI: StreamingResponse with Content-Disposition</span>
-        <span>Frontend: window.open(exportUrl) → auto-download</span>
-        <span>Filename: {companyId}_{date}.{ext}</span>
-      </div>
-    </div>
-    <div class="node n-lime">
-      <span class="node-tag">Predict → Auto-Save Flow</span>
-      <div class="node-title">Seamless Report Persistence</div>
-      <div class="detail-list">
-        <span>User runs analysis on /dashboard</span>
-        <span>Backend: POST /predict → runs agents</span>
-        <span>After ensembler → insert_one to MongoDB</span>
-        <span>Tagged with user.uid from auth token</span>
-        <span>Response includes MongoDB _id in payload</span>
-        <span>Frontend shows "✓ Saved to My Reports" toast</span>
-        <span>User can immediately export or visit /reports</span>
-        <span>Re-runs same company → creates new report doc</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="info-note">
-    <strong>💡 My Reports Dashboard Layout:</strong> Sidebar nav item "My Reports 📂" → Grid of cards (2-col on desktop, 1-col mobile). Each card shows company logo placeholder, ticker, date, signal colored badge (green=BUY, red=SELL, blue=HOLD), confidence percentage, and 3 download icons. Clicking the card body expands to show full analysis in a slide-over panel without leaving the page.
-  </div>
-
-
-  <!-- ════════════════════════════════════════
-     PHASE 8 — LANDING PAGE BLUEPRINT
-  ════════════════════════════════════════ -->
-  <div class="section-label orange" style="margin-top: 24px;">
-    <span class="num">PHASE 8</span>
-    <h2>Landing Page — Section-by-Section Blueprint</h2>
-    <div class="line"></div>
-  </div>
-
-  <div class="info-note">
-    <strong>Design Mandate:</strong> NOT generic AI slop. Dark theme (#060608 base). Syne + JetBrains Mono fonts (already in your project). Subtle grid overlay, glowing accent lines, animated number counters. Real screenshots of your dashboard, not mockup illustrations. No stock photos.
-  </div>
-
-  <div class="flow-row flow-row-3 gap-sm">
-
-    <div class="landing-section-card" style="background: rgba(59,130,246,0.06); border-color: rgba(59,130,246,0.2);">
-      <span class="sec-num" style="color:#93c5fd;">§ 01 · HERO</span>
-      <div class="sec-title" style="color:#93c5fd;">Above the Fold — The Hook</div>
-      <div class="sec-desc">Animated badge: "AI-Powered Financial Intelligence for Startups". Headline: "Your Startup's Financials, Decoded in 10 Seconds." Subline: "4 AI agents analyze your reports simultaneously — revenue forecast, buy/sell signal, peer benchmarking, risk flags." Two CTAs: [Get Started Free] [See How It Works ↓]</div>
-      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Animated mockup of dashboard (screenshot with glow). Subtle floating numbers (revenue values) in background. Pulse animation on "LIVE" badge.</div>
-    </div>
-
-    <div class="landing-section-card" style="background: rgba(244,63,94,0.06); border-color: rgba(244,63,94,0.2);">
-      <span class="sec-num" style="color:#fda4af;">§ 02 · PROBLEM</span>
-      <div class="sec-title" style="color:#fda4af;">Why Startups Fail at Financials</div>
-      <div class="sec-desc">4 pain points shown as cards with before/after contrast. "Manual Excel takes weeks." "CFO costs ₹40L/year." "Missing investor-grade benchmarks." "No early warning on revenue risk." Stat: "73% of startups cite financial mismanagement as a key failure cause."</div>
-      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> 4 cards with ❌ icons for "without FinSight". Subtle red tint background on this section only for emotional contrast.</div>
-    </div>
-
-    <div class="landing-section-card" style="background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.2);">
-      <span class="sec-num" style="color:#6ee7b7;">§ 03 · HOW IT WORKS</span>
-      <div class="sec-title" style="color:#6ee7b7;">3-Step Process (No Jargon)</div>
-      <div class="sec-desc">Step 1: Upload or enter your company data / ticker. Step 2: 4 AI agents analyze simultaneously (show agent names with icons). Step 3: Get your full report — signal, forecast, peers, risks. Timeline or stepper UI. Below: "It runs in under 10 seconds."</div>
-      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Horizontal 3-step flow with connecting animated dotted line. Agent icons with slight bounce on scroll-in.</div>
-    </div>
-
-    <div class="landing-section-card" style="background: rgba(139,92,246,0.06); border-color: rgba(139,92,246,0.2);">
-      <span class="sec-num" style="color:#c4b5fd;">§ 04 · THE 4 AGENTS</span>
-      <div class="sec-title" style="color:#c4b5fd;">Meet Your Analysis Team</div>
-      <div class="sec-desc">4 cards, one per agent. Each has: icon, name, what it does in plain English, example output snippet. Transcript NLP: "Reads your earnings calls and finds what management is really saying." Financial Model: "XGBoost ML predicts revenue range with 3 confidence levels." News Agent: "Scans macro headlines to flag external risks." Competitor Agent: "Benchmarks you vs peers."</div>
-      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> 2×2 grid of agent cards. Each card has a small animated output preview (e.g. confidence bar filling up).</div>
-    </div>
-
-    <div class="landing-section-card" style="background: rgba(6,182,212,0.06); border-color: rgba(6,182,212,0.2);">
-      <span class="sec-num" style="color:#67e8f9;">§ 05 · WHAT YOU GET</span>
-      <div class="sec-title" style="color:#67e8f9;">Your Full Financial Intelligence Report</div>
-      <div class="sec-desc">Show the exact outputs: BUY/HOLD/SELL/MONITOR signal with color. Revenue forecast bar with p05/p50/p95. EBITDA forecast. Confidence score with ring. Peer comparison table. Transcript driver quotes. Risk factors. Export to JSON/CSV/TXT.</div>
-      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Real screenshot of your dashboard with annotations/callouts pointing to each output. "Real data, real predictions."</div>
-    </div>
-
-    <div class="landing-section-card" style="background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.2);">
-      <span class="sec-num" style="color:#fcd34d;">§ 06 · WHY IT MATTERS</span>
-      <div class="sec-title" style="color:#fcd34d;">Built for Startup Reality</div>
-      <div class="sec-desc">"Before your Series A pitch, know your numbers cold." "Identify revenue risk 1 quarter before it hits." "Present investor-grade peer benchmarks without a Bloomberg terminal." "Save ₹30L/year vs traditional financial analysts." 3 stat counters animated on scroll: 4 Agents, &lt;10s Analysis, 800+ Data Points.</div>
-      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Bold stat numbers with counter animation. Short founder testimonial card (even if fictional for now). Glassmorphism card design.</div>
-    </div>
-
-    <div class="landing-section-card" style="background: rgba(132,204,22,0.06); border-color: rgba(132,204,22,0.2);">
-      <span class="sec-num" style="color:#bef264;">§ 07 · TECH TRANSPARENCY</span>
-      <div class="sec-title" style="color:#bef264;">What Powers FinSight Ai</div>
-      <div class="sec-desc">Show the real stack honestly. Groq (primary LLM), Gemini 2.0 (fallback), XGBoost (ML forecasting), FastAPI (backend), React + Vite (frontend), MongoDB Atlas (storage), Firebase Auth (security). "No hallucination — every agent output is audited and logged."</div>
-      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Stack badges with logos. Small architecture diagram (simplified, not the full flowchart). "Powered by real ML, not just chat."</div>
-    </div>
-
-    <div class="landing-section-card" style="background: rgba(99,102,241,0.06); border-color: rgba(99,102,241,0.2);">
-      <span class="sec-num" style="color:#a5b4fc;">§ 08 · PRICING</span>
-      <div class="sec-title" style="color:#a5b4fc;">Beta Access — Currently Free</div>
-      <div class="sec-desc">Free Tier: 5 analyses/month, all 4 agents, JSON/CSV export. Pro (Coming Soon): Unlimited analyses, priority queue, PDF reports. Enterprise (Coming Soon): API access, team accounts, custom data. Be honest: "Beta phase — all features free for early adopters."</div>
-      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> 3-column pricing cards. Free tier highlighted with "Current" badge. Pro/Enterprise with "Waitlist" CTA instead of price.</div>
-    </div>
-
-    <div class="landing-section-card" style="background: rgba(236,72,153,0.06); border-color: rgba(236,72,153,0.2);">
-      <span class="sec-num" style="color:#f9a8d4;">§ 09 · FAQ + FOOTER</span>
-      <div class="sec-title" style="color:#f9a8d4;">FAQ + Final CTA + Footer</div>
-      <div class="sec-desc">FAQ: Is my data secure? (Firebase + MongoDB, no sharing). What companies? (Any public ticker + synthetic test data). How accurate? (Probabilistic ranges, not guarantees). Need tech skills? (No — just enter a name). Final CTA: "Ready to understand your financials?" [Create Free Account]. Footer: GitHub, docs link, contact email, college project notice.</div>
-      <div class="sec-what"><span style="color:#67e8f9;">WHAT'S SHOWN:</span> Accordion FAQ. Large bold CTA section with glow effect. Minimal footer — no link spam.</div>
-    </div>
-
-  </div>
-
-
-  <!-- ════════════════════════════════════════
-     PHASE 9 — COMPLETE USER JOURNEY
-  ════════════════════════════════════════ -->
-  <div class="section-label" style="margin-top: 28px;">
-    <span class="num">PHASE 9</span>
-    <h2>Complete End-to-End User Journey</h2>
-    <div class="line"></div>
-  </div>
-
-  <div class="flow-row flow-row-2 gap">
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;">👤 NEW USER FLOW (First Visit)</div>
-
-      <div class="journey-step">
-        <div class="step-num">01</div>
-        <div class="step-content">
-          <div class="step-title">Lands on / (Landing Page)</div>
-          <div class="step-desc">Reads hero, scrolls through How It Works, sees agent breakdown and sample outputs. Clicks "Get Started Free".</div>
-          <span class="step-route">/ → public, no auth</span>
-        </div>
-      </div>
-      <div class="journey-step">
-        <div class="step-num">02</div>
-        <div class="step-content">
-          <div class="step-title">Creates Account → /signup</div>
-          <div class="step-desc">Enters email+password or Google OAuth. Firebase creates account. uid assigned. Redirected to dashboard.</div>
-          <span class="step-route">/signup → /dashboard</span>
-        </div>
-      </div>
-      <div class="journey-step">
-        <div class="step-num">03</div>
-        <div class="step-content">
-          <div class="step-title">Runs First Analysis</div>
-          <div class="step-desc">Enters "AAPL" or company ticker. Selects date. Clicks Signal. 4 agents run in parallel (&lt;10s). Results appear. Report auto-saved to MongoDB with their uid.</div>
-          <span class="step-route">/dashboard → POST /api/predict → MongoDB save</span>
-        </div>
-      </div>
-      <div class="journey-step">
-        <div class="step-num">04</div>
-        <div class="step-content">
-          <div class="step-title">Views Report Detail + Exports</div>
-          <div class="step-desc">Sees BUY signal, revenue forecast chart, peer table, transcript drivers. Clicks [Download JSON] to export full data. Clicks [Download TXT] for readable summary.</div>
-          <span class="step-route">/dashboard → GET /api/export/{id}/json</span>
-        </div>
-      </div>
-      <div class="journey-step">
-        <div class="step-num">05</div>
-        <div class="step-content">
-          <div class="step-title">Visits My Reports</div>
-          <div class="step-desc">Sees all past analyses. Can search by company, filter by signal type. Views any old report in full-screen panel. Deletes reports they don't need.</div>
-          <span class="step-route">/reports → GET /api/my-reports</span>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;">🔄 RETURNING USER FLOW</div>
-
-      <div class="journey-step">
-        <div class="step-num">R1</div>
-        <div class="step-content">
-          <div class="step-title">Visits /login</div>
-          <div class="step-desc">onAuthStateChanged fires. If already logged in (token valid), skips login page, goes directly to /dashboard. If not, shows login form.</div>
-          <span class="step-route">/login → check auth state → /dashboard</span>
-        </div>
-      </div>
-      <div class="journey-step">
-        <div class="step-num">R2</div>
-        <div class="step-content">
-          <div class="step-title">Explores Peer Benchmarking</div>
-          <div class="step-desc">After running analysis, clicks "Peer Benchmarking" in sidebar. Sees AAPL vs MSFT/GOOGL/META comparison table with revenue delta and margin delta columns.</div>
-          <span class="step-route">/peers → uses data prop from App.jsx</span>
-        </div>
-      </div>
-      <div class="journey-step">
-        <div class="step-num">R3</div>
-        <div class="step-content">
-          <div class="step-title">Checks Audit Trail</div>
-          <div class="step-desc">Visits Audit Trail to see all past prediction logs, including which agents ran, which degraded, exact latency. Searchable log table. All rows from their account only.</div>
-          <span class="step-route">/audit → GET /api/audit (uid-filtered)</span>
-        </div>
-      </div>
-      <div class="journey-step">
-        <div class="step-num">R4</div>
-        <div class="step-content">
-          <div class="step-title">Sector Analysis View</div>
-          <div class="step-desc">Views macro sector context from most recent prediction. Sees sector_outlook string, risk_factors list, macro_sentiment score from News Agent output.</div>
-          <span class="step-route">/sector → reads data prop</span>
-        </div>
-      </div>
-      <div class="journey-step">
-        <div class="step-num">R5</div>
-        <div class="step-content">
-          <div class="step-title">Uses Active Signals Page</div>
-          <div class="step-desc">Views chronological list of all BUY/HOLD/SELL signals they've generated, with timestamps and confidence scores. Quick overview of their analysis history without opening each report.</div>
-          <span class="step-route">/signals → GET /api/my-reports (summary only)</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ════════════════════════════════════════
-     PHASE 10 — BUILD PRIORITY + TIMELINE
-  ════════════════════════════════════════ -->
-  <div class="section-label" style="margin-top: 28px;">
-    <span class="num">PHASE 10</span>
-    <h2>Build Priority &amp; College Timeline (1.5 Years)</h2>
-    <div class="line"></div>
-  </div>
-
-  <div class="flow-row flow-row-2 gap">
-    <div style="padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Feature Priority</div>
-      <div class="detail-list" style="gap: 8px;">
-        <span>Landing Page (§01–09) <span class="priority p-must">MUST</span> — judges see this first</span>
-        <span>Firebase Auth (/login, /signup, ProtectedRoute) <span class="priority p-must">MUST</span></span>
-        <span>MongoDB Reports storage (auto-save on predict) <span class="priority p-must">MUST</span></span>
-        <span>My Reports page (/reports) <span class="priority p-must">MUST</span></span>
-        <span>JSON / TXT Export endpoints <span class="priority p-must">MUST</span></span>
-        <span>Audit trail filtered by uid <span class="priority p-should">SHOULD</span></span>
-        <span>CSV Export (flatten metrics) <span class="priority p-should">SHOULD</span></span>
-        <span>Search/filter in My Reports <span class="priority p-should">SHOULD</span></span>
-        <span>Report naming (user can rename) <span class="priority p-nice">NICE</span></span>
-        <span>Dark/light mode toggle <span class="priority p-nice">NICE</span></span>
-        <span>Email notifications on analysis complete <span class="priority p-nice">NICE</span></span>
-        <span>Shareable report link (public URL) <span class="priority p-nice">NICE</span></span>
-      </div>
-    </div>
-    <div style="padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Build Timeline</div>
-      <div class="timeline">
-        <div class="timeline-item done">
-          <div class="tl-label">✅ DONE — Semester 1</div>
-          <div class="tl-title">Core AI Pipeline</div>
-          <div class="tl-items">4 agents · XGBoost training · Groq/Gemini · FastAPI · React dashboard · SQLite audit</div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-label">📍 NOW — Month 1-2</div>
-          <div class="tl-title">Auth + Storage Layer</div>
-          <div class="tl-items">Firebase Auth setup · Firebase Admin on FastAPI · MongoDB Atlas + Motor · Auto-save reports · Protected routes</div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-label">Month 3-4</div>
-          <div class="tl-title">My Reports + Export</div>
-          <div class="tl-items">Reports page UI · JSON/CSV/TXT export endpoints · Audit trail uid-filtering · Delete report flow</div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-label">Month 5-6</div>
-          <div class="tl-title">Landing Page</div>
-          <div class="tl-items">All 9 sections · Real dashboard screenshots · Stat counters · Pricing · FAQ · SEO meta tags</div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-label">Month 7-8</div>
-          <div class="tl-title">Polish + Deploy</div>
-          <div class="tl-items">Vercel (frontend) · Render (backend) · MongoDB Atlas · Firebase production mode · Domain name · Performance audit</div>
-        </div>
-        <div class="timeline-item">
-          <div class="tl-label">Month 9-18 (Post-Submission)</div>
-          <div class="tl-title">Upgrade Path</div>
-          <div class="tl-items">Real transcript ingestion · PDF report generation · OpenAI GPT-4 upgrade · Stripe payments · Real company onboarding</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="degraded-note" style="margin-top: 20px;">
-    <strong>💰 Cost = ₹0 during college:</strong> Groq API (14,400 req/day free) · Gemini API (15 RPM free) · Firebase Auth (10,000 users/month free) · MongoDB Atlas (512MB free) · Vercel frontend (free) · Render backend (750hrs/month free). Total monthly cost: ₹0. Deploy everything on free tiers until you have paying users.
-  </div>
-
-
-  <!-- ════════════════════════════════════════
-     UPDATED LEGEND
-  ════════════════════════════════════════ -->
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(59,130,246,0.5)"></div>Frontend / API Layer</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(99,102,241,0.5)"></div>Orchestrator</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(139,92,246,0.5)"></div>LLM Agent (Transcript NLP)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(6,182,212,0.5)"></div>ML Agent (XGBoost)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(245,158,11,0.5)"></div>LLM Agent (News Macro)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(244,63,94,0.5)"></div>LLM Agent (Competitor)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(16,185,129,0.5)"></div>Ensembler</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(100,116,139,0.3); border:1px solid #475569"></div>Offline / Data Store</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(245,158,11,0.2); border:1px dashed rgba(245,158,11,0.4)"></div>Degraded / Gap</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(236,72,153,0.5)"></div>🆕 Auth System (Firebase)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(6,182,212,0.5)"></div>🆕 MongoDB (Reports DB)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(132,204,22,0.5)"></div>🆕 User Dashboard / Export</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(249,115,22,0.5)"></div>🆕 Landing Page</div>
-  </div>
-
 </div>
+
+
+<!-- ══════════════════════════════════
+  SECTION 8 — BUILD ROADMAP
+══════════════════════════════════ -->
+<div class="section" id="roadmap">
+  <div class="section-header">
+    <span class="section-tag tag-green">Roadmap</span>
+    <h2 class="section-title">Build Timeline — From Now to Major Project</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="timeline">
+      <div class="tl-item done">
+        <div class="tl-label">✅ DONE — Semester 6 Current State</div>
+        <div class="tl-title">Core AI Pipeline Built</div>
+        <div class="tl-items">4 agents · XGBoost 6 models · Groq/Gemini LLM rotation · FastAPI backend · React dashboard · asyncio parallel execution · SQLite audit trail · Docker support</div>
+      </div>
+
+      <div class="tl-item active">
+        <div class="tl-label">📍 NOW — Week 1-2 (Do First)</div>
+        <div class="tl-title">Real Data Foundation</div>
+        <div class="tl-items">Install finnhub-python, fredapi, newsapi-python · Create finnhub_loader.py, fred_loader.py, news_loader.py · Add new API keys to .env · Run collect_training_data.py · Retrain XGBoost on real data · Test with AAPL, NVDA, TSLA</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-label">Week 2-3</div>
+        <div class="tl-title">Two User Modes + CSV Upload</div>
+        <div class="tl-items">Create ModeToggle.jsx · Build InvestorDashboard.jsx (plain English) · Build StartupDashboard.jsx (financial detail) · Create CSVUpload.jsx with drag-drop · Add /api/upload-csv endpoint · Update Ensembler prompt for plain English output</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-label">Week 3-4</div>
+        <div class="tl-title">Deploy Live — Faculty Demo Ready</div>
+        <div class="tl-items">Create render.yaml · Push backend to Render.com (free) · Deploy frontend to Vercel (free) · Update vite.config.js proxy to Render URL · Share live link with faculty — no localhost needed</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-label">Month 2-3 (Major Project Start)</div>
+        <div class="tl-title">Firebase Auth + MongoDB</div>
+        <div class="tl-items">Firebase project setup · google login + email auth · FastAPI firebase-admin verification · MongoDB Atlas cluster (free 512MB) · Motor async driver · Per-user report isolation by uid · ProtectedRoute in React · AuthContext global state</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-label">Month 3-4</div>
+        <div class="tl-title">My Reports + Export System</div>
+        <div class="tl-items">Auto-save every analysis to MongoDB · My Reports page at /reports · Report cards grid (signal badge, confidence, export buttons) · JSON / CSV / TXT export endpoints · Delete report · Search/filter by company or signal</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-label">Month 5-6</div>
+        <div class="tl-title">Landing Page (9 Sections)</div>
+        <div class="tl-items">Hero section with dashboard screenshot · Problem section (4 pain points) · How it works (3 steps) · Meet the 4 agents · What you get (real output screenshots) · Tech stack transparency · Pricing (beta free) · FAQ · Final CTA</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-label">Month 7-18 (Post Submission)</div>
+        <div class="tl-title">Scale & Research Extensions</div>
+        <div class="tl-items">Real earnings call transcript ingestion · PDF report generation with charts · Mobile-responsive improvements · Backtesting visualization · Email alerts for strong signals · Multi-language support · Shareable report URLs</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Priority list -->
+  <div class="card mt-24">
+    <div class="card-title mb-16">📋 Feature Priority for Faculty Demo</div>
+    <div class="grid-2">
+      <ul class="item-list">
+        <li>Real Finnhub data replacing synthetic <span class="priority p-must">MUST</span></li>
+        <li>FRED + NewsAPI replacing Alpha Vantage <span class="priority p-must">MUST</span></li>
+        <li>CSV upload working end-to-end <span class="priority p-must">MUST</span></li>
+        <li>Two-mode dashboard (investor + startup) <span class="priority p-must">MUST</span></li>
+        <li>Plain English summaries from Ensembler <span class="priority p-must">MUST</span></li>
+        <li>Live deployment on Render + Vercel <span class="priority p-must">MUST</span></li>
+      </ul>
+      <ul class="item-list">
+        <li>XGBoost retrained on real data <span class="priority p-should">SHOULD</span></li>
+        <li>Glossary tooltips on financial terms <span class="priority p-should">SHOULD</span></li>
+        <li>Radar chart for agent confidence <span class="priority p-should">SHOULD</span></li>
+        <li>Firebase Auth + MongoDB <span class="priority p-nice">NICE (major project)</span></li>
+        <li>My Reports page <span class="priority p-nice">NICE (major project)</span></li>
+        <li>Landing page all 9 sections <span class="priority p-nice">NICE (major project)</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+  SECTION 9 — DEPLOY GUIDE
+══════════════════════════════════ -->
+<div class="section" id="deploy">
+  <div class="section-header">
+    <span class="section-tag tag-teal">Deploy</span>
+    <h2 class="section-title">Free Deployment — Live URL for Faculty</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid-2 mb-24">
+    <div>
+      <div class="font-mono text-dim mb-12" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Backend → Render.com (Free)</div>
+
+      <div class="step-row">
+        <div class="step-circle">1</div>
+        <div class="step-content">
+          <div class="step-title">Create render.yaml in project root</div>
+          <div class="step-desc">This file tells Render exactly how to build and start your backend. Build command runs pip install + train_pipeline.py. Start command runs uvicorn.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle">2</div>
+        <div class="step-content">
+          <div class="step-title">Push everything to GitHub</div>
+          <div class="step-desc">Make sure your latest code including all new data_sources/ files and the render.yaml is committed and pushed.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle">3</div>
+        <div class="step-content">
+          <div class="step-title">Go to render.com → New Web Service</div>
+          <div class="step-desc">Connect your GitHub repo. Render auto-detects render.yaml. Adds the service.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle">4</div>
+        <div class="step-content">
+          <div class="step-title">Add Environment Variables in Render dashboard</div>
+          <div class="step-desc">Add GROQ_API_KEY_1, GEMINI_API_KEY, FINNHUB_API_KEY, FRED_API_KEY, NEWS_API_KEY. Never commit .env to GitHub.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle">5</div>
+        <div class="step-content">
+          <div class="step-title">Click Deploy — Wait ~5 min</div>
+          <div class="step-desc">Backend URL will be: https://finsight-backend.onrender.com — test with /health endpoint.</div>
+          <span class="step-route">curl https://finsight-backend.onrender.com/health</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="font-mono text-dim mb-12" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Frontend → Vercel (Free)</div>
+
+      <div class="step-row">
+        <div class="step-circle">1</div>
+        <div class="step-content">
+          <div class="step-title">Update vite.config.js proxy URL</div>
+          <div class="step-desc">Change the proxy target from http://localhost:8000 to your Render backend URL: https://finsight-backend.onrender.com</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle">2</div>
+        <div class="step-content">
+          <div class="step-title">Go to vercel.com → Add New Project</div>
+          <div class="step-desc">Import your GitHub repo. Vercel auto-detects React+Vite.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle">3</div>
+        <div class="step-content">
+          <div class="step-title">Set Root Directory to frontend</div>
+          <div class="step-desc">Build command: npm run build · Output directory: dist · Framework preset: Vite</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle">4</div>
+        <div class="step-content">
+          <div class="step-title">Add environment variable</div>
+          <div class="step-desc">VITE_API_URL = https://finsight-backend.onrender.com</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-circle">5</div>
+        <div class="step-content">
+          <div class="step-title">Click Deploy — 1-2 minutes</div>
+          <div class="step-desc">Frontend URL: https://finsight-ai.vercel.app — Share this with faculty!</div>
+          <span class="step-route">✅ Live URL ready to share</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box info-green">
+    <strong>💰 Total Monthly Cost = ₹0:</strong> Groq API (14,400 requests/day free) · Gemini API (15 RPM free) · Finnhub (60 calls/min free) · FRED API (unlimited, free) · NewsAPI (100/day free) · Firebase Auth (10,000 users/month free) · MongoDB Atlas (512MB free) · Vercel frontend (free) · Render backend (750 hours/month free). Everything runs on free tiers until you have paying users.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+  SECTION 10 — USER JOURNEY
+══════════════════════════════════ -->
+<div class="section" id="journey">
+  <div class="section-header">
+    <span class="section-tag tag-purple">User Journey</span>
+    <h2 class="section-title">Complete End-to-End User Flows</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="font-mono text-dim mb-12" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">👤 Normal Investor — First Time User</div>
+      <div class="step-row"><div class="step-circle">1</div><div class="step-content"><div class="step-title">Opens live URL</div><div class="step-desc">Lands on dashboard directly (or landing page if built). Sees clean interface with company input box.</div></div></div>
+      <div class="step-row"><div class="step-circle">2</div><div class="step-content"><div class="step-title">Enters "AAPL" and clicks Analyze</div><div class="step-desc">4 agents run in parallel. Loading indicator shows. Results appear in under 10 seconds.</div><span class="step-route">POST /api/predict → { company_id: "AAPL", as_of_date: "2026-01-01" }</span></div></div>
+      <div class="step-row"><div class="step-circle">3</div><div class="step-content"><div class="step-title">Sees "Normal Investor" mode result</div><div class="step-desc">Big green card: "🟢 Good to Invest". Plain English: "Apple continues to grow steadily. Their services business is strong. Safe for long-term." Simple verdict shown clearly.</div></div></div>
+      <div class="step-row"><div class="step-circle">4</div><div class="step-content"><div class="step-title">Reads "What does this mean for me?"</div><div class="step-desc">No jargon. Sees revenue forecast as Worst/Best/Most Likely in dollars. Glossary tooltips explain any term they don't understand.</div></div></div>
+      <div class="step-row"><div class="step-circle">5</div><div class="step-content"><div class="step-title">Uploads their own company CSV</div><div class="step-desc">Clicks CSV tab, drags their file, gets full analysis on their own company's financial data.</div><span class="step-route">POST /api/upload-csv → parse → run agents → results</span></div></div>
+    </div>
+
+    <div>
+      <div class="font-mono text-dim mb-12" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">🏢 Startup Founder — Business Mode</div>
+      <div class="step-row"><div class="step-circle">1</div><div class="step-content"><div class="step-title">Enters competitor ticker (e.g. NVDA)</div><div class="step-desc">Wants to know where their company stands vs NVIDIA in the semiconductor sector.</div></div></div>
+      <div class="step-row"><div class="step-circle">2</div><div class="step-content"><div class="step-title">Toggles to "Startup / Business" mode</div><div class="step-desc">Dashboard switches to detailed financial view — company profile loads with logo, sector, market cap.</div></div></div>
+      <div class="step-row"><div class="step-circle">3</div><div class="step-content"><div class="step-title">Reads P/E ratio, revenue growth, margins</div><div class="step-desc">4-metric grid shows: P/E 42.1 · Revenue Growth +122% · Net Margin 55% · Market Cap $3.2T</div></div></div>
+      <div class="step-row"><div class="step-circle">4</div><div class="step-content"><div class="step-title">Studies peer benchmarking table</div><div class="step-desc">NVDA vs AMD vs INTC vs QCOM — revenue delta, margin delta per competitor. Radar chart shows agent confidence breakdown.</div></div></div>
+      <div class="step-row"><div class="step-circle">5</div><div class="step-content"><div class="step-title">Reads expert analysis</div><div class="step-desc">Full rationale paragraph from CIO Ensembler with quantitative reasoning. Revenue forecast P05/P50/P95 with confidence intervals.</div></div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .page -->
+
+<footer>
+  <p>FinSight AI — BTech CSE (AI) Project · 6th Semester Current + Major Project Upgrade Plan</p>
+  <p>Multi-Agent Financial Intelligence Platform · All APIs used are free tier · Zero deployment cost</p>
+  <p style="margin-top:8px;color:var(--border2);">Architecture & Implementation Guide — Generated for personal project planning use</p>
+</footer>
+
 </body>
 </html>
