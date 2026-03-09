@@ -1,99 +1,89 @@
+```mermaid
 graph TB
     User((User))
 
-    subgraph Frontend["React Frontend (Vite)"]
+    subgraph Frontend["React Frontend - Vite"]
         UI[Dashboard UI]
         State[State Management]
         APIClient[API Client]
     end
 
     subgraph BackendCore["Backend Core"]
-        Gateway[FastAPI Gateway\nCORS + Pydantic Validators]
-        Orchestrator[Orchestrator Engine\nasyncio.gather]
+        Gateway[FastAPI Gateway - CORS + Pydantic Validators]
+        Orchestrator[Orchestrator Engine - asyncio.gather]
 
-        subgraph CommitteeAgents["Committee of Specialized Agents (Parallel)"]
-            QuantAgent[Financial\nQuant Agent]
-            NLPAgent[NLP\nTranscript Agent]
-            NewsAgent[News &\nMacro Agent]
-            CompAgent[Competitor\nPeer Agent]
+        subgraph CommitteeAgents["Committee of Specialized Agents - Parallel"]
+            QuantAgent[Financial Quant Agent]
+            NLPAgent[NLP Transcript Agent]
+            NewsAgent[News and Macro Agent]
+            CompAgent[Competitor Peer Agent]
         end
 
         subgraph MLLayer["Machine Learning"]
-            yFinance[yFinance\nFetcher]
-            XGBoost[XGBoost\nQuantile Model\nP05 / P50 / P95]
-            SHAP[SHAP\nExplainer]
+            yFinance[yFinance Fetcher]
+            XGBoost[XGBoost Quantile Model - P05 / P50 / P95]
+            SHAP[SHAP Explainer]
         end
 
-        subgraph IntelligenceLayer["LLM Intelligence"]
-            Groq[Groq LLM\nLlama 3 70B]
+        subgraph LLMLayer["LLM Intelligence"]
+            Groq[Groq LLM - Llama 3 70B]
         end
 
-        Ensembler[CIO Ensembler\nWeighted Confidence Aggregator]
+        Ensembler[CIO Ensembler - Weighted Confidence Aggregator]
         AuditManager[Audit Manager]
-        SQLite[(SQLite\nAudit Trail)]
+        SQLite[(SQLite - Audit Trail)]
     end
 
     subgraph DataSources["External Data Sources"]
-        Finnhub[Finnhub API\nCompany Profile]
-        AlphaV[Alpha Vantage\nHistorical Data]
-        FRED[FRED API\nMacro Indicators]
-        NewsAPI[NewsAPI\nArticles]
-        FeatureStore[Feature Store\nEngineered Vectors]
+        Finnhub[Finnhub API - Company Profile]
+        AlphaV[Alpha Vantage - Historical Data]
+        FRED[FRED API - Macro Indicators]
+        NewsAPI[NewsAPI - Articles]
+        FeatureStore[Feature Store - Engineered Vectors]
     end
 
-    %% User → Frontend
     User -->|Search Ticker + Date| UI
     UI --> State
     State --> APIClient
-
-    %% Frontend → Backend
     APIClient -->|POST /predict| Gateway
-
-    %% Gateway → Orchestrator
     Gateway --> Orchestrator
 
-    %% Orchestrator → Data Sources
     Orchestrator --> Finnhub
     Orchestrator --> AlphaV
     Orchestrator --> FRED
     Orchestrator --> NewsAPI
-    Finnhub -->|Historical Data| FeatureStore
-    AlphaV -->|Historical Data| FeatureStore
-    FRED -->|Macro Data| FeatureStore
-    NewsAPI -->|News Articles| FeatureStore
 
-    %% Orchestrator → Agents (Parallel)
-    FeatureStore -->|Features + JSON| QuantAgent
+    Finnhub --> FeatureStore
+    AlphaV --> FeatureStore
+    FRED --> FeatureStore
+    NewsAPI --> FeatureStore
+
+    FeatureStore -->|JSON + Features| QuantAgent
     FeatureStore -->|Transcript Text| NLPAgent
     FeatureStore -->|Macro Metrics| NewsAgent
     FeatureStore -->|Benchmarking Data| CompAgent
 
-    %% ML Pipeline
     QuantAgent --> yFinance
-    yFinance -->|Historical Prices| XGBoost
-    XGBoost -->|Forecasts| SHAP
-    SHAP -->|SHAP Values + Forecast| Ensembler
+    yFinance --> XGBoost
+    XGBoost --> SHAP
+    SHAP -->|Forecast + SHAP Values| Ensembler
 
-    %% LLM Agents
-    NLPAgent -->|Analyze Transcript| Groq
-    NewsAgent -->|Analyze Macro News| Groq
-    CompAgent -->|Benchmark Peers| Groq
+    NLPAgent --> Groq
+    NewsAgent --> Groq
+    CompAgent --> Groq
     Groq -->|Sentiment + Insights| NLPAgent
     Groq -->|Macro Score| NewsAgent
     Groq -->|Competitive Position| CompAgent
 
-    %% Agents → Ensembler
-    QuantAgent -->|Results + Confidence 0.84| Ensembler
-    NLPAgent -->|Results + Confidence 0.65| Ensembler
-    NewsAgent -->|Results + Confidence 0.72| Ensembler
-    CompAgent -->|Results + Confidence 0.58| Ensembler
+    QuantAgent -->|Confidence 0.84| Ensembler
+    NLPAgent -->|Confidence 0.65| Ensembler
+    NewsAgent -->|Confidence 0.72| Ensembler
+    CompAgent -->|Confidence 0.58| Ensembler
 
-    %% Ensembler → Audit → DB
-    Ensembler -->|Final Signal + Recommendation| AuditManager
+    Ensembler -->|Final Signal| AuditManager
     AuditManager -->|Persist| SQLite
-
-    %% Response back to Frontend
-    AuditManager -->|Consolidated JSON Response| Gateway
+    AuditManager -->|Consolidated JSON| Gateway
     Gateway -->|Consolidated State| APIClient
-    APIClient -->|Render Dashboard| UI
-    UI -->|Display Analysis + PDF Report| User
+    APIClient --> UI
+    UI -->|Analysis + PDF Report| User
+```
